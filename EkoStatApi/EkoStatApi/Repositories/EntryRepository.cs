@@ -8,11 +8,10 @@ namespace EkoStatApi.Repositories;
 public class EntryRepository : Repository<Entry>, IEntryRepository
 {
     public EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    public IQueryable<Entry> EntriesWithAllIncludes
+    public IQueryable<Entry> EntriesWithIncludes
         => EkoStatContext.Entries
             .Include(e => e.Article)
-            .Include(e => e.Unit)
-            .Include(e => e.User);
+            .Include(e => e.Unit);
 
     public EntryRepository(EkoStatContext context)
         : base(context)
@@ -23,27 +22,27 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
 
     public async Task<Entry?> GetAsync(int id)
     {
-        return await EntriesWithAllIncludes
+        return await EntriesWithIncludes
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<IEnumerable<Entry>> GetByArticleAsync(int articleId)
     {
-        return await EntriesWithAllIncludes
+        return await EntriesWithIncludes
             .Where(e => e.ArticleId == articleId)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<Entry>> GetByTagAsync(int tagId)
     {
-        return await EntriesWithAllIncludes
+        return await EntriesWithIncludes
             .Where(e => e.Article.Tags.Any(t => t.Id == tagId))
             .ToListAsync();
     }
 
     public async Task<IEnumerable<Entry>> GetByUserAsync(int userId)
     {
-        return await EntriesWithAllIncludes
+        return await EntriesWithIncludes
             .Where(e => e.UserId == userId)
             .ToListAsync();
     }

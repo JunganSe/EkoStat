@@ -8,10 +8,9 @@ namespace EkoStatApi.Repositories;
 public class TagRepository : Repository<Tag>, ITagRepository
 {
     public EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    public IQueryable<Tag> TagsWithAllIncludes
+    public IQueryable<Tag> TagsWithIncludes
         => EkoStatContext.Tags
-            .Include(t => t.Articles)
-            .Include(t => t.User);
+            .Include(t => t.Articles);
 
     public TagRepository(EkoStatContext context)
         : base(context)
@@ -22,7 +21,7 @@ public class TagRepository : Repository<Tag>, ITagRepository
 
     public async Task<Tag?> GetAsync(int id)
     {
-        return await TagsWithAllIncludes
+        return await TagsWithIncludes
             .FirstOrDefaultAsync(t => t.Id == id);
     }
 
@@ -35,7 +34,7 @@ public class TagRepository : Repository<Tag>, ITagRepository
 
     public async Task<IEnumerable<Tag>> GetByUserAsync(int userId)
     {
-        return await TagsWithAllIncludes
+        return await TagsWithIncludes
             .Where(t => t.UserId == userId)
             .ToListAsync();
     }

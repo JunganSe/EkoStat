@@ -8,7 +8,7 @@ namespace EkoStatApi.Repositories;
 public class UnitRepository : Repository<Unit>, IUnitRepository
 {
     public EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    public IQueryable<Unit> UnitsWithAllIncludes
+    public IQueryable<Unit> UnitsWithIncludes
         => EkoStatContext.Units
             .Include(u => u.Entries);
 
@@ -21,7 +21,7 @@ public class UnitRepository : Repository<Unit>, IUnitRepository
 
     public async Task<Unit?> GetAsync(int id)
     {
-        return await UnitsWithAllIncludes
+        return await UnitsWithIncludes
             .FirstOrDefaultAsync(u => u.Id == id);
     }
 }
