@@ -2,13 +2,13 @@
 
 namespace EkoStatApi.Data;
 
-public interface IUnitOfWork : IDisposable
+internal interface IUnitOfWork : IDisposable
 {
-    public IArticleRepository Articles { get; }
-    public IEntryRepository Entries { get; }
-    public ITagRepository Tags { get; }
-    public IUnitRepository Units { get; }
-    public IUserRepository Users { get; }
+    IArticleRepository Articles { get; }
+    IEntryRepository Entries { get; }
+    ITagRepository Tags { get; }
+    IUnitRepository Units { get; }
+    IUserRepository Users { get; }
 
     Task<int> SaveAsync();
 }

@@ -3,7 +3,7 @@ using EkoStatApi.Repositories.Interfaces;
 
 namespace EkoStatApi.Data;
 
-public class UnitOfWork : IUnitOfWork
+internal class UnitOfWork : IUnitOfWork
 {
     private readonly EkoStatContext _ekoStatContext;
     private IArticleRepository? _articleRepository;

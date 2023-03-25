@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace EkoStatApi.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
     protected readonly DbContext Context; // Läggs i en protected field så att de ärvande klasserna kan nå den.
     private readonly DbSet<TEntity> _entities;
