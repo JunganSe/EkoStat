@@ -14,6 +14,7 @@ public class Program
         builder.Services.AddDbContext<EkoStatContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"))
         ); ;
+        builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
