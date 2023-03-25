@@ -1,12 +1,18 @@
 ﻿using EkoStatApi.Data;
 using EkoStatApi.Models;
 using EkoStatApi.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace EkoStatApi.Repositories;
 
 public class EntryRepository : Repository<Entry>, IEntryRepository
 {
     public EkoStatContext EkoStatContext { get => (EkoStatContext)Context; }
+    public IQueryable<Entry> EntriesWithAllIncludes
+        => EkoStatContext.Entries
+            .Include(e => e.Article)
+            .Include(e => e.Unit)
+            .Include(e => e.User);
 
     public EntryRepository(EkoStatContext context)
         : base(context)
@@ -15,18 +21,29 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
 
 
 
-    public Task<Entry> GetAsync(int id)
+    public async Task<Entry?> GetAsync(int id)
     {
-        throw new NotImplementedException();
+        return await EntriesWithAllIncludes.FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public Task<IEnumerable<Entry>> GetByUserAsync(int userId)
+    public async Task<IEnumerable<Entry>> GetByArticleAsync(int articleId)
     {
-        throw new NotImplementedException();
+        return await EntriesWithAllIncludes
+            .Where(e => e.ArticleId == articleId)
+            .ToListAsync();
     }
 
-    public Task<IEnumerable<Entry>> GetByArticleAsync(int articleId)
+    public async Task<IEnumerable<Entry>> GetByTagAsync(int tagId)
     {
-        throw new NotImplementedException();
+        return await EntriesWithAllIncludes
+            .Where(e => e.Article.Tags.Any(t => t.Id == tagId))
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Entry>> GetByUserAsync(int userId)
+    {
+        return await EntriesWithAllIncludes
+            .Where(e => e.UserId == userId)
+            .ToListAsync();
     }
 }
