@@ -58,6 +58,8 @@ public class EkoStatContext : DbContext
             entity.Property(e => e.Count).IsRequired();
             entity.Property(e => e.CostPerArticle).IsRequired();
 
+            entity.HasOne(e => e.Article).WithMany(e => e.Entries)
+                .HasForeignKey(e => e.ArticleId).IsRequired();
             entity.HasOne(e => e.Unit).WithMany(e => e.Entries)
                 .HasForeignKey(e => e.UnitId).IsRequired();
             entity.HasOne(e => e.User).WithMany(e => e.Entries)
