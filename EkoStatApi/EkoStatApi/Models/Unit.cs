@@ -1,6 +1,6 @@
 ﻿namespace EkoStatApi.Models;
 
-public class Unit
+internal class Unit
 {
     // Keys
     public int Id { get; set; }

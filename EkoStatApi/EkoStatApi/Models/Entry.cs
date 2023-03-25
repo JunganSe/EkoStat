@@ -1,6 +1,6 @@
 ﻿namespace EkoStatApi.Models;
 
-public class Entry
+internal class Entry
 {
     // Keys
     public int Id { get; set; }
