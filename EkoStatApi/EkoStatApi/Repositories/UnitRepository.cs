@@ -1,12 +1,16 @@
 ﻿using EkoStatApi.Data;
 using EkoStatApi.Models;
 using EkoStatApi.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace EkoStatApi.Repositories;
 
 public class UnitRepository : Repository<Unit>, IUnitRepository
 {
     public EkoStatContext EkoStatContext { get => (EkoStatContext)Context; }
+    public IQueryable<Unit> UnitsWithAllIncludes
+        => EkoStatContext.Units
+            .Include(u => u.Entries);
 
     public UnitRepository(EkoStatContext context)
         : base(context)
@@ -15,8 +19,8 @@ public class UnitRepository : Repository<Unit>, IUnitRepository
 
 
 
-    public Task<Unit> GetAsync(int id)
+    public async Task<Unit?> GetAsync(int id)
     {
-        throw new NotImplementedException();
+        return await UnitsWithAllIncludes.FirstOrDefaultAsync(u => u.Id == id);
     }
 }
