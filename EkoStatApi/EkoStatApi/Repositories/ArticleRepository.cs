@@ -2,13 +2,12 @@
 using EkoStatApi.Models;
 using EkoStatApi.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace EkoStatApi.Repositories;
 
 public class ArticleRepository : Repository<Article>, IArticleRepository
 {
-    public EkoStatContext EkoStatContext { get => (EkoStatContext)Context; }
+    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
     public IQueryable<Article> ArticlesWithAllIncludes
         => EkoStatContext.Articles
             .Include(a => a.Entries)
@@ -24,7 +23,8 @@ public class ArticleRepository : Repository<Article>, IArticleRepository
 
     public async Task<Article?> GetAsync(int id)
     {
-        return await ArticlesWithAllIncludes.FirstOrDefaultAsync(a => a.Id == id);
+        return await ArticlesWithAllIncludes
+            .FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<IEnumerable<Article>> GetByEntryAsync(int entryId)

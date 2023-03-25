@@ -7,7 +7,7 @@ namespace EkoStatApi.Repositories;
 
 public class UserRepository : Repository<User>, IUserRepository
 {
-    public EkoStatContext EkoStatContext { get => (EkoStatContext)Context; }
+    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
     public IQueryable<User> UsersWithAllIncludes
         => EkoStatContext.Users
             .Include(u => u.Tags)
@@ -23,6 +23,7 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<User?> GetAsync(int id)
     {
-        return await UsersWithAllIncludes.FirstOrDefaultAsync(u => u.Id == id);
+        return await UsersWithAllIncludes
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 }
