@@ -11,7 +11,7 @@ internal class EkoStatContext : DbContext
     public DbSet<Article> Articles => Set<Article>();
     public DbSet<Entry> Entries => Set<Entry>();
 
-    public EkoStatContext(DbContextOptions options)
+    public EkoStatContext(DbContextOptions<EkoStatContext> options)
         : base(options)
     {
     }
