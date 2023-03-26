@@ -2,7 +2,7 @@
 
 namespace EkoStatApi.Repositories.Interfaces;
 
-internal interface IRepository<TEntity> where TEntity : class
+public interface IRepository<TEntity> where TEntity : class
 {
 
     // Hämta

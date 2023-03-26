@@ -2,7 +2,7 @@
 
 namespace EkoStatApi.Repositories.Interfaces;
 
-internal interface IEntryRepository : IRepository<Entry>
+public interface IEntryRepository : IRepository<Entry>
 {
     Task<Entry?> GetAsync(int id);
     Task<IEnumerable<Entry>> GetByArticleAsync(int articleId);

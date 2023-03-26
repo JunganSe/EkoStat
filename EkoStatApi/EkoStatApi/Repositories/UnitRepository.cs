@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EkoStatApi.Repositories;
 
-internal class UnitRepository : Repository<Unit>, IUnitRepository
+public class UnitRepository : Repository<Unit>, IUnitRepository
 {
-    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    private IQueryable<Unit> UnitsWithIncludes
+    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    public IQueryable<Unit> UnitsWithIncludes
         => EkoStatContext.Units
             .Include(u => u.Entries);
 

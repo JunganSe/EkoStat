@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EkoStatApi.Repositories;
 
-internal class TagRepository : Repository<Tag>, ITagRepository
+public class TagRepository : Repository<Tag>, ITagRepository
 {
-    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    private IQueryable<Tag> TagsWithIncludes
+    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    public IQueryable<Tag> TagsWithIncludes
         => EkoStatContext.Tags
             .Include(t => t.Articles);
 

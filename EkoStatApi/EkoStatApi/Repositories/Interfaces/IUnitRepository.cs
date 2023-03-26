@@ -2,7 +2,7 @@
 
 namespace EkoStatApi.Repositories.Interfaces;
 
-internal interface IUnitRepository : IRepository<Unit>
+public interface IUnitRepository : IRepository<Unit>
 {
     Task<Unit?> GetAsync(int id);
 }
