@@ -14,6 +14,7 @@ public class Program
         builder.Services.AddDbContext<EkoStatContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"))
         ); ;
+        builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
         builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
         builder.Services.AddControllers();
