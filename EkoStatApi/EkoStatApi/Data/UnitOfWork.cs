@@ -23,9 +23,9 @@ public class UnitOfWork : IUnitOfWork
         _ekoStatContext = ekoStatContext;
     }
 
-    public async Task<int> SaveAsync()
+    public async Task<bool> TrySaveAsync()
     {
-        return await _ekoStatContext.SaveChangesAsync();
+        return (await _ekoStatContext.SaveChangesAsync() > 0);
     }
 
     public void Dispose()

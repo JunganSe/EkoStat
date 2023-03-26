@@ -10,5 +10,5 @@ public interface IUnitOfWork : IDisposable
     public IUnitRepository Units { get; }
     public IUserRepository Users { get; }
 
-    Task<int> SaveAsync();
+    Task<bool> TrySaveAsync();
 }
