@@ -38,8 +38,8 @@ public class UnitController : ControllerBase
         var dto = _mapper.Map<UnitResponseDto>(unit);
 
         return (dto != null)
-            ? Ok(dto)
-            : NotFound($"Fail: Find unit with id '{id}'.");
+            ? Ok(dto) // 200
+            : NotFound($"Fail: Find unit with id '{id}'."); // 404
     }
 
 
@@ -65,7 +65,7 @@ public class UnitController : ControllerBase
 
         return (await _unitOfWork.TrySaveAsync())
             ? NoContent() // 204
-            : StatusCode(500, $"Fail: Update course with id '{id}'."); // Internal server error
+            : StatusCode(500, $"Fail: Update unit with id '{id}'."); // Internal server error
     }
 
     [HttpDelete("{id}")]
@@ -78,6 +78,6 @@ public class UnitController : ControllerBase
 
         return (await _unitOfWork.TrySaveAsync())
             ? NoContent() // 204
-            : StatusCode(500, $"Fail: Delete course with id '{id}'."); // Internal server error
+            : StatusCode(500, $"Fail: Delete unit with id '{id}'."); // Internal server error
     }
 }
