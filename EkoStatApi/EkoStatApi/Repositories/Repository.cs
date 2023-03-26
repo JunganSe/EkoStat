@@ -23,7 +23,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return await _entities.FindAsync(id);
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllOnlyAsync()
+    public async Task<List<TEntity>> GetAllOnlyAsync()
     {
         return await _entities.ToListAsync();
     }
@@ -47,7 +47,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     // Hämta med include och filter.
     // include: Komma/space-separerad lista i sträng.
     // predicate: Använd för att filtrera.
-    public async Task<IEnumerable<TEntity>> GetEntitiesAsync(
+    public async Task<List<TEntity>> GetEntitiesAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         string? include = null)
     {
@@ -73,7 +73,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         await _entities.AddAsync(entity);
     }
 
-    public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+    public async Task AddRangeAsync(List<TEntity> entities)
     {
         await _entities.AddRangeAsync(entities);
     }
@@ -86,7 +86,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         _entities.Remove(entity);
     }
 
-    public void RemoveRange(IEnumerable<TEntity> entities)
+    public void RemoveRange(List<TEntity> entities)
     {
         _entities.RemoveRange(entities);
     }
