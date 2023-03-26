@@ -2,6 +2,7 @@
 
 public class EntryRequestDto
 {
+    public int? Id { get; set; }
     public string? Name { get; set; }
     public string? Comment { get; set; }
     public DateTimeOffset? TimeStamp { get; set; }
