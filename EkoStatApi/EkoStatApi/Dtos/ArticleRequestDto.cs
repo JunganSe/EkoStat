@@ -1,6 +1,6 @@
 ﻿namespace EkoStatApi.Dtos;
 
-internal class ArticleRequestDto
+public class ArticleRequestDto
 {
     public string? Name { get; set; }
     public List<int>? TagIds { get; set; }

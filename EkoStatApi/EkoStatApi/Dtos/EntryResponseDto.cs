@@ -1,6 +1,6 @@
 ﻿namespace EkoStatApi.Dtos;
 
-internal class EntryResponseDto
+public class EntryResponseDto
 {
     public string? Name { get; set; }
     public string? Comment { get; set; }

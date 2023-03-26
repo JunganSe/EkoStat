@@ -1,6 +1,6 @@
 ﻿namespace EkoStatApi.Dtos;
 
-internal class UnitRequestDto
+public class UnitRequestDto
 {
     public string? Name { get; set; }
 }
