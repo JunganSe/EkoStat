@@ -55,13 +55,9 @@ public class UnitController : ControllerBase
             : StatusCode(500, "Fail: Create course."); // Internal server error
     }
 
-    [HttpPut]
-    public async Task<ActionResult> UpdateAsync(UnitRequestDto dto)
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateAsync(int id, UnitRequestDto dto)
     {
-        if (dto.Id == null) // TODO: Validera med modelstate istället.
-            return BadRequest();
-        int id = (int)dto.Id;
-
         var unit = await _unitOfWork.Units.GetOnlyAsync(id);
         if (unit == null)
             return NotFound($"Fail: Find unit with id '{id}' to update.");
