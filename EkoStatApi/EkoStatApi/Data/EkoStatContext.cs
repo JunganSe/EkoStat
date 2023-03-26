@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EkoStatApi.Data;
 
-internal class EkoStatContext : DbContext
+public class EkoStatContext : DbContext
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Unit> Units => Set<Unit>();
