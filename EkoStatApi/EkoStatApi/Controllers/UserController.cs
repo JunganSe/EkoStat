@@ -69,7 +69,7 @@ public class UserController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> RemoveAsync(int id)
+    public async Task<ActionResult> DeleteAsync(int id)
     {
         var user = await _unitOfWork.Users.GetOnlyAsync(id);
         if (user == null)
