@@ -41,6 +41,35 @@ public class TagController : ControllerBase
             : NotFound($"Fail: Find tag with id '{id}'."); // 404
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TagResponseDto>> GetAsync(int id)
+    {
+        var tag = await _unitOfWork.Tags.GetAsync(id);
+        var dto = _mapper.Map<TagResponseDto>(tag);
+
+        return (dto != null)
+            ? Ok(dto) // 200
+            : NotFound($"Fail: Find tag with id '{id}'."); // 404
+    }
+
+    [HttpGet("ByArticle/{id}")]
+    public async Task<ActionResult<List<TagResponseDto>>> GetByArticleAsync(int articleId)
+    {
+        var tags = await _unitOfWork.Tags.GetByArticleAsync(articleId);
+        var dtos = _mapper.Map<List<TagResponseDto>>(tags);
+
+        return Ok(dtos);
+    }
+
+    [HttpGet("ByUser/{id}")]
+    public async Task<ActionResult<List<TagResponseDto>>> GetByUserAsync(int userId)
+    {
+        var tags = await _unitOfWork.Tags.GetByUserAsync(userId);
+        var dtos = _mapper.Map<List<TagResponseDto>>(tags);
+
+        return Ok(dtos);
+    }
+
 
 
     [HttpPost]
