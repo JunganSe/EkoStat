@@ -41,6 +41,17 @@ public class UserController : ControllerBase
             : NotFound($"Fail: Find user with id '{id}'."); // 404
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UserResponseDto>> GetAsync(int id)
+    {
+        var user = await _unitOfWork.Users.GetAsync(id);
+        var dto = _mapper.Map<UserResponseDto>(user);
+
+        return (dto != null)
+            ? Ok(dto) // 200
+            : NotFound($"Fail: Find user with id '{id}'."); // 404
+    }
+
 
 
     [HttpPost]
