@@ -21,9 +21,8 @@ public class UnitController : ControllerBase
 
 
 
-    [HttpGet]
-    [Route("all")]
-    public async Task<ActionResult<List<UnitResponseDto>>> GetAllAsync()
+    [HttpGet("only/all")]
+    public async Task<ActionResult<List<UnitResponseDto>>> GetAllOnlyAsync()
     {
         var units = await _unitOfWork.Units.GetAllOnlyAsync();
         var dtos = _mapper.Map<List<UnitResponseDto>>(units);
@@ -31,8 +30,8 @@ public class UnitController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<UnitResponseDto>> GetAsync(int id)
+    [HttpGet("only/{id}")]
+    public async Task<ActionResult<UnitResponseDto>> GetOnlyAsync(int id)
     {
         var unit = await _unitOfWork.Units.GetOnlyAsync(id);
         var dto = _mapper.Map<UnitResponseDto>(unit);

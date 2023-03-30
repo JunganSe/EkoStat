@@ -21,9 +21,8 @@ public class TagController : ControllerBase
 
 
 
-    [HttpGet]
-    [Route("all")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetAllAsync()
+    [HttpGet("only/all")]
+    public async Task<ActionResult<List<TagResponseDto>>> GetAllOnlyAsync()
     {
         var tags = await _unitOfWork.Tags.GetAllOnlyAsync();
         var dtos = _mapper.Map<List<TagResponseDto>>(tags);
@@ -31,8 +30,8 @@ public class TagController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TagResponseDto>> GetAsync(int id)
+    [HttpGet("only/{id}")]
+    public async Task<ActionResult<TagResponseDto>> GetOnlyAsync(int id)
     {
         var tag = await _unitOfWork.Tags.GetOnlyAsync(id);
         var dto = _mapper.Map<TagResponseDto>(tag);
