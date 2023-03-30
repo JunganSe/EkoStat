@@ -24,32 +24,53 @@ public class UnitController : ControllerBase
     [HttpGet("only/all")]
     public async Task<ActionResult<List<UnitResponseDto>>> GetAllOnlyAsync()
     {
-        var units = await _unitOfWork.Units.GetAllOnlyAsync();
-        var dtos = _mapper.Map<List<UnitResponseDto>>(units);
+        try
+        {
+            var units = await _unitOfWork.Units.GetAllOnlyAsync();
+            var dtos = _mapper.Map<List<UnitResponseDto>>(units);
 
-        return Ok(dtos);
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("only/{id}")]
     public async Task<ActionResult<UnitResponseDto>> GetOnlyAsync(int id)
     {
-        var unit = await _unitOfWork.Units.GetOnlyAsync(id);
-        var dto = _mapper.Map<UnitResponseDto>(unit);
+        try
+        {
+            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            var dto = _mapper.Map<UnitResponseDto>(unit);
 
-        return (dto != null)
-            ? Ok(dto) // 200
-            : NotFound($"Fail: Find unit with id '{id}'."); // 404
+            return (dto != null)
+                ? Ok(dto) // 200
+                : NotFound($"Fail: Find unit with id '{id}'."); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<UnitResponseDto>> GetAsync(int id)
     {
-        var unit = await _unitOfWork.Units.GetAsync(id);
-        var dto = _mapper.Map<UnitResponseDto>(unit);
+        try
+        {
+            var unit = await _unitOfWork.Units.GetAsync(id);
+            var dto = _mapper.Map<UnitResponseDto>(unit);
 
-        return (dto != null)
-            ? Ok(dto) // 200
-            : NotFound($"Fail: Find unit with id '{id}'."); // 404
+            return (dto != null)
+                ? Ok(dto) // 200
+                : NotFound($"Fail: Find unit with id '{id}'."); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
 
@@ -57,37 +78,58 @@ public class UnitController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreateAsync(UnitRequestDto dto)
     {
-        var unit = _mapper.Map<Unit>(dto);
-        await _unitOfWork.Units.AddAsync(unit);
+        try
+        {
+            var unit = _mapper.Map<Unit>(dto);
+            await _unitOfWork.Units.AddAsync(unit);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? StatusCode(201, unit.Id) // Created
-            : StatusCode(500, "Fail: Create course."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? StatusCode(201, unit.Id) // Created
+                : StatusCode(500, "Fail: Create course."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAsync(int id, UnitRequestDto dto)
     {
-        var unit = await _unitOfWork.Units.GetOnlyAsync(id);
-        if (unit == null)
-            return NotFound($"Fail: Find unit with id '{id}' to update.");
-        _mapper.Map(dto, unit);
+        try
+        {
+            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            if (unit == null)
+                return NotFound($"Fail: Find unit with id '{id}' to update.");
+            _mapper.Map(dto, unit);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? NoContent() // 204
-            : StatusCode(500, $"Fail: Update unit with id '{id}'."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? NoContent() // 204
+                : StatusCode(500, $"Fail: Update unit with id '{id}'."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAsync(int id)
     {
-        var unit = await _unitOfWork.Units.GetOnlyAsync(id);
-        if (unit == null)
-            return NotFound($"Fail: Find unit with id '{id}' to delete.");
-        _unitOfWork.Units.Remove(unit);
+        try
+        {
+            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            if (unit == null)
+                return NotFound($"Fail: Find unit with id '{id}' to delete.");
+            _unitOfWork.Units.Remove(unit);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? NoContent() // 204
-            : StatusCode(500, $"Fail: Delete unit with id '{id}'."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? NoContent() // 204
+                : StatusCode(500, $"Fail: Delete unit with id '{id}'."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 }

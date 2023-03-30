@@ -24,59 +24,101 @@ public class ArticleController : ControllerBase
     [HttpGet("only/all")]
     public async Task<ActionResult<List<ArticleResponseDto>>> GetAllOnlyAsync()
     {
-        var articles = await _unitOfWork.Articles.GetAllOnlyAsync();
-        var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
+        try
+        {
+            var articles = await _unitOfWork.Articles.GetAllOnlyAsync();
+            var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
 
-        return Ok(dtos);
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("only/{id}")]
     public async Task<ActionResult<ArticleResponseDto>> GetOnlyAsync(int id)
     {
-        var article = await _unitOfWork.Articles.GetOnlyAsync(id);
-        var dto = _mapper.Map<ArticleResponseDto>(article);
+        try
+        {
+            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            var dto = _mapper.Map<ArticleResponseDto>(article);
 
-        return (dto != null)
-            ? Ok(dto) // 200
-            : NotFound($"Fail: Find article with id '{id}'."); // 404
+            return (dto != null)
+                ? Ok(dto) // 200
+                : NotFound($"Fail: Find article with id '{id}'."); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<ArticleResponseDto>> GetAsync(int id)
     {
-        var article = await _unitOfWork.Articles.GetAsync(id);
-        var dto = _mapper.Map<ArticleResponseDto>(article);
+        try
+        {
+            var article = await _unitOfWork.Articles.GetAsync(id);
+            var dto = _mapper.Map<ArticleResponseDto>(article);
 
-        return (dto != null)
-            ? Ok(dto) // 200
-            : NotFound($"Fail: Find article with id '{id}'."); // 404
+            return (dto != null)
+                ? Ok(dto) // 200
+                : NotFound($"Fail: Find article with id '{id}'."); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("ByEntry/{entryId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByEntryAsync(int entryId)
     {
-        var articles = await _unitOfWork.Articles.GetByEntryAsync(entryId);
-        var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
+        try
+        {
+            var articles = await _unitOfWork.Articles.GetByEntryAsync(entryId);
+            var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
 
-        return Ok(dtos); // 200
+            return Ok(dtos); // 200
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("ByTag/{tagId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByTagAsync(int tagId)
     {
-        var articles = await _unitOfWork.Articles.GetByTagAsync(tagId);
-        var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
+        try
+        {
+            var articles = await _unitOfWork.Articles.GetByTagAsync(tagId);
+            var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
 
-        return Ok(dtos); // 200
+            return Ok(dtos); // 200
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpGet("ByUser/{userId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByUserAsync(int userId)
     {
-        var articles = await _unitOfWork.Articles.GetByUserAsync(userId);
-        var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
+        try
+        {
+            var articles = await _unitOfWork.Articles.GetByUserAsync(userId);
+            var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
 
-        return Ok(dtos); // 200
+            return Ok(dtos); // 200
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
 
@@ -84,37 +126,58 @@ public class ArticleController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CreateAsync(ArticleRequestDto dto)
     {
-        var article = _mapper.Map<Article>(dto);
-        await _unitOfWork.Articles.AddAsync(article);
+        try
+        {
+            var article = _mapper.Map<Article>(dto);
+            await _unitOfWork.Articles.AddAsync(article);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? StatusCode(201, article.Id) // Created
-            : StatusCode(500, "Fail: Create article."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? StatusCode(201, article.Id) // Created
+                : StatusCode(500, "Fail: Create article."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAsync(int id, ArticleRequestDto dto)
     {
-        var article = await _unitOfWork.Articles.GetOnlyAsync(id);
-        if (article == null)
-            return NotFound($"Fail: Find article with id '{id}' to update.");
-        _mapper.Map(dto, article);
+        try
+        {
+            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            if (article == null)
+                return NotFound($"Fail: Find article with id '{id}' to update.");
+            _mapper.Map(dto, article);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? NoContent() // 204
-            : StatusCode(500, $"Fail: Update article with id '{id}'."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? NoContent() // 204
+                : StatusCode(500, $"Fail: Update article with id '{id}'."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAsync(int id)
     {
-        var article = await _unitOfWork.Articles.GetOnlyAsync(id);
-        if (article == null)
-            return NotFound($"Fail: Find article with id '{id}' to delete.");
-        _unitOfWork.Articles.Remove(article);
+        try
+        {
+            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            if (article == null)
+                return NotFound($"Fail: Find article with id '{id}' to delete.");
+            _unitOfWork.Articles.Remove(article);
 
-        return (await _unitOfWork.TrySaveAsync())
-            ? NoContent() // 204
-            : StatusCode(500, $"Fail: Delete article with id '{id}'."); // Internal server error
+            return (await _unitOfWork.TrySaveAsync())
+                ? NoContent() // 204
+                : StatusCode(500, $"Fail: Delete article with id '{id}'."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message); // Internal server error
+        }
     }
 }
