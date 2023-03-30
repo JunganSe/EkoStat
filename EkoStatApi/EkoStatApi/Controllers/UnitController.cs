@@ -41,6 +41,17 @@ public class UnitController : ControllerBase
             : NotFound($"Fail: Find unit with id '{id}'."); // 404
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UnitResponseDto>> GetAsync(int id)
+    {
+        var unit = await _unitOfWork.Units.GetAsync(id);
+        var dto = _mapper.Map<UnitResponseDto>(unit);
+
+        return (dto != null)
+            ? Ok(dto) // 200
+            : NotFound($"Fail: Find unit with id '{id}'."); // 404
+    }
+
 
 
     [HttpPost]
