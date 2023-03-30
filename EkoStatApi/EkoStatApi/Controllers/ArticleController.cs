@@ -52,7 +52,7 @@ public class ArticleController : ControllerBase
             : NotFound($"Fail: Find article with id '{id}'."); // 404
     }
 
-    [HttpGet("ByEntry/{id}")]
+    [HttpGet("ByEntry/{entryId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByEntryAsync(int entryId)
     {
         var articles = await _unitOfWork.Articles.GetByEntryAsync(entryId);
@@ -61,7 +61,7 @@ public class ArticleController : ControllerBase
         return Ok(dtos); // 200
     }
 
-    [HttpGet("ByTag/{id}")]
+    [HttpGet("ByTag/{tagId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByTagAsync(int tagId)
     {
         var articles = await _unitOfWork.Articles.GetByTagAsync(tagId);
@@ -70,7 +70,7 @@ public class ArticleController : ControllerBase
         return Ok(dtos); // 200
     }
 
-    [HttpGet("ByUser/{id}")]
+    [HttpGet("ByUser/{userId}")]
     public async Task<ActionResult<ArticleResponseDto>> GetByUserAsync(int userId)
     {
         var articles = await _unitOfWork.Articles.GetByUserAsync(userId);

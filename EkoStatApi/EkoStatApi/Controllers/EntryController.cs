@@ -52,7 +52,7 @@ public class EntryController : ControllerBase
             : NotFound($"Fail: Find entry with id '{id}'."); // 404
     }
 
-    [HttpGet("ByArticle/{id}")]
+    [HttpGet("ByArticle/{articleId}")]
     public async Task<ActionResult<List<EntryResponseDto>>> GetByArticleAsync(int articleId)
     {
         var entries = await _unitOfWork.Entries.GetByArticleAsync(articleId);
@@ -61,7 +61,7 @@ public class EntryController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("ByTag/{id}")]
+    [HttpGet("ByTag/{tagId}")]
     public async Task<ActionResult<List<EntryResponseDto>>> GetByTagAsync(int tagId)
     {
         var entries = await _unitOfWork.Entries.GetByTagAsync(tagId);
@@ -70,7 +70,7 @@ public class EntryController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("ByUser/{id}")]
+    [HttpGet("ByUser/{userId}")]
     public async Task<ActionResult<List<EntryResponseDto>>> GetByUserAsync(int userId)
     {
         var entries = await _unitOfWork.Entries.GetByTagAsync(userId);

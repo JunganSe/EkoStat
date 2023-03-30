@@ -52,7 +52,7 @@ public class TagController : ControllerBase
             : NotFound($"Fail: Find tag with id '{id}'."); // 404
     }
 
-    [HttpGet("ByArticle/{id}")]
+    [HttpGet("ByArticle/{articleId}")]
     public async Task<ActionResult<List<TagResponseDto>>> GetByArticleAsync(int articleId)
     {
         var tags = await _unitOfWork.Tags.GetByArticleAsync(articleId);
@@ -61,7 +61,7 @@ public class TagController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("ByUser/{id}")]
+    [HttpGet("ByUser/{userId}")]
     public async Task<ActionResult<List<TagResponseDto>>> GetByUserAsync(int userId)
     {
         var tags = await _unitOfWork.Tags.GetByUserAsync(userId);
