@@ -41,6 +41,44 @@ public class EntryController : ControllerBase
             : NotFound($"Fail: Find entry with id '{id}'."); // 404
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<EntryResponseDto>> GetAsync(int id)
+    {
+        var entry = await _unitOfWork.Entries.GetAsync(id);
+        var dto = _mapper.Map<EntryResponseDto>(entry);
+
+        return (dto != null)
+            ? Ok(dto) // 200
+            : NotFound($"Fail: Find entry with id '{id}'."); // 404
+    }
+
+    [HttpGet("ByArticle/{id}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByArticleAsync(int articleId)
+    {
+        var entries = await _unitOfWork.Entries.GetByArticleAsync(articleId);
+        var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
+
+        return Ok(dtos);
+    }
+
+    [HttpGet("ByTag/{id}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByTagAsync(int tagId)
+    {
+        var entries = await _unitOfWork.Entries.GetByTagAsync(tagId);
+        var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
+
+        return Ok(dtos);
+    }
+
+    [HttpGet("ByUser/{id}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByUserAsync(int userId)
+    {
+        var entries = await _unitOfWork.Entries.GetByTagAsync(userId);
+        var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
+
+        return Ok(dtos);
+    }
+
 
 
     [HttpPost]
