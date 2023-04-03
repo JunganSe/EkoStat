@@ -24,7 +24,7 @@ public class EntryController : ControllerBase
 
 
     [HttpGet("only/ByUser/{userId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetOnlyByUserAsync(int userId)
+    public async Task<ActionResult<List<EntryResponseDto>>> GetOnlyByUser(int userId)
     {
         try
         {
@@ -41,7 +41,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpGet("only/{id}")]
-    public async Task<ActionResult<EntryResponseDto>> GetOnlyAsync(int id)
+    public async Task<ActionResult<EntryResponseDto>> GetOnly(int id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<EntryResponseDto>> GetAsync(int id)
+    public async Task<ActionResult<EntryResponseDto>> Get(int id)
     {
         try
         {
@@ -79,7 +79,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpGet("ByArticle/{articleId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetByArticleAsync(int articleId)
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByArticle(int articleId)
     {
         try
         {
@@ -96,7 +96,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpGet("ByTag/{tagId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetByTagAsync(int tagId)
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByTag(int tagId)
     {
         try
         {
@@ -113,7 +113,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpGet("ByUser/{userId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetByUserAsync(int userId)
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByUser(int userId)
     {
         try
         {
@@ -132,7 +132,7 @@ public class EntryController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult> CreateAsync(EntryRequestDto dto)
+    public async Task<ActionResult> Create(EntryRequestDto dto)
     {
         try
         {
@@ -151,7 +151,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateAsync(int id, EntryRequestDto dto)
+    public async Task<ActionResult> Update(int id, EntryRequestDto dto)
     {
         try
         {
@@ -172,7 +172,7 @@ public class EntryController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteAsync(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         try
         {

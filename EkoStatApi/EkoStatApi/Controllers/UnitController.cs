@@ -24,7 +24,7 @@ public class UnitController : ControllerBase
 
 
     [HttpGet("only/all")]
-    public async Task<ActionResult<List<UnitResponseDto>>> GetAllOnlyAsync()
+    public async Task<ActionResult<List<UnitResponseDto>>> GetAllOnly()
     {
         try
         {
@@ -41,7 +41,7 @@ public class UnitController : ControllerBase
     }
 
     [HttpGet("only/{id}")]
-    public async Task<ActionResult<UnitResponseDto>> GetOnlyAsync(int id)
+    public async Task<ActionResult<UnitResponseDto>> GetOnly(int id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class UnitController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<UnitResponseDto>> GetAsync(int id)
+    public async Task<ActionResult<UnitResponseDto>> Get(int id)
     {
         try
         {
@@ -81,7 +81,7 @@ public class UnitController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult> CreateAsync(UnitRequestDto dto)
+    public async Task<ActionResult> Create(UnitRequestDto dto)
     {
         try
         {
@@ -100,7 +100,7 @@ public class UnitController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateAsync(int id, UnitRequestDto dto)
+    public async Task<ActionResult> Update(int id, UnitRequestDto dto)
     {
         try
         {
@@ -121,7 +121,7 @@ public class UnitController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteAsync(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         try
         {

@@ -24,7 +24,7 @@ public class TagController : ControllerBase
 
 
     [HttpGet("only/ByUser/{userId}")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetOnlyByUserAsync(int userId)
+    public async Task<ActionResult<List<TagResponseDto>>> GetOnlyByUser(int userId)
     {
         try
         {
@@ -41,7 +41,7 @@ public class TagController : ControllerBase
     }
 
     [HttpGet("only/{id}")]
-    public async Task<ActionResult<TagResponseDto>> GetOnlyAsync(int id)
+    public async Task<ActionResult<TagResponseDto>> GetOnly(int id)
     {
         try
         {
@@ -60,7 +60,7 @@ public class TagController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<TagResponseDto>> GetAsync(int id)
+    public async Task<ActionResult<TagResponseDto>> Get(int id)
     {
         try
         {
@@ -79,7 +79,7 @@ public class TagController : ControllerBase
     }
 
     [HttpGet("ByArticle/{articleId}")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetByArticleAsync(int articleId)
+    public async Task<ActionResult<List<TagResponseDto>>> GetByArticle(int articleId)
     {
         try
         {
@@ -96,7 +96,7 @@ public class TagController : ControllerBase
     }
 
     [HttpGet("ByUser/{userId}")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetByUserAsync(int userId)
+    public async Task<ActionResult<List<TagResponseDto>>> GetByUser(int userId)
     {
         try
         {
@@ -115,7 +115,7 @@ public class TagController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult> CreateAsync(TagRequestDto dto)
+    public async Task<ActionResult> Create(TagRequestDto dto)
     {
         try
         {
@@ -134,7 +134,7 @@ public class TagController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateAsync(int id, TagRequestDto dto)
+    public async Task<ActionResult> Update(int id, TagRequestDto dto)
     {
         try
         {
@@ -155,7 +155,7 @@ public class TagController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteAsync(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         try
         {
