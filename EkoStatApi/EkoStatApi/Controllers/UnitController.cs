@@ -12,11 +12,13 @@ public class UnitController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILogger<UnitController> _logger;
 
-    public UnitController(IUnitOfWork unitOfWork, IMapper mapper)
+    public UnitController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UnitController> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
 
@@ -33,6 +35,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get units from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -51,6 +54,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get unit with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -69,6 +73,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get unit with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -89,6 +94,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Create new unit in database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -109,6 +115,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Update unit with id '{id}' in database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -129,6 +136,7 @@ public class UnitController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Delete unit with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }

@@ -12,11 +12,13 @@ public class TagController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILogger<TagController> _logger;
 
-    public TagController(IUnitOfWork unitOfWork, IMapper mapper)
+    public TagController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<TagController> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
 
@@ -33,6 +35,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get tags from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -51,6 +54,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get tag with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -69,6 +73,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get tag with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -85,6 +90,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get tags from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -101,6 +107,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get tags from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -121,6 +128,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Create new tag in database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -141,6 +149,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Update tag with id '{id}' in database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -161,6 +170,7 @@ public class TagController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Delete tag with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }

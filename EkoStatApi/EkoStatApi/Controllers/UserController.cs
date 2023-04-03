@@ -12,11 +12,13 @@ public class UserController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILogger<UserController> _logger;
 
-    public UserController(IUnitOfWork unitOfWork, IMapper mapper)
+    public UserController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<UserController> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
 
@@ -33,6 +35,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get users from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -51,6 +54,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get user with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -69,6 +73,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get user with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -89,6 +94,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Create new user in database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -109,6 +115,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Update user with id '{id}' in database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -129,6 +136,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Delete user with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }

@@ -12,11 +12,13 @@ public class ArticleController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly ILogger<ArticleController> _logger;
 
-    public ArticleController(IUnitOfWork unitOfWork, IMapper mapper)
+    public ArticleController(IUnitOfWork unitOfWork, IMapper mapper, ILogger<ArticleController> logger)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _logger = logger;
     }
 
 
@@ -33,6 +35,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get articles from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -51,6 +54,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get article with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -69,6 +73,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get article with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -85,6 +90,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get articles from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -101,6 +107,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get articles from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -117,6 +124,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Get articles from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
@@ -137,7 +145,8 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message); // Internal server error
+            _logger.LogError(ex, "Fail: Create new article in database.");
+            return StatusCode(500, "Fail: Create article."); // Internal server error
         }
     }
 
@@ -157,7 +166,8 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message); // Internal server error
+            _logger.LogError(ex, "Fail: Update article with id '{id}' in database.", id);
+            return StatusCode(500, $"Fail: Update article with id '{id}'."); // Internal server error
         }
     }
 
@@ -177,6 +187,7 @@ public class ArticleController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Fail: Delete article with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
