@@ -28,6 +28,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
         return await _entities.ToListAsync();
     }
 
+    // Hämta med include och filter.
+    // predicate: Använd för att filtrera.
+    // include: Komma/space-separerad lista i sträng.
     public async Task<TEntity?> GetEntityAsync(
         Expression<Func<TEntity, bool>> predicate,
         string? include = null)
@@ -45,8 +48,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     }
 
     // Hämta med include och filter.
-    // include: Komma/space-separerad lista i sträng.
     // predicate: Använd för att filtrera.
+    // include: Komma/space-separerad lista i sträng.
     public async Task<List<TEntity>> GetEntitiesAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         string? include = null)
