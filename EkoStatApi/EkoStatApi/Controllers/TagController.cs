@@ -23,12 +23,12 @@ public class TagController : ControllerBase
 
 
 
-    [HttpGet("only/all")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetAllOnlyAsync()
+    [HttpGet("only/ByUser/{userId}")]
+    public async Task<ActionResult<List<TagResponseDto>>> GetOnlyByUserAsync(int userId)
     {
         try
         {
-            var tags = await _unitOfWork.Tags.GetAllOnlyAsync();
+            var tags = await _unitOfWork.Tags.GetEntitiesAsync(e => e.UserId == userId);
             var dtos = _mapper.Map<List<TagResponseDto>>(tags);
 
             return Ok(dtos);

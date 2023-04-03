@@ -23,12 +23,12 @@ public class EntryController : ControllerBase
 
 
 
-    [HttpGet("only/all")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetAllOnlyAsync()
+    [HttpGet("only/ByUser/{userId}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetOnlyByUserAsync(int userId)
     {
         try
         {
-            var entries = await _unitOfWork.Entries.GetAllOnlyAsync();
+            var entries = await _unitOfWork.Entries.GetEntitiesAsync(e => e.UserId == userId);
             var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
 
             return Ok(dtos);

@@ -23,12 +23,12 @@ public class ArticleController : ControllerBase
 
 
 
-    [HttpGet("only/all")]
-    public async Task<ActionResult<List<ArticleResponseDto>>> GetAllOnlyAsync()
+    [HttpGet("only/ByUser/{userId}")]
+    public async Task<ActionResult<List<ArticleResponseDto>>> GetOnlyByUserAsync(int userId)
     {
         try
         {
-            var articles = await _unitOfWork.Articles.GetAllOnlyAsync();
+            var articles = await _unitOfWork.Articles.GetEntitiesAsync(e => e.UserId == userId);
             var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
 
             return Ok(dtos);
