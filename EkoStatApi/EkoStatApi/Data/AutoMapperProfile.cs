@@ -1,7 +1,7 @@
 ﻿using EkoStatApi.Dtos;
 using EkoStatApi.Models;
 
-namespace EkoStatApi;
+namespace EkoStatApi.Data;
 
 public class AutoMapperProfile : AutoMapper.Profile
 {
