@@ -23,12 +23,12 @@ public class UnitController : ControllerBase
 
 
 
-    [HttpGet("only/all")]
-    public async Task<ActionResult<List<UnitResponseDto>>> GetAllOnly()
+    [HttpGet("Minimal/all")]
+    public async Task<ActionResult<List<UnitResponseDto>>> GetAllMinimal()
     {
         try
         {
-            var units = await _unitOfWork.Units.GetAllOnlyAsync();
+            var units = await _unitOfWork.Units.GetAllMinimalAsync();
             var dtos = _mapper.Map<List<UnitResponseDto>>(units);
 
             return Ok(dtos);
@@ -40,12 +40,12 @@ public class UnitController : ControllerBase
         }
     }
 
-    [HttpGet("only/{id}")]
-    public async Task<ActionResult<UnitResponseDto>> GetOnly(int id)
+    [HttpGet("Minimal/{id}")]
+    public async Task<ActionResult<UnitResponseDto>> GetMinimal(int id)
     {
         try
         {
-            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             var dto = _mapper.Map<UnitResponseDto>(unit);
 
             return (dto != null)
@@ -104,7 +104,7 @@ public class UnitController : ControllerBase
     {
         try
         {
-            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             if (unit == null)
                 return NotFound($"Fail: Find unit with id '{id}' to update.");
             _mapper.Map(dto, unit);
@@ -125,7 +125,7 @@ public class UnitController : ControllerBase
     {
         try
         {
-            var unit = await _unitOfWork.Units.GetOnlyAsync(id);
+            var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             if (unit == null)
                 return NotFound($"Fail: Find unit with id '{id}' to delete.");
             _unitOfWork.Units.Remove(unit);

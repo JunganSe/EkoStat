@@ -23,8 +23,8 @@ public class EntryController : ControllerBase
 
 
 
-    [HttpGet("only/ByUser/{userId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetOnlyByUser(int userId)
+    [HttpGet("Minimal/ByUser/{userId}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetByUserMinimal(int userId)
     {
         try
         {
@@ -40,12 +40,12 @@ public class EntryController : ControllerBase
         }
     }
 
-    [HttpGet("only/{id}")]
-    public async Task<ActionResult<EntryResponseDto>> GetOnly(int id)
+    [HttpGet("Minimal/{id}")]
+    public async Task<ActionResult<EntryResponseDto>> GetMinimal(int id)
     {
         try
         {
-            var entry = await _unitOfWork.Entries.GetOnlyAsync(id);
+            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             var dto = _mapper.Map<EntryResponseDto>(entry);
 
             return (dto != null)
@@ -155,7 +155,7 @@ public class EntryController : ControllerBase
     {
         try
         {
-            var entry = await _unitOfWork.Entries.GetOnlyAsync(id);
+            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
                 return NotFound($"Fail: Find entry with id '{id}' to update.");
             _mapper.Map(dto, entry);
@@ -176,7 +176,7 @@ public class EntryController : ControllerBase
     {
         try
         {
-            var entry = await _unitOfWork.Entries.GetOnlyAsync(id);
+            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
                 return NotFound($"Fail: Find entry with id '{id}' to delete.");
             _unitOfWork.Entries.Remove(entry);

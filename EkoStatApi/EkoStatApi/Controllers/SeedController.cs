@@ -76,7 +76,7 @@ public class SeedController : ControllerBase
 
     private async Task SeedArticlesAsync()
     {
-        var tags = await _unitOfWork.Tags.GetAllOnlyAsync();
+        var tags = await _unitOfWork.Tags.GetAllMinimalAsync();
         var articles = new List<Article>()
         {
             new Article()

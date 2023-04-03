@@ -23,8 +23,8 @@ public class ArticleController : ControllerBase
 
 
 
-    [HttpGet("only/ByUser/{userId}")]
-    public async Task<ActionResult<List<ArticleResponseDto>>> GetOnlyByUser(int userId)
+    [HttpGet("Minimal/ByUser/{userId}")]
+    public async Task<ActionResult<List<ArticleResponseDto>>> GetByUserMinimal(int userId)
     {
         try
         {
@@ -40,12 +40,12 @@ public class ArticleController : ControllerBase
         }
     }
 
-    [HttpGet("only/{id}")]
-    public async Task<ActionResult<ArticleResponseDto>> GetOnly(int id)
+    [HttpGet("Minimal/{id}")]
+    public async Task<ActionResult<ArticleResponseDto>> GetMinimal(int id)
     {
         try
         {
-            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             var dto = _mapper.Map<ArticleResponseDto>(article);
 
             return (dto != null)
@@ -155,7 +155,7 @@ public class ArticleController : ControllerBase
     {
         try
         {
-            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             if (article == null)
                 return NotFound($"Fail: Find article with id '{id}' to update.");
             _mapper.Map(dto, article);
@@ -176,7 +176,7 @@ public class ArticleController : ControllerBase
     {
         try
         {
-            var article = await _unitOfWork.Articles.GetOnlyAsync(id);
+            var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             if (article == null)
                 return NotFound($"Fail: Find article with id '{id}' to delete.");
             _unitOfWork.Articles.Remove(article);

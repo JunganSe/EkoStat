@@ -18,12 +18,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
 
     // Hämta utan include-delar.
-    public async Task<TEntity?> GetOnlyAsync(int id)
+    public async Task<TEntity?> GetMinimalAsync(int id)
     {
         return await _entities.FindAsync(id);
     }
 
-    public async Task<List<TEntity>> GetAllOnlyAsync()
+    public async Task<List<TEntity>> GetAllMinimalAsync()
     {
         return await _entities.ToListAsync();
     }

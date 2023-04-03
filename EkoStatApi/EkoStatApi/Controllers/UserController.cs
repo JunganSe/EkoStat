@@ -23,12 +23,12 @@ public class UserController : ControllerBase
 
 
 
-    [HttpGet("only/all")]
-    public async Task<ActionResult<List<UserResponseDto>>> GetAllOnly()
+    [HttpGet("Minimal/all")]
+    public async Task<ActionResult<List<UserResponseDto>>> GetAllMinimal()
     {
         try
         {
-            var users = await _unitOfWork.Users.GetAllOnlyAsync();
+            var users = await _unitOfWork.Users.GetAllMinimalAsync();
             var dtos = _mapper.Map<List<UserResponseDto>>(users);
 
             return Ok(dtos);
@@ -40,12 +40,12 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpGet("only/{id}")]
-    public async Task<ActionResult<UserResponseDto>> GetOnly(int id)
+    [HttpGet("Minimal/{id}")]
+    public async Task<ActionResult<UserResponseDto>> GetMinimal(int id)
     {
         try
         {
-            var user = await _unitOfWork.Users.GetOnlyAsync(id);
+            var user = await _unitOfWork.Users.GetMinimalAsync(id);
             var dto = _mapper.Map<UserResponseDto>(user);
 
             return (dto != null)
@@ -104,7 +104,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var user = await _unitOfWork.Users.GetOnlyAsync(id);
+            var user = await _unitOfWork.Users.GetMinimalAsync(id);
             if (user == null)
                 return NotFound($"Fail: Find user with id '{id}' to update.");
             _mapper.Map(dto, user);
@@ -125,7 +125,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            var user = await _unitOfWork.Users.GetOnlyAsync(id);
+            var user = await _unitOfWork.Users.GetMinimalAsync(id);
             if (user == null)
                 return NotFound($"Fail: Find user with id '{id}' to delete.");
             _unitOfWork.Users.Remove(user);

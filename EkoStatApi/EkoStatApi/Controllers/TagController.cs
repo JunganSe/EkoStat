@@ -23,8 +23,8 @@ public class TagController : ControllerBase
 
 
 
-    [HttpGet("only/ByUser/{userId}")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetOnlyByUser(int userId)
+    [HttpGet("Minimal/ByUser/{userId}")]
+    public async Task<ActionResult<List<TagResponseDto>>> GetByUserMinimal(int userId)
     {
         try
         {
@@ -40,12 +40,12 @@ public class TagController : ControllerBase
         }
     }
 
-    [HttpGet("only/{id}")]
-    public async Task<ActionResult<TagResponseDto>> GetOnly(int id)
+    [HttpGet("Minimal/{id}")]
+    public async Task<ActionResult<TagResponseDto>> GetMinimal(int id)
     {
         try
         {
-            var tag = await _unitOfWork.Tags.GetOnlyAsync(id);
+            var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             var dto = _mapper.Map<TagResponseDto>(tag);
 
             return (dto != null)
@@ -138,7 +138,7 @@ public class TagController : ControllerBase
     {
         try
         {
-            var tag = await _unitOfWork.Tags.GetOnlyAsync(id);
+            var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             if (tag == null)
                 return NotFound($"Fail: Find tag with id '{id}' to update.");
             _mapper.Map(dto, tag);
@@ -159,7 +159,7 @@ public class TagController : ControllerBase
     {
         try
         {
-            var tag = await _unitOfWork.Tags.GetOnlyAsync(id);
+            var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             if (tag == null)
                 return NotFound($"Fail: Find tag with id '{id}' to delete.");
             _unitOfWork.Tags.Remove(tag);

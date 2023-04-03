@@ -6,8 +6,8 @@ public interface IRepository<TEntity> where TEntity : class
 {
 
     // Hämta
-    Task<TEntity?> GetOnlyAsync(int id);
-    Task<List<TEntity>> GetAllOnlyAsync();
+    Task<TEntity?> GetMinimalAsync(int id);
+    Task<List<TEntity>> GetAllMinimalAsync();
     Task<TEntity?> GetEntityAsync(Expression<Func<TEntity, bool>> predicate, string? include = null);
     Task<List<TEntity>> GetEntitiesAsync(Expression<Func<TEntity, bool>>? predicate = null, string? include = null);
 
