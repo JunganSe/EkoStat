@@ -129,6 +129,24 @@ public class EntryController : ControllerBase
         }
     }
 
+    [HttpPost("Filtered/{userId}")]
+    public async Task<ActionResult<List<EntryResponseDto>>> GetFiltered(int userId, EntryFilterRequestDto filter)
+    {
+        try
+        {
+            var entries = await _unitOfWork.Entries.GetByUserAsync(userId);
+            entries = FilterEntries(entries, filter);
+            var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
+
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Get entries from database.");
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
 
 
     [HttpPost]
@@ -190,5 +208,49 @@ public class EntryController : ControllerBase
             _logger.LogError(ex, "Fail: Delete entry with id '{id}' from database.", id);
             return StatusCode(500, ex.Message); // Internal server error
         }
+    }
+
+
+
+    private IEnumerable<Entry> FilterEntries(IEnumerable<Entry> entries, EntryFilterRequestDto filter)
+    {
+        // Artikel
+        if (filter.ArticleIds != null && filter.ArticleIds.Count > 0)
+            entries = entries.Where(e => filter.ArticleIds.Contains(e.ArticleId));
+
+        // Taggar
+        if (filter.TagIds != null 
+            && filter.TagIds.Count > 0
+            && filter.MustHaveAllTags != null)
+        {
+            if ((bool)filter.MustHaveAllTags) // Artiklen i entry har alla taggar.
+            {
+                entries = entries
+                    .Where(entry => filter.TagIds
+                        .All(filterTagId => entry.Article.Tags
+                            .Any(tag => tag.Id == filterTagId)));
+            }
+            else // Artiklen i entry har någon av taggarna.
+            {
+                entries = entries
+                    .Where(entry => filter.TagIds
+                        .Any(filterTagId => entry.Article.Tags
+                            .Any(tag => tag.Id == filterTagId)));
+            }
+        }
+
+        // Pris
+        if (filter.PriceMin != null)
+            entries = entries.Where(entry => entry.CostPerArticle >= filter.PriceMin);
+        if (filter.PriceMax != null)
+            entries = entries.Where(entry => entry.CostPerArticle <= filter.PriceMax);
+
+        // Timestamp
+        if (filter.TimestampFrom != null)
+            entries = entries.Where(e => e.TimeStamp >= filter.TimestampFrom);
+        if (filter.TimestampUntil != null)
+            entries = entries.Where(e => e.TimeStamp <= filter.TimestampUntil);
+
+        return entries;
     }
 }

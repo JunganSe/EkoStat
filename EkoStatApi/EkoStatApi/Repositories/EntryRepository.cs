@@ -11,6 +11,7 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
     public IQueryable<Entry> EntriesWithIncludes
         => EkoStatContext.Entries
             .Include(e => e.Article)
+                .ThenInclude(a => a.Tags)
             .Include(e => e.Unit);
 
     public EntryRepository(EkoStatContext context)
