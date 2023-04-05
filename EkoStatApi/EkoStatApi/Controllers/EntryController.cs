@@ -154,6 +154,9 @@ public class EntryController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var entry = _mapper.Map<Entry>(dto);
             await _unitOfWork.Entries.AddAsync(entry);
 
@@ -173,6 +176,9 @@ public class EntryController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
                 return NotFound($"Fail: Find entry with id '{id}' to update.");

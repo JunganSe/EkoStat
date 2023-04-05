@@ -119,6 +119,9 @@ public class TagController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var tag = _mapper.Map<Tag>(dto);
             await _unitOfWork.Tags.AddAsync(tag);
 
@@ -138,6 +141,9 @@ public class TagController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             if (tag == null)
                 return NotFound($"Fail: Find tag with id '{id}' to update.");

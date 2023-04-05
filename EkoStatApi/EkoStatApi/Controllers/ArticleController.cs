@@ -136,6 +136,9 @@ public class ArticleController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var article = _mapper.Map<Article>(dto);
             await _unitOfWork.Articles.AddAsync(article);
 
@@ -155,6 +158,9 @@ public class ArticleController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             if (article == null)
                 return NotFound($"Fail: Find article with id '{id}' to update.");

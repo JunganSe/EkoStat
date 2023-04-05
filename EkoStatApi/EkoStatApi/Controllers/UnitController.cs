@@ -85,6 +85,9 @@ public class UnitController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var unit = _mapper.Map<Unit>(dto);
             await _unitOfWork.Units.AddAsync(unit);
 
@@ -104,6 +107,9 @@ public class UnitController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             if (unit == null)
                 return NotFound($"Fail: Find unit with id '{id}' to update.");

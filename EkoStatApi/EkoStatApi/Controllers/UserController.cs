@@ -85,6 +85,9 @@ public class UserController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var user = _mapper.Map<User>(dto);
             await _unitOfWork.Users.AddAsync(user);
 
@@ -104,6 +107,9 @@ public class UserController : ControllerBase
     {
         try
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
             var user = await _unitOfWork.Users.GetMinimalAsync(id);
             if (user == null)
                 return NotFound($"Fail: Find user with id '{id}' to update.");
