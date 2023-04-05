@@ -23,6 +23,8 @@ public class TagController : ControllerBase
 
 
 
+    #region Read
+
     [HttpGet("Minimal/ByUser/{userId}")]
     public async Task<ActionResult<List<TagResponseDto>>> GetByUserMinimal(int userId)
     {
@@ -112,7 +114,11 @@ public class TagController : ControllerBase
         }
     }
 
+    #endregion
 
+
+
+    #region CUD
 
     [HttpPost]
     public async Task<ActionResult> Create(TagRequestDto dto)
@@ -180,4 +186,6 @@ public class TagController : ControllerBase
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
+
+    #endregion
 }

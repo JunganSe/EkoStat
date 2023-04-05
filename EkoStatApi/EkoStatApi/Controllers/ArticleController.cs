@@ -23,6 +23,8 @@ public class ArticleController : ControllerBase
 
 
 
+    #region Read
+
     [HttpGet("Minimal/ByUser/{userId}")]
     public async Task<ActionResult<List<ArticleResponseDto>>> GetByUserMinimal(int userId)
     {
@@ -129,7 +131,11 @@ public class ArticleController : ControllerBase
         }
     }
 
+    #endregion
 
+
+
+    #region CUD
 
     [HttpPost]
     public async Task<ActionResult> Create(ArticleRequestDto dto)
@@ -197,4 +203,6 @@ public class ArticleController : ControllerBase
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
+
+    #endregion
 }

@@ -23,6 +23,8 @@ public class UserController : ControllerBase
 
 
 
+    #region Read
+
     [HttpGet("Minimal/all")]
     public async Task<ActionResult<List<UserResponseDto>>> GetAllMinimal()
     {
@@ -78,7 +80,11 @@ public class UserController : ControllerBase
         }
     }
 
+    #endregion
 
+
+
+    #region CUD
 
     [HttpPost]
     public async Task<ActionResult> Create(UserRequestDto dto)
@@ -146,4 +152,6 @@ public class UserController : ControllerBase
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
+
+    #endregion
 }

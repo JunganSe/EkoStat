@@ -23,6 +23,8 @@ public class EntryController : ControllerBase
 
 
 
+    #region Read
+
     [HttpGet("Minimal/ByUser/{userId}")]
     public async Task<ActionResult<List<EntryResponseDto>>> GetByUserMinimal(int userId)
     {
@@ -147,7 +149,11 @@ public class EntryController : ControllerBase
         }
     }
 
+    #endregion
 
+
+
+    #region CUD
 
     [HttpPost]
     public async Task<ActionResult> Create(EntryRequestDto dto)
@@ -215,6 +221,8 @@ public class EntryController : ControllerBase
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
+
+    #endregion
 
 
 
