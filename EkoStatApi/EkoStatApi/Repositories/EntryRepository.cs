@@ -27,21 +27,21 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public async Task<IEnumerable<Entry>> GetByArticleAsync(int articleId)
+    public async Task<ICollection<Entry>> GetByArticleAsync(int articleId)
     {
         return await EntriesWithIncludes
             .Where(e => e.ArticleId == articleId)
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Entry>> GetByTagAsync(int tagId)
+    public async Task<ICollection<Entry>> GetByTagAsync(int tagId)
     {
         return await EntriesWithIncludes
             .Where(e => e.Article.Tags.Any(t => t.Id == tagId))
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Entry>> GetByUserAsync(int userId)
+    public async Task<ICollection<Entry>> GetByUserAsync(int userId)
     {
         return await EntriesWithIncludes
             .Where(e => e.UserId == userId)

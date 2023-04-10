@@ -226,11 +226,12 @@ public class EntryController : ControllerBase
 
 
 
-    private IEnumerable<Entry> FilterEntries(IEnumerable<Entry> entries, EntryFilterRequestDto filter)
+    private ICollection<Entry> FilterEntries(ICollection<Entry> entries, EntryFilterRequestDto filter)
     {
         // Artikel
         if (filter.ArticleIds != null && filter.ArticleIds.Count > 0)
-            entries = entries.Where(e => filter.ArticleIds.Contains(e.ArticleId));
+            entries = (ICollection<Entry>)entries
+                .Where(e => filter.ArticleIds.Contains(e.ArticleId));
 
         // Taggar
         if (filter.TagIds != null 
@@ -239,14 +240,14 @@ public class EntryController : ControllerBase
         {
             if ((bool)filter.MustHaveAllTags) // Artiklen i entry har alla taggar.
             {
-                entries = entries
+                entries = (ICollection<Entry>)entries
                     .Where(entry => filter.TagIds
                         .All(filterTagId => entry.Article.Tags
                             .Any(tag => tag.Id == filterTagId)));
             }
             else // Artiklen i entry har någon av taggarna.
             {
-                entries = entries
+                entries = (ICollection<Entry>)entries
                     .Where(entry => filter.TagIds
                         .Any(filterTagId => entry.Article.Tags
                             .Any(tag => tag.Id == filterTagId)));
@@ -255,15 +256,19 @@ public class EntryController : ControllerBase
 
         // Pris
         if (filter.PriceMin != null)
-            entries = entries.Where(entry => entry.CostPerArticle >= filter.PriceMin);
+            entries = (ICollection<Entry>)entries
+                .Where(entry => entry.CostPerArticle >= filter.PriceMin);
         if (filter.PriceMax != null)
-            entries = entries.Where(entry => entry.CostPerArticle <= filter.PriceMax);
+            entries = (ICollection<Entry>)entries
+                .Where(entry => entry.CostPerArticle <= filter.PriceMax);
 
         // Timestamp
         if (filter.TimestampFrom != null)
-            entries = entries.Where(e => e.TimeStamp >= filter.TimestampFrom);
+            entries = (ICollection<Entry>)entries
+                .Where(e => e.TimeStamp >= filter.TimestampFrom);
         if (filter.TimestampUntil != null)
-            entries = entries.Where(e => e.TimeStamp <= filter.TimestampUntil);
+            entries = (ICollection<Entry>)entries
+                .Where(e => e.TimeStamp <= filter.TimestampUntil);
 
         return entries;
     }

@@ -76,13 +76,13 @@ public class SeedController : ControllerBase
 
     private async Task SeedArticlesAsync()
     {
-        var tags = await _unitOfWork.Tags.GetAllMinimalAsync();
+        var tags = (await _unitOfWork.Tags.GetAllMinimalAsync()) as List<Tag>;
         var articles = new List<Article>()
         {
             new Article()
             {
                 Name = "Ärtor, frysta",
-                Tags = new List<Tag>() { tags[0], tags[1] },
+                Tags = new List<Tag>() { tags![0], tags[1] },
                 UserId = 1,
             },
             new Article()

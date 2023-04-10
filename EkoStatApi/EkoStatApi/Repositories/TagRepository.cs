@@ -25,14 +25,14 @@ public class TagRepository : Repository<Tag>, ITagRepository
             .FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task<IEnumerable<Tag>> GetByArticleAsync(int articleId)
+    public async Task<ICollection<Tag>> GetByArticleAsync(int articleId)
     {
         return await EkoStatContext.Tags
             .Where(t => t.Articles.Any(a => a.Id == articleId))
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Tag>> GetByUserAsync(int userId)
+    public async Task<ICollection<Tag>> GetByUserAsync(int userId)
     {
         return await TagsWithIncludes
             .Where(t => t.UserId == userId)
