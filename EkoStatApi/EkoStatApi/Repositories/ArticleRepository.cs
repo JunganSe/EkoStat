@@ -7,8 +7,8 @@ namespace EkoStatApi.Repositories;
 
 public class ArticleRepository : Repository<Article>, IArticleRepository
 {
-    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    public IQueryable<Article> ArticlesWithIncludes
+    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    private IQueryable<Article> ArticlesWithIncludes
         => EkoStatContext.Articles
             .Include(a => a.Entries)
             .Include(a => a.Tags);

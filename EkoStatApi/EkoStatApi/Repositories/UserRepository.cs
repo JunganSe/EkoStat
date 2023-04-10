@@ -7,8 +7,8 @@ namespace EkoStatApi.Repositories;
 
 public class UserRepository : Repository<User>, IUserRepository
 {
-    public EkoStatContext EkoStatContext => (EkoStatContext)Context;
-    public IQueryable<User> UsersWithIncludes
+    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    private IQueryable<User> UsersWithIncludes
         => EkoStatContext.Users
             .Include(u => u.Tags)
             .Include(u => u.Articles)
