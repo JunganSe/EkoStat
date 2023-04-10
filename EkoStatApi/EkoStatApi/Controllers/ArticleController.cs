@@ -169,7 +169,7 @@ public class ArticleController : ControllerBase
 
             var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             if (article == null)
-                return NotFound($"Fail: Find article with id '{id}' to update.");
+                return NotFound($"Fail: Find article with id '{id}' to update."); // 404
             _mapper.Map(dto, article);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -190,7 +190,7 @@ public class ArticleController : ControllerBase
         {
             var article = await _unitOfWork.Articles.GetMinimalAsync(id);
             if (article == null)
-                return NotFound($"Fail: Find article with id '{id}' to delete.");
+                return NotFound($"Fail: Find article with id '{id}' to delete."); // 404
             _unitOfWork.Articles.Remove(article);
 
             return (await _unitOfWork.TrySaveAsync())

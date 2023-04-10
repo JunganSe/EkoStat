@@ -118,7 +118,7 @@ public class UnitController : ControllerBase
 
             var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             if (unit == null)
-                return NotFound($"Fail: Find unit with id '{id}' to update.");
+                return NotFound($"Fail: Find unit with id '{id}' to update."); // 404
             _mapper.Map(dto, unit);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -139,7 +139,7 @@ public class UnitController : ControllerBase
         {
             var unit = await _unitOfWork.Units.GetMinimalAsync(id);
             if (unit == null)
-                return NotFound($"Fail: Find unit with id '{id}' to delete.");
+                return NotFound($"Fail: Find unit with id '{id}' to delete."); // 404
             _unitOfWork.Units.Remove(unit);
 
             return (await _unitOfWork.TrySaveAsync())

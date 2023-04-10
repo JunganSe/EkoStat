@@ -118,7 +118,7 @@ public class UserController : ControllerBase
 
             var user = await _unitOfWork.Users.GetMinimalAsync(id);
             if (user == null)
-                return NotFound($"Fail: Find user with id '{id}' to update.");
+                return NotFound($"Fail: Find user with id '{id}' to update."); // 404
             _mapper.Map(dto, user);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -139,7 +139,7 @@ public class UserController : ControllerBase
         {
             var user = await _unitOfWork.Users.GetMinimalAsync(id);
             if (user == null)
-                return NotFound($"Fail: Find user with id '{id}' to delete.");
+                return NotFound($"Fail: Find user with id '{id}' to delete."); // 404
             _unitOfWork.Users.Remove(user);
 
             return (await _unitOfWork.TrySaveAsync())

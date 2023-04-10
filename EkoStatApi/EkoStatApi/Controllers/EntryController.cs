@@ -187,7 +187,7 @@ public class EntryController : ControllerBase
 
             var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
-                return NotFound($"Fail: Find entry with id '{id}' to update.");
+                return NotFound($"Fail: Find entry with id '{id}' to update."); // 404
             _mapper.Map(dto, entry);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -208,7 +208,7 @@ public class EntryController : ControllerBase
         {
             var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
-                return NotFound($"Fail: Find entry with id '{id}' to delete.");
+                return NotFound($"Fail: Find entry with id '{id}' to delete."); // 404
             _unitOfWork.Entries.Remove(entry);
 
             return (await _unitOfWork.TrySaveAsync())

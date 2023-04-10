@@ -152,7 +152,7 @@ public class TagController : ControllerBase
 
             var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             if (tag == null)
-                return NotFound($"Fail: Find tag with id '{id}' to update.");
+                return NotFound($"Fail: Find tag with id '{id}' to update."); // 404
             _mapper.Map(dto, tag);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -173,7 +173,7 @@ public class TagController : ControllerBase
         {
             var tag = await _unitOfWork.Tags.GetMinimalAsync(id);
             if (tag == null)
-                return NotFound($"Fail: Find tag with id '{id}' to delete.");
+                return NotFound($"Fail: Find tag with id '{id}' to delete."); // 404
             _unitOfWork.Tags.Remove(tag);
 
             return (await _unitOfWork.TrySaveAsync())
