@@ -61,25 +61,6 @@ public class UnitController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<UnitResponseDto>> Get(int id)
-    {
-        try
-        {
-            var unit = await _unitOfWork.Units.GetAsync(id);
-            var dto = _mapper.Map<UnitResponseDto>(unit);
-
-            return (dto != null)
-                ? Ok(dto) // 200
-                : NotFound($"Fail: Find unit with id '{id}'."); // 404
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get unit with id '{id}' from database.", id);
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     #endregion
 
 
