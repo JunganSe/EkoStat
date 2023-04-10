@@ -9,7 +9,6 @@ public class Entry
     public int UserId { get; set; }
 
     // Data
-    public string Name { get; set; } = null!;
     public string Comment { get; set; } = null!;
     public DateTimeOffset TimeStamp { get; set; }
     public double Count { get; set; }

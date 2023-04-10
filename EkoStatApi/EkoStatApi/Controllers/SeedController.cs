@@ -147,7 +147,6 @@ public class SeedController : ControllerBase
         {
             new Entry()
             {
-                Name = "Frysgrönt",
                 Comment = "Extrapris",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 1.5,
@@ -158,7 +157,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "Snabbmakaroner",
                 Comment = "Extrapris",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 1,
@@ -169,7 +167,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 500,
@@ -180,7 +177,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "Dill",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 275,
@@ -191,7 +187,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "Sour cream",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 275,
@@ -202,7 +197,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 44.8,
@@ -213,7 +207,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "Tågbiljett",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 1,
@@ -224,7 +217,6 @@ public class SeedController : ControllerBase
             },
             new Entry()
             {
-                Name = "",
                 Comment = "Parkering",
                 TimeStamp = DateTimeOffset.Now,
                 Count = 1,
