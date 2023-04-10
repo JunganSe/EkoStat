@@ -23,10 +23,7 @@ public class AutoMapperProfile : AutoMapper.Profile
                 opt => opt.MapFrom(src => src.Articles.Select(a => a.Id)));
 
         CreateMap<UnitRequestDto, Unit>();
-        CreateMap<Unit, UnitResponseDto>()
-            .ForMember(
-                dest => dest.EntryIds,
-                opt => opt.MapFrom(src => src.Entries.Select(e => e.Id)));
+        CreateMap<Unit, UnitResponseDto>();
 
         CreateMap<UserRequestDto, User>();
         CreateMap<User, UserResponseDto>()
