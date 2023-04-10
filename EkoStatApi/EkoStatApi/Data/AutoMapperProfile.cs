@@ -11,13 +11,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<Article, ArticleResponseDto>();
 
         CreateMap<EntryRequestDto, Entry>();
-        CreateMap<Entry, EntryResponseDto>()
-            .ForMember(
-                dest => dest.ArticleName,
-                options => options.MapFrom(src => src.Article.Name))
-            .ForMember(
-                dest => dest.UnitName,
-                options => options.MapFrom(src => src.Unit.Name));
+        CreateMap<Entry, EntryResponseDto>();
 
         CreateMap<TagRequestDto, Tag>();
         CreateMap<Tag, TagResponseDto>();

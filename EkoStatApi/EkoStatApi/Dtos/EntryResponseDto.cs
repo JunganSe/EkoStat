@@ -8,9 +8,7 @@ public class EntryResponseDto
     public DateTimeOffset? TimeStamp { get; set; }
     public double? Count { get; set; }
     public decimal? CostPerArticle { get; set; }
-    public int? ArticleId { get; set; }
-    public string? ArticleName { get; set; }
-    public int? UnitId { get; set; }
-    public string? UnitName { get; set; }
+    public ArticleResponseDto? Article { get; set; }
+    public UnitResponseDto? Unit { get; set; }
     public int? UserId { get; set; }
 }
