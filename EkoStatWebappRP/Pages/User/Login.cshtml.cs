@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EkoStatWebappRP.Pages;
+namespace EkoStatWebappRP.Pages.User;
 
-public class IndexModel : PageModel
+public class LoginModel : PageModel
 {
     public void OnGet()
     {

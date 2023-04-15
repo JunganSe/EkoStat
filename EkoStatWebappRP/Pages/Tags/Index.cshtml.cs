@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EkoStatWebappRP.Pages;
+namespace EkoStatWebappRP.Pages.Tags;
 
 public class IndexModel : PageModel
 {
