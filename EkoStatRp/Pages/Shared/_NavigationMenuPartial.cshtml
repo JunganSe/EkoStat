@@ -3,7 +3,7 @@
 @{
     var httpContext = httpContextAccessor.HttpContext;
     var userId = (httpContext != null) 
-        ? httpContext.Session.GetString("UserId") 
+        ? httpContext.Session.GetString(Constants.Session.UserId) 
         : null;
     bool isLoggedIn = (!string.IsNullOrEmpty(userId));
 }
