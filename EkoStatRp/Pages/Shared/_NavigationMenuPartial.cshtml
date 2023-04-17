@@ -1,5 +1,11 @@
-﻿@{
-    bool isLoggedIn = true; // TODO: Kontrollera inloggning.
+﻿@inject IHttpContextAccessor httpContextAccessor
+
+@{
+    var httpContext = httpContextAccessor.HttpContext;
+    var userId = (httpContext != null) 
+        ? httpContext.Session.GetString("UserId") 
+        : null;
+    bool isLoggedIn = (!string.IsNullOrEmpty(userId));
 }
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
