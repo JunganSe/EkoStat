@@ -138,7 +138,7 @@ public class ArticleController : ControllerBase
     #region CUD
 
     [HttpPost]
-    public async Task<ActionResult> Create(ArticleRequestDto dto)
+    public async Task<ActionResult> Create(ArticleRequestDto dto) // TODO: Mappa taggar.
     {
         try
         {
@@ -160,7 +160,7 @@ public class ArticleController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(int id, ArticleRequestDto dto)
+    public async Task<ActionResult> Update(int id, ArticleRequestDto dto) // TODO: Mappa taggar.
     {
         try
         {

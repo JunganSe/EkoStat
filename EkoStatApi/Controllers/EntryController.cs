@@ -236,7 +236,7 @@ public class EntryController : ControllerBase
         // Taggar
         if (filter.TagIds != null 
             && filter.TagIds.Count > 0
-            && filter.MustHaveAllTags != null)
+            && filter.MustHaveAllTags != null) // TODO: Flytta in filter.MustHaveAllTags kontrollen in i blocket och gör ArgumentException till BadRequest om den är null.
         {
             if ((bool)filter.MustHaveAllTags) // Artiklen i entry har alla taggar.
             {
