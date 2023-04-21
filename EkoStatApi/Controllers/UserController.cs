@@ -61,25 +61,6 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<UserResponseDto>> Get(int id)
-    {
-        try
-        {
-            var user = await _unitOfWork.Users.GetAsync(id);
-            var dto = _mapper.Map<UserResponseDto>(user);
-
-            return (dto != null)
-                ? Ok(dto) // 200
-                : NotFound($"Fail: Find user with id '{id}'."); // 404
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get user with id '{id}' from database.", id);
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     #endregion
 
 
