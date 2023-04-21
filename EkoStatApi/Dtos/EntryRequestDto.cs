@@ -4,9 +4,6 @@ namespace EkoStatApi.Dtos;
 
 public class EntryRequestDto
 {
-    [MinLength(2)]
-    public string? Name { get; set; }
-
     [MaxLength(200)]
     public string? Comment { get; set; }
 
