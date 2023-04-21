@@ -131,10 +131,10 @@ public class SeedController : ControllerBase
     {
         var units = new List<Unit>()
         {
-            new Unit() { Name = "gram" },
-            new Unit() { Name = "kilo" },
-            new Unit() { Name = "liter" },
-            new Unit() { Name = "styck" },
+            new Unit() { Name = "gram", ShortName = "g" },
+            new Unit() { Name = "kilo", ShortName = "kg" },
+            new Unit() { Name = "liter", ShortName = "l" },
+            new Unit() { Name = "styck", ShortName = "st" },
         };
         await _unitOfWork.Units.AddRangeAsync(units);
         if (!await _unitOfWork.TrySaveAsync())

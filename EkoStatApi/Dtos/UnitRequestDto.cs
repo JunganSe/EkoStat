@@ -7,4 +7,8 @@ public class UnitRequestDto
     [Required]
     [MinLength(1)]
     public string? Name { get; set; }
+
+    [Required]
+    [MinLength(1)]
+    public string? ShortName { get; set; }
 }

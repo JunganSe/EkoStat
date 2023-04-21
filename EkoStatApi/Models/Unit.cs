@@ -7,6 +7,7 @@ public class Unit
 
     // Data
     public string Name { get; set; } = null!;
+    public string ShortName { get; set; } = null!;
 
     // Navigation
     public ICollection<Entry> Entries { get; set; } = new List<Entry>();
