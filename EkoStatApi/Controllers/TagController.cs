@@ -61,25 +61,6 @@ public class TagController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TagResponseDto>> Get(int id)
-    {
-        try
-        {
-            var tag = await _unitOfWork.Tags.GetAsync(id);
-            var dto = _mapper.Map<TagResponseDto>(tag);
-
-            return (dto != null)
-                ? Ok(dto) // 200
-                : NotFound($"Fail: Find tag with id '{id}'."); // 404
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get tag with id '{id}' from database.", id);
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     [HttpGet("ByArticle/{articleId}")]
     public async Task<ActionResult<List<TagResponseDto>>> GetByArticle(int articleId)
     {

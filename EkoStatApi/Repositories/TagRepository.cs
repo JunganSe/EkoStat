@@ -19,12 +19,6 @@ public class TagRepository : Repository<Tag>, ITagRepository
 
 
 
-    public async Task<Tag?> GetAsync(int id)
-    {
-        return await TagsWithIncludes
-            .FirstOrDefaultAsync(t => t.Id == id);
-    }
-
     public async Task<ICollection<Tag>> GetByArticleAsync(int articleId)
     {
         return await EkoStatContext.Tags
