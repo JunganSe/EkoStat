@@ -9,5 +9,4 @@ public class EntryResponseDto
     public decimal? CostPerArticle { get; set; }
     public ArticleResponseDto? Article { get; set; }
     public UnitResponseDto? Unit { get; set; }
-    public int? UserId { get; set; }
 }
