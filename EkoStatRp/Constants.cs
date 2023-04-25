@@ -2,6 +2,10 @@
 
 internal static class Constants
 {
+    public static class AppsettingsJsonNames
+    {
+        public const string ApiUrl = "ApiUrl";
+    }
     public static class SessionData
     {
         public const string UserId = "UserId";
