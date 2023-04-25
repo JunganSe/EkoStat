@@ -6,7 +6,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        // --- Add services to the container. ---
+
         builder.Services.AddRazorPages();
 
         // För att kunna använda HttpContext.Session-metoder för att lagra data tillfälligt på servern.
@@ -20,9 +21,11 @@ public class Program
         });
         builder.Services.AddHttpContextAccessor(); // För att kunna injecta IHttpContextAccessor, som används för att nå HttpContext.Session-metoder.
 
-        var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+
+        var app = builder.Build();
+        // --- Configure the HTTP request pipeline. ---
+
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
