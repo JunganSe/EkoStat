@@ -1,7 +1,7 @@
 ﻿@inject IHttpContextAccessor httpContextAccessor
 
 @{
-    var userId = httpContextAccessor.HttpContext?.Session.GetString(Constants.Session.UserId); // TODO: Lägg i metod.
+    var userId = httpContextAccessor.HttpContext?.Session.GetString(Constants.SessionData.UserId); // TODO: Lägg i metod.
     bool isLoggedIn = (!string.IsNullOrEmpty(userId));
 }
 

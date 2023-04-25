@@ -7,6 +7,6 @@ public class LoginModel : PageModel
 {
     public void OnGet()
     {
-        HttpContext.Session.SetString(Constants.Session.UserId, "1");
+        HttpContext.Session.SetString(Constants.SessionData.UserId, "1");
     }
 }

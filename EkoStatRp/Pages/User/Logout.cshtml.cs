@@ -6,6 +6,6 @@ public class LogoutModel : PageModel
 {
     public void OnGet()
     {
-        HttpContext.Session.Remove(Constants.Session.UserId);
+        HttpContext.Session.Remove(Constants.SessionData.UserId);
     }
 }
