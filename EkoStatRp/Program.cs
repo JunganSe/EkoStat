@@ -39,8 +39,6 @@ public class Program
 
         app.MapRazorPages();
 
-        Constants.Initialize("./Constants.json"); // TODO: Hämta filsökvägen från appsettings.json
-
         app.Run();
     }
 }
