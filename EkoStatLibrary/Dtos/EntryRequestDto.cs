@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EkoStatApi.Dtos;
+namespace EkoStatLibrary.Dtos;
 
 public class EntryRequestDto
 {

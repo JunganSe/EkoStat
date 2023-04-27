@@ -1,4 +1,4 @@
-﻿using EkoStatApi.Dtos;
+﻿using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 
 namespace EkoStatApi.Data;

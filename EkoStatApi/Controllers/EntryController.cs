@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EkoStatApi.Data;
-using EkoStatApi.Dtos;
+using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
 

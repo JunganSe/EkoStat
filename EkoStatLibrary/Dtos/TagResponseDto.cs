@@ -1,6 +1,6 @@
-﻿namespace EkoStatApi.Dtos;
+﻿namespace EkoStatLibrary.Dtos;
 
-public class UserResponseDto
+public class TagResponseDto
 {
     public int? Id { get; set; }
     public string? Name { get; set; }

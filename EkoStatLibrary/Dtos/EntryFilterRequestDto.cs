@@ -1,4 +1,4 @@
-﻿namespace EkoStatApi.Dtos;
+﻿namespace EkoStatLibrary.Dtos;
 
 public class EntryFilterRequestDto
 {
