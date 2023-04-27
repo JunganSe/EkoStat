@@ -11,4 +11,8 @@ internal static class Constants
         public const string UserId = "UserId";
         public const string UserName = "UserName";
     }
+    public static class ApiEndpoints
+    {
+        public const string TagsByUser = "/Tags/Minimal/ByUser/";
+    }
 }
