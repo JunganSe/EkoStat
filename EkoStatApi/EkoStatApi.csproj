@@ -20,4 +20,8 @@
     <Folder Include="Data\Database\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EkoStatLibrary\EkoStatLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
