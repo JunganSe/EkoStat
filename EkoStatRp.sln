@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkoStatRp", "EkoStatRp\EkoStatRp.csproj", "{954B82E9-CEFA-4473-A6DF-A86E48C515AF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EkoStatLibrary", "EkoStatLibrary\EkoStatLibrary.csproj", "{BCD18C9B-2D11-4097-A316-5081F73692FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{954B82E9-CEFA-4473-A6DF-A86E48C515AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{954B82E9-CEFA-4473-A6DF-A86E48C515AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{954B82E9-CEFA-4473-A6DF-A86E48C515AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCD18C9B-2D11-4097-A316-5081F73692FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD18C9B-2D11-4097-A316-5081F73692FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD18C9B-2D11-4097-A316-5081F73692FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD18C9B-2D11-4097-A316-5081F73692FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
