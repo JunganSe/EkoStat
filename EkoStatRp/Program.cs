@@ -24,6 +24,7 @@ public class Program
         builder.Services.AddHttpContextAccessor(); // För att kunna injecta IHttpContextAccessor, som används för att nå HttpContext.Session-metoder.
 
         builder.Services.AddTransient<HttpHelper>();
+        builder.Services.AddScoped<UserHelper>();
 
         var app = builder.Build();
         // --- Configure the HTTP request pipeline. ---
