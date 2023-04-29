@@ -5,3 +5,20 @@
 }
 
 <h1>Tags</h1>
+<hr />
+
+<div>
+    @* TODO: Lägga till taggar *@
+</div>
+<hr />
+
+<div>
+    <table>
+        @foreach (var tag in Model.Tags)
+        {
+            <tr>
+                <td>@tag.Name</td>
+            </tr>
+        }
+    </table>
+</div>
