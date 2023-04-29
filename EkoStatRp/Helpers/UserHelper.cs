@@ -6,6 +6,7 @@ public class UserHelper
 {
     public bool IsLoggedIn(ClaimsPrincipal user)
     {
-        throw new NotImplementedException();
+        // TODO: Kontrollera inloggning
+        return true;
     }
 }

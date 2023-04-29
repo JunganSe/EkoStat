@@ -22,8 +22,8 @@ public class IndexModel : PageModelBase<IndexModel>
     {
         try
         {
-            //if (!_userHelper.IsLoggedIn(User))
-            //    return RedirectToPage("/Index");
+            if (!_userHelper.IsLoggedIn(User))
+                return GoHome();
 
             using var httpClient = new HttpClient();
             string url = _apiUrl + $"{Constants.ApiEndpoints.TagsByUser}/{_userId}";
