@@ -27,6 +27,6 @@ public class HttpHelper
     {
         if (_httpContextAccessor.HttpContext == null)
             throw new NullReferenceException(nameof(HttpContext));
-        return _httpContextAccessor.HttpContext?.Session.GetString(key);
+        return _httpContextAccessor.HttpContext.Session.GetString(key);
     }
 }
