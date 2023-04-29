@@ -6,6 +6,10 @@ internal static class Constants
     {
         public const string ApiUrl = "ApiUrl";
     }
+    public static class RazorPages
+    {
+        public const string Home = "/Index";
+    }
     public static class SessionData
     {
         public const string UserId = "UserId";

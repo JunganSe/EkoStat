@@ -1,4 +1,5 @@
 ﻿using EkoStatRp.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EkoStatRp.Common;
@@ -16,5 +17,11 @@ public class PageModelBase<T> : PageModel
         _userHelper = userHelper;
         _logger = logger;
         _apiUrl = _httpHelper.GetApiUrl();
+    }
+
+    protected RedirectToPageResult GoHome()
+    {
+        string page = Constants.RazorPages.Home;
+        return new RedirectToPageResult(page);
     }
 }
