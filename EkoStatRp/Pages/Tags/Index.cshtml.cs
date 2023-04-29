@@ -12,7 +12,7 @@ public class IndexModel : PageModelBase<IndexModel>
     private readonly string? _userId;
 
     public List<TagResponseDto> Tags { get; set; } = new();
-    public TagRequestDto NewTag { get; set; }
+    public TagRequestDto? NewTag { get; set; }
 
     public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
         : base(httpHelper, userHelper, logger)
@@ -41,6 +41,8 @@ public class IndexModel : PageModelBase<IndexModel>
 
     public async Task<IActionResult> OnPostAsync()
     {
+        // TODO: try-catch?
+        // TODO: null check på NewTag
         using var httpClient = new HttpClient();
         string url = _apiUrl + Constants.ApiEndpoints.TagPost;
         NewTag.UserId = int.Parse(_userId!); // TODO: Bättre konvertering.
