@@ -1,27 +1,20 @@
 using EkoStatLibrary.Dtos;
+using EkoStatRp.Common;
 using EkoStatRp.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EkoStatRp.Pages.Tags;
 
 [BindProperties]
-public class IndexModel : PageModel
+public class IndexModel : PageModelBase<IndexModel>
 {
-    private readonly HttpHelper _httpHelper;
-    private readonly UserHelper _userHelper;
-    private readonly ILogger<IndexModel> _logger;
-    private readonly string _apiUrl;
     private readonly string? _userId;
 
     public List<TagResponseDto> Tags { get; set; } = new();
 
     public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+        :base(httpHelper, userHelper, logger)
     {
-        _httpHelper = httpHelper;
-        _userHelper = userHelper;
-        _logger = logger;
-        _apiUrl = _httpHelper.GetApiUrl();
         _userId = _httpHelper.GetSessionData(Constants.SessionData.UserId);
     }
 
