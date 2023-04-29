@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using EkoStatRp.Common;
+using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages;
 
-public class IndexModel : PageModel
+public class IndexModel : PageModelBase<IndexModel>
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+        : base(httpHelper, userHelper, logger)
     {
-        _logger = logger;
     }
 
     public void OnGet()
