@@ -7,9 +7,15 @@
 <h1>Tags</h1>
 <hr />
 
-<div>
-    @* TODO: Lägga till taggar *@
-</div>
+<form method="post">
+    <div id="formInputContainer">
+        <div>
+            <label asp-for="@Model.NewTag.Name"></label>
+            <input asp-for="@Model.NewTag.Name" />
+        </div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
 <hr />
 
 <div>
@@ -22,3 +28,7 @@
         }
     </table>
 </div>
+
+@section Scripts{
+    <script src="~/js/tags_index.js"></script>
+}

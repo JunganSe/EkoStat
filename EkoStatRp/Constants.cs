@@ -18,5 +18,6 @@ internal static class Constants
     public static class ApiEndpoints
     {
         public const string TagsByUser = "/Tags/Minimal/ByUser";
+        public const string TagPost = "/Tags";
     }
 }
