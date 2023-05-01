@@ -2,7 +2,6 @@ using EkoStatLibrary.Dtos;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 
 namespace EkoStatRp.Pages.Tags;
 
@@ -12,7 +11,7 @@ public class IndexModel : PageModelBase<IndexModel>
     private readonly string? _userId;
 
     public List<TagResponseDto> Tags { get; set; } = new();
-    public TagRequestDto? NewTag { get; set; }
+    public TagRequestDto NewTag { get; set; } = new();
 
     public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
         : base(httpHelper, userHelper, logger)
@@ -30,13 +29,13 @@ public class IndexModel : PageModelBase<IndexModel>
             using var httpClient = new HttpClient();
             string url = $"{_apiUrl}{Constants.ApiEndpoints.TagsByUser}/{_userId}";
             Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(url) ?? new();
-            return Page();
         }
         catch (Exception ex)
         {
+            // TODO: Meddela användaren.
             _logger.LogError(ex, "Fail: Get Tags.");
-            return Page();
         }
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
