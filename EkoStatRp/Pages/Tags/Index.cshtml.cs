@@ -40,19 +40,19 @@ public class IndexModel : PageModelBase<IndexModel>
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // TODO: try-catch?
-        // TODO: null check på NewTag
-        using var httpClient = new HttpClient();
-        string url = _apiUrl + Constants.ApiEndpoints.TagPost;
-        NewTag.UserId = int.Parse(_userId!); // TODO: Bättre konvertering.
-        var response = await httpClient.PostAsJsonAsync(url, NewTag);
-
-        if (!response.IsSuccessStatusCode)
+        try
+        {
+            using var httpClient = new HttpClient();
+            string url = _apiUrl + Constants.ApiEndpoints.TagPost;
+            NewTag.UserId = int.Parse(_userId!); // TODO: Hämta id med metod.
+            var response = await httpClient.PostAsJsonAsync(url, NewTag);
+            response.EnsureSuccessStatusCode();
+        }
+        catch (Exception ex)
         {
             // TODO: Meddela användaren.
-            return Page();
+            _logger.LogError(ex, "Fail: Create tag.");
         }
-
-        return RedirectToPage("/Tags/Index"); // Ladda om sidan.
+        return RedirectToPage();
     }
 }
