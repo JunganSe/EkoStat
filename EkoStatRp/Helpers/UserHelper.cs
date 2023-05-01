@@ -19,4 +19,13 @@ public class UserHelper
             return false;
         return true;
     }
+
+    public int? GetUserId(ClaimsPrincipal user)
+    {
+        // TODO: Kontrollera med user.
+        var userIdData = _httpHelper.GetSessionData(Constants.SessionData.UserId);
+        if (int.TryParse(userIdData, out int id))
+            return id;
+        return null;
+    }
 }

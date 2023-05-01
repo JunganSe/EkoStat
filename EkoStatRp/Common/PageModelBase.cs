@@ -21,10 +21,7 @@ public class PageModelBase<T> : PageModel
 
     protected int? GetUserId()
     {
-        var userIdData = _httpHelper.GetSessionData(Constants.SessionData.UserId);
-        if (int.TryParse(userIdData, out int id))
-            return id;
-        return null;
+        return _userHelper.GetUserId(User);
     }
 
     protected bool IsLoggedIn()
