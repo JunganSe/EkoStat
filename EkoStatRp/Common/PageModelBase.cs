@@ -19,6 +19,14 @@ public class PageModelBase<T> : PageModel
         _apiUrl = _httpHelper.GetApiUrl();
     }
 
+    protected int? GetUserId()
+    {
+        var userIdData = _httpHelper.GetSessionData(Constants.SessionData.UserId);
+        if (int.TryParse(userIdData, out int id))
+            return id;
+        return null;
+    }
+
     protected RedirectToPageResult GoHome()
     {
         string page = Constants.RazorPages.Home;
