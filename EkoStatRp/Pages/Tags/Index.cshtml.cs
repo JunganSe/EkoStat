@@ -8,15 +8,12 @@ namespace EkoStatRp.Pages.Tags;
 [BindProperties]
 public class IndexModel : PageModelBase<IndexModel>
 {
-    private readonly string? _userId;
-
     public List<TagResponseDto> Tags { get; set; } = new();
     public TagRequestDto NewTag { get; set; } = new();
 
     public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
         : base(httpHelper, userHelper, logger)
     {
-        _userId = _httpHelper.GetSessionData(Constants.SessionData.UserId);
     }
 
     public async Task<IActionResult> OnGetAsync()
@@ -27,7 +24,8 @@ public class IndexModel : PageModelBase<IndexModel>
                 return GoHome();
 
             using var httpClient = new HttpClient();
-            string url = $"{_apiUrl}{Constants.ApiEndpoints.TagsByUser}/{_userId}";
+            var userId = GetUserId();
+            string url = $"{_apiUrl}{Constants.ApiEndpoints.TagsByUser}/{userId}";
             Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(url) ?? new();
         }
         catch (Exception ex)
@@ -44,7 +42,7 @@ public class IndexModel : PageModelBase<IndexModel>
         {
             using var httpClient = new HttpClient();
             string url = _apiUrl + Constants.ApiEndpoints.TagPost;
-            NewTag.UserId = int.Parse(_userId!); // TODO: Hämta id med metod.
+            NewTag.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewTag);
             response.EnsureSuccessStatusCode();
         }
