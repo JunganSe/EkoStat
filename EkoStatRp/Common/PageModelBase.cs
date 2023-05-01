@@ -27,6 +27,11 @@ public class PageModelBase<T> : PageModel
         return null;
     }
 
+    protected bool IsLoggedIn()
+    {
+        return _userHelper.IsLoggedIn(User);
+    }
+
     protected RedirectToPageResult GoHome()
     {
         string page = Constants.RazorPages.Home;

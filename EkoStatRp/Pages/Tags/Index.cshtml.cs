@@ -20,7 +20,7 @@ public class IndexModel : PageModelBase<IndexModel>
     {
         try
         {
-            if (!_userHelper.IsLoggedIn(User))
+            if (!IsLoggedIn())
                 return GoHome();
 
             using var httpClient = new HttpClient();
