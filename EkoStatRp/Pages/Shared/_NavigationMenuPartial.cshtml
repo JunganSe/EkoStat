@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-        <a class="navbar-brand" asp-page="/Index">EkoStat</a>
+        <a class="navbar-brand" asp-page="@Constants.RazorPages.Home">EkoStat</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,32 +16,32 @@
                 @if (isLoggedIn)
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Entries/Index">Entries</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.EntriesIndex">Entries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Articles/Index">Articles</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.ArticlesIndex">Articles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Tags/Index">Tags</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.TagsIndex">Tags</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Reports/Index">Reports</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.ReportsIndex">Reports</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/User/Settings">Settings</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.Settings">Settings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/User/Logout">Logout</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.Logout">Logout</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/User/Login">Login / Register</a>
+                        <a class="nav-link text-dark" asp-page="@Constants.RazorPages.Login">Login / Register</a>
                     </li>
                 }
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-page="/About">About</a>
+                    <a class="nav-link text-dark" asp-page="@Constants.RazorPages.About">About</a>
                 </li>
             </ul>
         </div>
