@@ -1,4 +1,5 @@
 ﻿namespace EkoStatApi.Models;
+#nullable disable
 
 public class Unit
 {
@@ -6,8 +7,8 @@ public class Unit
     public int Id { get; set; }
 
     // Data
-    public string Name { get; set; } = null!;
-    public string ShortName { get; set; } = null!;
+    public string Name { get; set; }
+    public string ShortName { get; set; }
 
     // Navigation
     public ICollection<Entry> Entries { get; set; } = new List<Entry>();

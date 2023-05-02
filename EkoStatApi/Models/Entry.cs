@@ -1,4 +1,5 @@
 ﻿namespace EkoStatApi.Models;
+#nullable disable
 
 public class Entry
 {
@@ -9,13 +10,13 @@ public class Entry
     public int UserId { get; set; }
 
     // Data
-    public string Comment { get; set; } = null!;
+    public string Comment { get; set; }
     public DateTimeOffset TimeStamp { get; set; }
     public double Count { get; set; }
     public decimal CostPerArticle { get; set; }
 
     // Navigation
-    public Article Article { get; set; } = null!;
-    public Unit Unit { get; set; } = null!;
-    public User User { get; set; } = null!;
+    public Article Article { get; set; }
+    public Unit Unit { get; set; }
+    public User User { get; set; }
 }

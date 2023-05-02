@@ -1,4 +1,5 @@
 ﻿namespace EkoStatApi.Models;
+#nullable disable
 
 public class User
 {
@@ -6,7 +7,7 @@ public class User
     public int Id { get; set; }
 
     // Data
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
     // Navigation
     public ICollection<Tag> Tags { get; set; } = new List<Tag>();
