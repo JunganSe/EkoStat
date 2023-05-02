@@ -25,7 +25,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
 
             using var httpClient = new HttpClient();
             var userId = GetUserId();
-            string url = $"{_apiUrl}{Constants.ApiEndpoints.ArticlesByUser}/{userId}";
+            string url = $"{_apiUrl}{EkoStatLibrary.Constants.ApiEndpoints.ArticlesByUser}/{userId}";
             Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(url) ?? new();
         }
         catch (Exception ex)
@@ -41,7 +41,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
         try
         {
             using var httpClient = new HttpClient();
-            string url = _apiUrl + Constants.ApiEndpoints.ArticleCreate;
+            string url = _apiUrl + EkoStatLibrary.Constants.ApiEndpoints.ArticleCreate;
             NewArticle.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewArticle);
             response.EnsureSuccessStatusCode();

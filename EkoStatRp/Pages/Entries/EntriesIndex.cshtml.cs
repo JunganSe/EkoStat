@@ -24,7 +24,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
 
             using var httpClient = new HttpClient();
             var userId = GetUserId();
-            string url = $"{_apiUrl}{Constants.ApiEndpoints.EntriesByUser}/{userId}";
+            string url = $"{_apiUrl}{EkoStatLibrary.Constants.ApiEndpoints.EntriesByUser}/{userId}";
             Entries = await httpClient.GetFromJsonAsync<List<EntryResponseDto>>(url) ?? new();
         }
         catch (Exception ex)
