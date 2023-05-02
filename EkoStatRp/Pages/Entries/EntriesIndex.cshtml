@@ -1,5 +1,6 @@
 ﻿@page "/Entries"
 @model EkoStatRp.Pages.Entries.EntriesIndex
+@inject EkoStatRp.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Entries";
 }
@@ -13,6 +14,7 @@
         <tr>
             <th>Comment</th>
             <th>Article</th>
+            <th>Tags</th>
             <th>Count</th>
             <th>Unit</th>
             <th>Cost per article</th>
@@ -23,9 +25,11 @@
     <tbody>
         @foreach (var entry in Model.Entries)
         {
+            var tags = _dtoHelper.GetTagNamesAsString(entry.Article.Tags);
             <tr>
                 <td>@entry.Comment</td>
                 <td>@entry.Article.Name</td>
+                <td>@tags</td>
                 <td>@entry.Count</td>
                 <td>@entry.Unit.Name</td>
                 <td>@entry.CostPerArticle</td>
