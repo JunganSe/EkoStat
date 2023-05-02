@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages.Entries;
 
-public class AddModel : PageModelBase<AddModel>
+public class EntriesAdd : PageModelBase<EntriesAdd>
 {
-    public AddModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<AddModel> logger)
+    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesAdd> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

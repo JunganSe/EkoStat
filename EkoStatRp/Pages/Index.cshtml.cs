@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages;
 
-public class IndexModel : PageModelBase<IndexModel>
+public class Home : PageModelBase<Home>
 {
-    public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+    public Home(HttpHelper httpHelper, UserHelper userHelper, ILogger<Home> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages;
 
-public class AboutModel : PageModelBase<AboutModel>
+public class About : PageModelBase<About>
 {
-    public AboutModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<AboutModel> logger)
+    public About(HttpHelper httpHelper, UserHelper userHelper, ILogger<About> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

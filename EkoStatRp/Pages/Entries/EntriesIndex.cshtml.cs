@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace EkoStatRp.Pages.Entries;
 
 [BindProperties]
-public class IndexModel : PageModelBase<IndexModel>
+public class EntriesIndex : PageModelBase<EntriesIndex>
 {
     public List<EntryResponseDto> Entries { get; set; } = new();
 
-    public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+    public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesIndex> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

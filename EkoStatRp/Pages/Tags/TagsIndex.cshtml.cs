@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace EkoStatRp.Pages.Tags;
 
 [BindProperties]
-public class IndexModel : PageModelBase<IndexModel>
+public class TagsIndex : PageModelBase<TagsIndex>
 {
     public List<TagResponseDto> Tags { get; set; } = new();
     public TagRequestDto NewTag { get; set; } = new();
 
-    public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+    public TagsIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<TagsIndex> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

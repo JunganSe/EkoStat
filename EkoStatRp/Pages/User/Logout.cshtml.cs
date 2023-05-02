@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages.User;
 
-public class LogoutModel : PageModelBase<LogoutModel>
+public class Logout : PageModelBase<Logout>
 {
-    public LogoutModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<LogoutModel> logger)
+    public Logout(HttpHelper httpHelper, UserHelper userHelper, ILogger<Logout> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

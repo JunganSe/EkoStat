@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages.User;
 
-public class LoginModel : PageModelBase<LoginModel>
+public class Login : PageModelBase<Login>
 {
-    public LoginModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<LoginModel> logger)
+    public Login(HttpHelper httpHelper, UserHelper userHelper, ILogger<Login> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

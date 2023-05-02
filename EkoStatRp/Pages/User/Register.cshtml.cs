@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages.User;
 
-public class RegisterModel : PageModelBase<RegisterModel>
+public class Register : PageModelBase<Register>
 {
-    public RegisterModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<RegisterModel> logger)
+    public Register(HttpHelper httpHelper, UserHelper userHelper, ILogger<Register> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

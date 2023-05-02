@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace EkoStatRp.Pages.Articles;
 
 [BindProperties]
-public class IndexModel : PageModelBase<IndexModel>
+public class ArticlesIndex : PageModelBase<ArticlesIndex>
 {
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public ArticleRequestDto NewArticle { get; set; } = new();
 
-    public IndexModel(HttpHelper httpHelper, UserHelper userHelper, ILogger<IndexModel> logger)
+    public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<ArticlesIndex> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

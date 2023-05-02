@@ -1,11 +1,11 @@
-﻿@page
-@model EkoStatRp.Pages.Entries.IndexModel
+﻿@page "/Entries"
+@model EkoStatRp.Pages.Entries.EntriesIndex
 @{
     ViewData["Title"] = "Entries";
 }
 
 <h1>Entries</h1>
-<a asp-page="/Entries/Add">Add entries</a>
+<a asp-page="@Constants.RazorPages.EntriesAdd">Add entries</a>
 <hr />
 
 <table class="table-bordered">
