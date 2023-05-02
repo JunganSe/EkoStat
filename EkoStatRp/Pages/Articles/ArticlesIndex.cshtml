@@ -1,5 +1,6 @@
 ﻿@page "/Articles"
 @model EkoStatRp.Pages.Articles.ArticlesIndex
+@inject EkoStatRp.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Articles";
 }
@@ -19,11 +20,22 @@
 <hr />
 
 <table class="table-bordered">
-    @foreach (var article in Model.Articles)
-    {
+    <thead>
         <tr>
-            <td>@article.Name</td>
-            <td>-knappar-</td>
+            <th>Name</th>
+            <th>Tags</th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var article in Model.Articles)
+        {
+            var tags = _dtoHelper.GetTagNamesAsString(article.Tags);
+            <tr>
+                <td>@article.Name</td>
+                <td>@tags</td>
+                <td>-knappar-</td>
+            </tr>
+        }
+    </tbody>
 </table>
