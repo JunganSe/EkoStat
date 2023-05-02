@@ -6,3 +6,32 @@
 
 <h1>Entries</h1>
 <a asp-page="/Entries/Add">Add entries</a>
+<hr />
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>Comment</th>
+            <th>Article</th>
+            <th>Count</th>
+            <th>Unit</th>
+            <th>Cost per article</th>
+            <th>Timestamp</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model.Entries)
+        {
+            <tr>
+                <td>@entry.Comment</td>
+                <td>@entry.Article.Name</td>
+                <td>@entry.Count</td>
+                <td>@entry.Unit.Name</td>
+                <td>@entry.CostPerArticle</td>
+                <td>@entry.TimeStamp</td>
+                <td>-knappar-</td>
+            </tr>
+        }
+    </tbody>
+</table>
