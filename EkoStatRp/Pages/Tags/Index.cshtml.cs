@@ -41,7 +41,7 @@ public class IndexModel : PageModelBase<IndexModel>
         try
         {
             using var httpClient = new HttpClient();
-            string url = _apiUrl + Constants.ApiEndpoints.TagPost;
+            string url = _apiUrl + Constants.ApiEndpoints.TagCreate;
             NewTag.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewTag);
             response.EnsureSuccessStatusCode();

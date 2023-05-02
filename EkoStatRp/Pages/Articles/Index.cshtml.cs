@@ -41,7 +41,7 @@ public class IndexModel : PageModelBase<IndexModel>
         try
         {
             using var httpClient = new HttpClient();
-            string url = _apiUrl + Constants.ApiEndpoints.ArticlePost;
+            string url = _apiUrl + Constants.ApiEndpoints.ArticleCreate;
             NewArticle.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewArticle);
             response.EnsureSuccessStatusCode();
