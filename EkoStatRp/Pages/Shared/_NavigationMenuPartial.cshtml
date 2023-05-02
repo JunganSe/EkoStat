@@ -1,8 +1,7 @@
-﻿@inject IHttpContextAccessor httpContextAccessor
+﻿@inject Helpers.UserHelper userHelper
 
 @{
-    var userId = httpContextAccessor.HttpContext?.Session.GetString(Constants.SessionData.UserId); // TODO: Lägg i metod.
-    bool isLoggedIn = (!string.IsNullOrEmpty(userId));
+    bool isLoggedIn = userHelper.IsLoggedIn(User);
 }
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
