@@ -1,7 +1,6 @@
-﻿@inject Helpers.UserHelper userHelper
-
+﻿@inject Helpers.UserHelper _userHelper
 @{
-    bool isLoggedIn = userHelper.IsLoggedIn(User);
+    bool isLoggedIn = _userHelper.IsLoggedIn(User);
 }
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
