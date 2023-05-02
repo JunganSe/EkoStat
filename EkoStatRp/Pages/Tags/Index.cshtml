@@ -18,17 +18,12 @@
 </form>
 <hr />
 
-<div>
-    <table>
-        @foreach (var tag in Model.Tags)
-        {
-            <tr>
-                <td>@tag.Name</td>
-            </tr>
-        }
-    </table>
-</div>
-
-@section Scripts{
-    <script src="~/js/tags_index.js"></script>
-}
+<table class="table-bordered">
+    @foreach (var tag in Model.Tags)
+    {
+        <tr>
+            <td>@tag.Name</td>
+            <td>-knappar-</td>
+        </tr>
+    }
+</table>
