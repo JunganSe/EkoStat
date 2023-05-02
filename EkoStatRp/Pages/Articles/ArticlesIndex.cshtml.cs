@@ -2,19 +2,21 @@ using EkoStatLibrary.Dtos;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace EkoStatRp.Pages.Articles;
 
 [BindProperties]
 public class ArticlesIndex : PageModelBase<ArticlesIndex>
 {
+    private readonly DtoHelper _dtoHelper;
+
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public ArticleRequestDto NewArticle { get; set; } = new();
 
-    public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<ArticlesIndex> logger)
+    public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<ArticlesIndex> logger)
         : base(httpHelper, userHelper, logger)
     {
+        _dtoHelper = dtoHelper;
     }
 
     public async Task<IActionResult> OnGetAsync()
@@ -44,6 +46,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
             using var httpClient = new HttpClient();
             string url = _apiUrl + LibraryConstants.ApiEndpoints.ArticleCreate;
             NewArticle.UserId = GetUserId();
+            NewArticle.TagIds = _dtoHelper.ParseValidToInt(Request.Form["tagIds"]);
             var response = await httpClient.PostAsJsonAsync(url, NewArticle);
             response.EnsureSuccessStatusCode();
         }
