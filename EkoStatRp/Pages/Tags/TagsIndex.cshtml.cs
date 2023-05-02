@@ -25,7 +25,7 @@ public class TagsIndex : PageModelBase<TagsIndex>
 
             using var httpClient = new HttpClient();
             var userId = GetUserId();
-            string url = $"{_apiUrl}{EkoStatLibrary.Constants.ApiEndpoints.TagsByUser}/{userId}";
+            string url = $"{_apiUrl}{LibraryConstants.ApiEndpoints.TagsByUser}/{userId}";
             Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(url) ?? new();
         }
         catch (Exception ex)
@@ -41,7 +41,7 @@ public class TagsIndex : PageModelBase<TagsIndex>
         try
         {
             using var httpClient = new HttpClient();
-            string url = _apiUrl + EkoStatLibrary.Constants.ApiEndpoints.TagCreate;
+            string url = _apiUrl + LibraryConstants.ApiEndpoints.TagCreate;
             NewTag.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewTag);
             response.EnsureSuccessStatusCode();

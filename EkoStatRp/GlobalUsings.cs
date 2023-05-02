@@ -1,0 +1,1 @@
+﻿global using LibraryConstants = EkoStatLibrary.Constants;
