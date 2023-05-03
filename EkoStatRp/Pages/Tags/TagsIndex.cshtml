@@ -7,6 +7,7 @@
 <h1>Tags</h1>
 <hr />
 
+<h2>Create new</h2>
 <form method="post">
     <div id="formInputContainer">
         <div>
@@ -14,10 +15,11 @@
             <input asp-for="@Model.NewTag.Name" />
         </div>
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit">Save</button>
 </form>
 <hr />
 
+<h2>Existing tags</h2>
 <table class="table-bordered">
     @foreach (var tag in Model.Tags)
     {
