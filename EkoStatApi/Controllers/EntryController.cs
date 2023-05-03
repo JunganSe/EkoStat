@@ -3,6 +3,7 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using EkoStatApi.data.Migrations;
 
 namespace EkoStatApi.Controllers;
 
@@ -133,6 +134,29 @@ public class EntryController : ControllerBase
             return (await _unitOfWork.TrySaveAsync())
                 ? StatusCode(201, entry.Id) // Created
                 : StatusCode(500, "Fail: Create entry."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Create new entry in database.");
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
+    [HttpPost("Multiple")]
+    public async Task<ActionResult> CreateMultiple(List<EntryRequestDto> dtos)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
+            var entries = _mapper.Map<List<Entry>>(dtos);
+            await _unitOfWork.Entries.AddRangeAsync(entries);
+
+            if (!await _unitOfWork.TrySaveAsync())
+                return StatusCode(500, "Fail: Create entry."); // Internal server error
+            var ids = entries.Select(u => u.Id).ToList();
+            return StatusCode(201, ids); // Created
         }
         catch (Exception ex)
         {

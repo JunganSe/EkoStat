@@ -3,6 +3,7 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using EkoStatApi.data.Migrations;
 
 namespace EkoStatApi.Controllers;
 
@@ -98,6 +99,29 @@ public class TagController : ControllerBase
             return (await _unitOfWork.TrySaveAsync())
                 ? StatusCode(201, tag.Id) // Created
                 : StatusCode(500, "Fail: Create tag."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Create new tag in database.");
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
+    [HttpPost("Multiple")]
+    public async Task<ActionResult> CreateMultiple(List<TagRequestDto> dtos)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
+            var tags = _mapper.Map<List<Tag>>(dtos);
+            await _unitOfWork.Tags.AddRangeAsync(tags);
+
+            if (!await _unitOfWork.TrySaveAsync())
+                StatusCode(500, "Fail: Create tag."); // Internal server error
+            var ids = tags.Select(t => t.Id).ToList();
+            return StatusCode(201, ids); // Created
         }
         catch (Exception ex)
         {

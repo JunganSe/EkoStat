@@ -3,6 +3,7 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using EkoStatApi.data.Migrations;
 
 namespace EkoStatApi.Controllers;
 
@@ -113,7 +114,7 @@ public class ArticleController : ControllerBase
 
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
             if (!AllTagsHaveUserId(tags, article.UserId))
-                return BadRequest("Tags and article must have same user.");
+                return BadRequest("Tags and article must have same user."); // 400
             article.Tags = tags;
 
             await _unitOfWork.Articles.AddAsync(article);
@@ -121,6 +122,39 @@ public class ArticleController : ControllerBase
             return (await _unitOfWork.TrySaveAsync())
                 ? StatusCode(201, article.Id) // Created
                 : StatusCode(500, "Fail: Create article."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Create new article in database.");
+            return StatusCode(500, "Fail: Create article."); // Internal server error
+        }
+    }
+
+    [HttpPost("Multiple")]
+    public async Task<ActionResult> CreateMultiple(List<ArticleRequestDto> dtos)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
+            var articles = new List<Article>();
+            foreach (var dto in dtos)
+            {
+                var article = _mapper.Map<Article>(dto);
+                var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
+                if (!AllTagsHaveUserId(tags, article.UserId))
+                    return BadRequest("Tags and article must have same user."); // 400
+                article.Tags = tags;
+                articles.Add(article);
+            }
+
+            await _unitOfWork.Articles.AddRangeAsync(articles);
+
+            if (!await _unitOfWork.TrySaveAsync())
+                return StatusCode(500, "Fail: Create article."); // Internal server error
+            var ids = articles.Select(a => a.Id).ToList();
+            return StatusCode(201, ids); // Created
         }
         catch (Exception ex)
         {
@@ -144,7 +178,7 @@ public class ArticleController : ControllerBase
 
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
             if (!AllTagsHaveUserId(tags, article.UserId))
-                return BadRequest("Tags and article must have same user.");
+                return BadRequest("Tags and article must have same user."); // 400
             article.Tags = tags;
 
             return (await _unitOfWork.TrySaveAsync())

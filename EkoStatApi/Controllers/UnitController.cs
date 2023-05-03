@@ -3,6 +3,7 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using EkoStatApi.data.Migrations;
 
 namespace EkoStatApi.Controllers;
 
@@ -81,6 +82,29 @@ public class UnitController : ControllerBase
             return (await _unitOfWork.TrySaveAsync())
                 ? StatusCode(201, unit.Id) // Created
                 : StatusCode(500, "Fail: Create course."); // Internal server error
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Create new unit in database.");
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
+    [HttpPost("Multiple")]
+    public async Task<ActionResult> CreateMultiple(List<UnitRequestDto> dtos)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // 400
+
+            var units = _mapper.Map<List<Unit>>(dtos);
+            await _unitOfWork.Units.AddRangeAsync(units);
+
+            if (!await _unitOfWork.TrySaveAsync())
+                return StatusCode(500, "Fail: Create course."); // Internal server error
+            var ids = units.Select(u => u.Id).ToList();
+            return StatusCode(201, ids); // Created
         }
         catch (Exception ex)
         {
