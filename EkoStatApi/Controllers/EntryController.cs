@@ -100,7 +100,7 @@ public class EntryController : ControllerBase
     {
         try
         {
-            var entries = await _unitOfWork.Entries.GetByUserAsync(userId);
+            var entries = (await _unitOfWork.Entries.GetByUserAsync(userId)).ToList();
             entries = FilterEntries(entries, filter);
             var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
 
@@ -213,49 +213,58 @@ public class EntryController : ControllerBase
 
 
 
-    private ICollection<Entry> FilterEntries(ICollection<Entry> entries, EntryFilterRequestDto filter)
+    private List<Entry> FilterEntries(List<Entry> entries, EntryFilterRequestDto filter)
     {
         // Artikel
         if (filter.ArticleIds != null && filter.ArticleIds.Count > 0)
-            entries = (ICollection<Entry>)entries
-                .Where(e => filter.ArticleIds.Contains(e.ArticleId));
+        {
+            entries = entries
+                .Where(e => filter.ArticleIds.Contains(e.ArticleId))
+                .ToList();
+        }
 
         // Taggar
-        if (filter.TagIds != null 
-            && filter.TagIds.Count > 0
-            && filter.MustHaveAllTags != null) // TODO: Flytta in filter.MustHaveAllTags kontrollen in i blocket och gör ArgumentException till BadRequest om den är null.
+        if (filter.MustHaveAllTags != null
+            && filter.TagIds != null
+            && filter.TagIds.Count > 0)
         {
-            if ((bool)filter.MustHaveAllTags) // Artiklen i entry har alla taggar.
+            if ((bool)filter.MustHaveAllTags) // Kolla om artiklen i entry har alla taggar.
             {
-                entries = (ICollection<Entry>)entries
+                entries = entries
                     .Where(entry => filter.TagIds
                         .All(filterTagId => entry.Article.Tags
-                            .Any(tag => tag.Id == filterTagId)));
+                            .Any(tag => tag.Id == filterTagId)))
+                    .ToList();
             }
-            else // Artiklen i entry har någon av taggarna.
+            else // Kolla om artiklen i entry har någon av taggarna.
             {
-                entries = (ICollection<Entry>)entries
+                entries = entries
                     .Where(entry => filter.TagIds
                         .Any(filterTagId => entry.Article.Tags
-                            .Any(tag => tag.Id == filterTagId)));
+                            .Any(tag => tag.Id == filterTagId)))
+                    .ToList();
             }
         }
 
         // Pris
         if (filter.PriceMin != null)
-            entries = (ICollection<Entry>)entries
-                .Where(entry => entry.CostPerArticle >= filter.PriceMin);
+            entries = entries
+                .Where(entry => entry.CostPerArticle >= filter.PriceMin)
+                .ToList();
         if (filter.PriceMax != null)
-            entries = (ICollection<Entry>)entries
-                .Where(entry => entry.CostPerArticle <= filter.PriceMax);
+            entries = entries
+                .Where(entry => entry.CostPerArticle <= filter.PriceMax)
+                .ToList();
 
         // Timestamp
         if (filter.TimestampFrom != null)
-            entries = (ICollection<Entry>)entries
-                .Where(e => e.TimeStamp >= filter.TimestampFrom);
+            entries = entries
+                .Where(e => e.TimeStamp >= filter.TimestampFrom)
+                .ToList();
         if (filter.TimestampUntil != null)
-            entries = (ICollection<Entry>)entries
-                .Where(e => e.TimeStamp <= filter.TimestampUntil);
+            entries = entries
+                .Where(e => e.TimeStamp <= filter.TimestampUntil)
+                .ToList();
 
         return entries;
     }
