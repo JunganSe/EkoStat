@@ -20,12 +20,12 @@ public class UserHelper
         return true;
     }
 
-    public int? GetUserId(ClaimsPrincipal user)
+    public int GetUserId(ClaimsPrincipal user)
     {
         // TODO: Kontrollera med user.
         var userIdData = _httpHelper.GetSessionData(Constants.SessionData.UserId);
         if (int.TryParse(userIdData, out int id))
             return id;
-        return null;
+        return 0;
     }
 }

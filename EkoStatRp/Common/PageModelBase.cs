@@ -19,7 +19,7 @@ public class PageModelBase<T> : PageModel
         _apiUrl = _httpHelper.GetApiUrl();
     }
 
-    protected int? GetUserId()
+    protected int GetUserId()
     {
         return _userHelper.GetUserId(User);
     }
