@@ -3,7 +3,6 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using EkoStatApi.data.Migrations;
 
 namespace EkoStatApi.Controllers;
 
