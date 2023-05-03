@@ -138,7 +138,7 @@ public class ArticleController : ControllerBase
     #region CUD
 
     [HttpPost]
-    public async Task<ActionResult> Create(ArticleRequestDto dto) // TODO: Mappa taggar.
+    public async Task<ActionResult> Create(ArticleRequestDto dto)
     {
         try
         {
@@ -146,6 +146,12 @@ public class ArticleController : ControllerBase
                 return BadRequest(ModelState); // 400
 
             var article = _mapper.Map<Article>(dto);
+
+            var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
+            if (!AllTagsHaveUserId(tags, article.UserId))
+                return BadRequest("Tags and article must have same user.");
+            article.Tags = tags;
+
             await _unitOfWork.Articles.AddAsync(article);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -160,17 +166,22 @@ public class ArticleController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(int id, ArticleRequestDto dto) // TODO: Mappa taggar.
+    public async Task<ActionResult> Update(int id, ArticleRequestDto dto)
     {
         try
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
 
-            var article = await _unitOfWork.Articles.GetMinimalAsync(id);
+            var article = await _unitOfWork.Articles.GetAsync(id);
             if (article == null)
                 return NotFound($"Fail: Find article with id '{id}' to update."); // 404
             _mapper.Map(dto, article);
+
+            var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
+            if (!AllTagsHaveUserId(tags, article.UserId))
+                return BadRequest("Tags and article must have same user.");
+            article.Tags = tags;
 
             return (await _unitOfWork.TrySaveAsync())
                 ? NoContent() // 204
@@ -204,5 +215,11 @@ public class ArticleController : ControllerBase
         }
     }
 
+
+
+    private bool AllTagsHaveUserId(List<Tag> tags, int userId)
+    {
+        return tags.All(t => t.UserId == userId);
+    }
     #endregion
 }

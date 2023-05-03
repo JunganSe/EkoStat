@@ -32,4 +32,11 @@ public class TagRepository : Repository<Tag>, ITagRepository
             .Where(t => t.UserId == userId)
             .ToListAsync();
     }
+
+    public async Task<ICollection<Tag>> GetByIdsAsync(List<int> tagIds)
+    {
+        return await Tags
+            .Where(t => tagIds.Contains(t.Id))
+            .ToListAsync();
+    }
 }
