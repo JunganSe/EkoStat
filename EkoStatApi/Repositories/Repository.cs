@@ -6,12 +6,12 @@ namespace EkoStatApi.Repositories;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 {
-    protected readonly DbContext Context; // Läggs i en protected field så att de ärvande klasserna kan nå den.
+    protected readonly DbContext _context; // Läggs i en protected field så att de ärvande klasserna kan nå den.
     private readonly DbSet<TEntity> _entities;
 
     public Repository(DbContext context) // Ta in en DbContext så att det går att använda olika context i olika repon (eftersom de alla ärver DbContext).
     {
-        Context = context;
+        _context = context;
         _entities = context.Set<TEntity>(); // Motsvarar tex "SchoolContext.Students", men skrivs så för att vi är i parent-contexten DbContext.
     }
 

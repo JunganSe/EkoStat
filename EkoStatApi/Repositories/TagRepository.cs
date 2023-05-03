@@ -7,7 +7,7 @@ namespace EkoStatApi.Repositories;
 
 public class TagRepository : Repository<Tag>, ITagRepository
 {
-    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    private EkoStatContext EkoStatContext => (EkoStatContext)_context;
     private IQueryable<Tag> Tags
         => EkoStatContext.Tags;
 

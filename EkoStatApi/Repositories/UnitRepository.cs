@@ -6,7 +6,7 @@ namespace EkoStatApi.Repositories;
 
 public class UnitRepository : Repository<Unit>, IUnitRepository
 {
-    private EkoStatContext EkoStatContext => (EkoStatContext)Context;
+    private EkoStatContext EkoStatContext => (EkoStatContext)_context;
     private IQueryable<Unit> Units
         => EkoStatContext.Units;
 
