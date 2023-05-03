@@ -25,42 +25,6 @@ public class EntryController : ControllerBase
 
     #region Read
 
-    [HttpGet("Minimal/ByUser/{userId}")]
-    public async Task<ActionResult<List<EntryResponseDto>>> GetByUserMinimal(int userId)
-    {
-        try
-        {
-            var entries = await _unitOfWork.Entries.GetEntitiesAsync(e => e.UserId == userId);
-            var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
-
-            return Ok(dtos);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get entries from database.");
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
-    [HttpGet("Minimal/{id}")]
-    public async Task<ActionResult<EntryResponseDto>> GetMinimal(int id)
-    {
-        try
-        {
-            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
-            var dto = _mapper.Map<EntryResponseDto>(entry);
-
-            return (dto != null)
-                ? Ok(dto) // 200
-                : NotFound($"Fail: Find entry with id '{id}'."); // 404
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get entry with id '{id}' from database.", id);
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<EntryResponseDto>> Get(int id)
     {

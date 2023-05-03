@@ -25,25 +25,8 @@ public class TagController : ControllerBase
 
     #region Read
 
-    [HttpGet("Minimal/ByUser/{userId}")]
-    public async Task<ActionResult<List<TagResponseDto>>> GetByUserMinimal(int userId)
-    {
-        try
-        {
-            var tags = await _unitOfWork.Tags.GetEntitiesAsync(e => e.UserId == userId);
-            var dtos = _mapper.Map<List<TagResponseDto>>(tags);
-
-            return Ok(dtos);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get tags from database.");
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
-    [HttpGet("Minimal/{id}")]
-    public async Task<ActionResult<TagResponseDto>> GetMinimal(int id)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TagResponseDto>> Get(int id)
     {
         try
         {

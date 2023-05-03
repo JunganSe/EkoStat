@@ -25,42 +25,6 @@ public class ArticleController : ControllerBase
 
     #region Read
 
-    [HttpGet("Minimal/ByUser/{userId}")]
-    public async Task<ActionResult<List<ArticleResponseDto>>> GetByUserMinimal(int userId)
-    {
-        try
-        {
-            var articles = await _unitOfWork.Articles.GetEntitiesAsync(e => e.UserId == userId);
-            var dtos = _mapper.Map<List<ArticleResponseDto>>(articles);
-
-            return Ok(dtos);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get articles from database.");
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
-    [HttpGet("Minimal/{id}")]
-    public async Task<ActionResult<ArticleResponseDto>> GetMinimal(int id)
-    {
-        try
-        {
-            var article = await _unitOfWork.Articles.GetMinimalAsync(id);
-            var dto = _mapper.Map<ArticleResponseDto>(article);
-
-            return (dto != null)
-                ? Ok(dto) // 200
-                : NotFound($"Fail: Find article with id '{id}'."); // 404
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get article with id '{id}' from database.", id);
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<ArticleResponseDto>> Get(int id)
     {

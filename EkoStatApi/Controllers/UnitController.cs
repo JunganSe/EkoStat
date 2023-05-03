@@ -25,8 +25,8 @@ public class UnitController : ControllerBase
 
     #region Read
 
-    [HttpGet("Minimal/all")]
-    public async Task<ActionResult<List<UnitResponseDto>>> GetAllMinimal()
+    [HttpGet("All")]
+    public async Task<ActionResult<List<UnitResponseDto>>> GetAll()
     {
         try
         {
@@ -42,8 +42,8 @@ public class UnitController : ControllerBase
         }
     }
 
-    [HttpGet("Minimal/{id}")]
-    public async Task<ActionResult<UnitResponseDto>> GetMinimal(int id)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UnitResponseDto>> Get(int id)
     {
         try
         {
