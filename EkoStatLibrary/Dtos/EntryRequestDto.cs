@@ -8,20 +8,20 @@ public class EntryRequestDto
     public string? Comment { get; set; }
 
     [Required]
-    public DateTimeOffset? TimeStamp { get; set; }
+    public DateTimeOffset TimeStamp { get; set; }
 
     [Required]
-    public double? Count { get; set; }
+    public double Count { get; set; }
 
     [Required]
-    public decimal? CostPerArticle { get; set; }
+    public decimal CostPerArticle { get; set; }
 
     [Required]
-    public int? ArticleId { get; set; }
+    public int ArticleId { get; set; }
 
     [Required]
-    public int? UnitId { get; set; }
+    public int UnitId { get; set; }
 
     [Required]
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 }
