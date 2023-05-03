@@ -11,6 +11,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
     private readonly DtoHelper _dtoHelper;
 
     public List<ArticleResponseDto> Articles { get; set; } = new();
+    public List<TagResponseDto> Tags { get; set; } = new();
     public ArticleRequestDto NewArticle { get; set; } = new();
 
     public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<ArticlesIndex> logger)
@@ -28,8 +29,12 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
 
             using var httpClient = new HttpClient();
             var userId = GetUserId();
-            string url = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
-            Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(url) ?? new();
+
+            string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
+            Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
+
+            string tagsUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.TagsByUser}/{userId}";
+            Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
         }
         catch (Exception ex)
         {
