@@ -215,57 +215,71 @@ public class EntryController : ControllerBase
 
     private List<Entry> FilterEntries(List<Entry> entries, EntryFilterRequestDto filter)
     {
-        // Artikel
-        if (filter.ArticleIds != null && filter.ArticleIds.Count > 0)
+        FilterByArticles();
+        FilterByTags();
+        FilterByPrice();
+        FilterByTimestamps();
+        return entries;
+
+
+
+        void FilterByArticles()
         {
-            entries = entries
-                .Where(e => filter.ArticleIds.Contains(e.ArticleId))
-                .ToList();
+            if (filter.ArticleIds != null && filter.ArticleIds.Count > 0)
+            {
+                entries = entries
+                    .Where(e => filter.ArticleIds.Contains(e.ArticleId))
+                    .ToList();
+            }
         }
 
-        // Taggar
-        if (filter.MustHaveAllTags != null
+        void FilterByTags()
+        {
+            if (filter.MustHaveAllTags != null
             && filter.TagIds != null
             && filter.TagIds.Count > 0)
-        {
-            if ((bool)filter.MustHaveAllTags) // Kolla om artiklen i entry har alla taggar.
             {
-                entries = entries
-                    .Where(entry => filter.TagIds
-                        .All(filterTagId => entry.Article.Tags
-                            .Any(tag => tag.Id == filterTagId)))
-                    .ToList();
-            }
-            else // Kolla om artiklen i entry har någon av taggarna.
-            {
-                entries = entries
-                    .Where(entry => filter.TagIds
-                        .Any(filterTagId => entry.Article.Tags
-                            .Any(tag => tag.Id == filterTagId)))
-                    .ToList();
+                if ((bool)filter.MustHaveAllTags) // Kolla om artiklen i entry har alla taggar.
+                {
+                    entries = entries
+                        .Where(entry => filter.TagIds
+                            .All(filterTagId => entry.Article.Tags
+                                .Any(tag => tag.Id == filterTagId)))
+                        .ToList();
+                }
+                else // Kolla om artiklen i entry har någon av taggarna.
+                {
+                    entries = entries
+                        .Where(entry => filter.TagIds
+                            .Any(filterTagId => entry.Article.Tags
+                                .Any(tag => tag.Id == filterTagId)))
+                        .ToList();
+                }
             }
         }
 
-        // Pris
-        if (filter.PriceMin != null)
-            entries = entries
-                .Where(entry => entry.CostPerArticle >= filter.PriceMin)
-                .ToList();
-        if (filter.PriceMax != null)
-            entries = entries
-                .Where(entry => entry.CostPerArticle <= filter.PriceMax)
-                .ToList();
+        void FilterByPrice()
+        {
+            if (filter.PriceMin != null)
+                entries = entries
+                    .Where(entry => entry.CostPerArticle >= filter.PriceMin)
+                    .ToList();
+            if (filter.PriceMax != null)
+                entries = entries
+                    .Where(entry => entry.CostPerArticle <= filter.PriceMax)
+                    .ToList();
+        }
 
-        // Timestamp
-        if (filter.TimestampFrom != null)
-            entries = entries
-                .Where(e => e.TimeStamp >= filter.TimestampFrom)
-                .ToList();
-        if (filter.TimestampUntil != null)
-            entries = entries
-                .Where(e => e.TimeStamp <= filter.TimestampUntil)
-                .ToList();
-
-        return entries;
+        void FilterByTimestamps()
+        {
+            if (filter.TimestampFrom != null)
+                entries = entries
+                    .Where(e => e.TimeStamp >= filter.TimestampFrom)
+                    .ToList();
+            if (filter.TimestampUntil != null)
+                entries = entries
+                    .Where(e => e.TimeStamp <= filter.TimestampUntil)
+                    .ToList();
+        }
     }
 }
