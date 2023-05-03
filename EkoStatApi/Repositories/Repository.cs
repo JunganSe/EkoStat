@@ -39,7 +39,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
         if (!string.IsNullOrWhiteSpace(include))
         {
-            var separators = new[] { ',', ' ' };
+            var separators = new char[] { ',', ' ' };
             foreach (var includeProperty in include.Split(separators))
                 query = query.Include(includeProperty);
         }
@@ -60,7 +60,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
 
         if (!string.IsNullOrWhiteSpace(include))
         {
-            var separators = new[] { ',', ' ' };
+            var separators = new char[] { ',', ' ' };
             foreach (var includeProperty in include.Split(separators))
                 query = query.Include(includeProperty);
         }
