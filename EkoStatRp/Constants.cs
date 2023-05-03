@@ -26,4 +26,10 @@ internal static class Constants
         public const string UserId = "UserId";
         public const string UserName = "UserName";
     }
+
+    public static class FontAwesome
+    {
+        public const string Edit = "fa-regular fa-pen-to-square";
+        public const string Delete = "fa-regular fa-trash-can";
+    }
 }
