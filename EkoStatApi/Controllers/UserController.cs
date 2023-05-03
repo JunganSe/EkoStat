@@ -25,23 +25,6 @@ public class UserController : ControllerBase
 
     #region Read
 
-    [HttpGet("All")]
-    public async Task<ActionResult<List<UserResponseDto>>> GetAll()
-    {
-        try
-        {
-            var users = await _unitOfWork.Users.GetAllMinimalAsync();
-            var dtos = _mapper.Map<List<UserResponseDto>>(users);
-
-            return Ok(dtos);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get users from database.");
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<UserResponseDto>> Get(int id)
     {
@@ -57,6 +40,23 @@ public class UserController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Fail: Get user with id '{id}' from database.", id);
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
+    [HttpGet("All")]
+    public async Task<ActionResult<List<UserResponseDto>>> GetAll()
+    {
+        try
+        {
+            var users = await _unitOfWork.Users.GetAllMinimalAsync();
+            var dtos = _mapper.Map<List<UserResponseDto>>(users);
+
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Get users from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }

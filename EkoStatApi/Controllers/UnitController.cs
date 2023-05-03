@@ -25,23 +25,6 @@ public class UnitController : ControllerBase
 
     #region Read
 
-    [HttpGet("All")]
-    public async Task<ActionResult<List<UnitResponseDto>>> GetAll()
-    {
-        try
-        {
-            var units = await _unitOfWork.Units.GetAllMinimalAsync();
-            var dtos = _mapper.Map<List<UnitResponseDto>>(units);
-
-            return Ok(dtos);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Fail: Get units from database.");
-            return StatusCode(500, ex.Message); // Internal server error
-        }
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<UnitResponseDto>> Get(int id)
     {
@@ -57,6 +40,23 @@ public class UnitController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Fail: Get unit with id '{id}' from database.", id);
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
+    [HttpGet("All")]
+    public async Task<ActionResult<List<UnitResponseDto>>> GetAll()
+    {
+        try
+        {
+            var units = await _unitOfWork.Units.GetAllMinimalAsync();
+            var dtos = _mapper.Map<List<UnitResponseDto>>(units);
+
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Get units from database.");
             return StatusCode(500, ex.Message); // Internal server error
         }
     }
