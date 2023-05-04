@@ -143,12 +143,16 @@ public class SeedController : ControllerBase
 
     private async Task SeedEntriesAsync()
     {
+        var dateTimeOffset1a = new DateTimeOffset(2023, 5, 2, 11, 45, 0, new TimeSpan(2, 0, 0));
+        var dateTimeOffset1b = new DateTimeOffset(2023, 5, 4, 12, 10, 0, new TimeSpan(2, 0, 0));
+        var dateTimeOffset2 = new DateTimeOffset(2023, 5, 6, 8, 0, 0, new TimeSpan(2, 0, 0));
         var entries = new List<Entry>()
         {
+            
             new Entry()
             {
                 Comment = "Extrapris",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset1a,
                 Count = 1.5,
                 CostPerArticle = 20,
                 ArticleId = 1,
@@ -158,7 +162,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Extrapris",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset1a,
                 Count = 1,
                 CostPerArticle = 40,
                 ArticleId = 4,
@@ -168,7 +172,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset1a,
                 Count = 500,
                 CostPerArticle = 35,
                 ArticleId = 3,
@@ -178,7 +182,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Dill",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset1b,
                 Count = 275,
                 CostPerArticle = 25,
                 ArticleId = 5,
@@ -188,7 +192,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Sour cream",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset1b,
                 Count = 275,
                 CostPerArticle = 25,
                 ArticleId = 5,
@@ -198,7 +202,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset2,
                 Count = 44.8,
                 CostPerArticle = 22.17m,
                 ArticleId = 6,
@@ -208,7 +212,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Tågbiljett",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset2,
                 Count = 1,
                 CostPerArticle = 410,
                 ArticleId = 6,
@@ -218,7 +222,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Parkering",
-                TimeStamp = DateTimeOffset.Now,
+                TimeStamp = dateTimeOffset2,
                 Count = 1,
                 CostPerArticle = 80,
                 ArticleId = 6,
