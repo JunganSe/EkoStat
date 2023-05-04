@@ -5,3 +5,56 @@
 }
 
 <h1>Add Entries</h1>
+<hr />
+
+<form method="post">
+    <div id="formInputContainer">
+        <div>
+            <label asp-for="@Model.NewEntry.Comment"></label>
+            <input asp-for="@Model.NewEntry.Comment" />
+            <span asp-validation-for="@Model.NewEntry.Comment" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.NewEntryTimeStamp"></label>
+            <input asp-for="@Model.NewEntryTimeStamp" />
+            <span asp-validation-for="@Model.NewEntryTimeStamp" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.NewEntry.Count"></label>
+            <input asp-for="@Model.NewEntry.Count" />
+            <span asp-validation-for="@Model.NewEntry.Count" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.NewEntry.CostPerArticle"></label>
+            <input asp-for="@Model.NewEntry.CostPerArticle" />
+            <span asp-validation-for="@Model.NewEntry.CostPerArticle" class="text-danger"></span>
+        </div>
+        <div>
+            <select asp-for="@Model.NewEntry.ArticleId">
+                <option selected disabled value="0">-Select article-</option>
+                @foreach (var article in Model.Articles)
+                {
+                    <option value="@article.Id">@article.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.NewEntry.ArticleId" class="text-danger"></span>
+        </div>
+        <div>
+            <select asp-for="@Model.NewEntry.UnitId">
+                <option selected disabled value="0">-Select unit-</option>
+                @foreach (var unit in Model.Units)
+                {
+                    <option value="@unit.Id">@unit.Name</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.NewEntry.UnitId" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit">Save</button>
+</form>
+
+
+
+@section scripts {
+    <partial name="@Constants.PartialViews.ValidationScripts" />
+}
