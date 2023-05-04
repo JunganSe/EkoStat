@@ -11,7 +11,6 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     private readonly DtoHelper _dtoHelper;
 
     public EntryRequestDto NewEntry { get; set; } = new();
-    public DateTime NewEntryTimeStamp { get; set; }
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public List<UnitResponseDto> Units { get; set; } = new();
 
@@ -31,7 +30,7 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
             using var httpClient = new HttpClient();
             var userId = GetUserId();
 
-            NewEntryTimeStamp = DateTime.Today; // TODO: Använd timestamp från senaste entry, om den entryn är minre än en timme gammal.
+            NewEntry.Timestamp = DateTime.Today; // TODO: Använd timestamp från senaste entry, om den entryn är minre än en timme gammal.
 
             string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
             Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
@@ -53,7 +52,6 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
         {
             using var httpClient = new HttpClient();
             string url = _apiUrl + LibraryConstants.ApiEndpoints.EntryCreate;
-            NewEntry.Timestamp = _dtoHelper.ConvertToDateTimeOffset(NewEntryTimeStamp);
             NewEntry.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewEntry);
             response.EnsureSuccessStatusCode();
