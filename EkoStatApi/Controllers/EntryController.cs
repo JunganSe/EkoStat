@@ -274,11 +274,11 @@ public class EntryController : ControllerBase
         {
             if (filter.TimestampFrom != null)
                 entries = entries
-                    .Where(e => e.TimeStamp >= filter.TimestampFrom)
+                    .Where(e => e.Timestamp >= filter.TimestampFrom)
                     .ToList();
             if (filter.TimestampUntil != null)
                 entries = entries
-                    .Where(e => e.TimeStamp <= filter.TimestampUntil)
+                    .Where(e => e.Timestamp <= filter.TimestampUntil)
                     .ToList();
         }
     }

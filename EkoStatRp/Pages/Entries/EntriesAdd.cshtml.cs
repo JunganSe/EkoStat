@@ -53,7 +53,7 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
         {
             using var httpClient = new HttpClient();
             string url = _apiUrl + LibraryConstants.ApiEndpoints.EntryCreate;
-            NewEntry.TimeStamp = _dtoHelper.GetDateTimeOffset(NewEntryTimeStamp);
+            NewEntry.Timestamp = _dtoHelper.GetDateTimeOffset(NewEntryTimeStamp);
             NewEntry.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewEntry);
             response.EnsureSuccessStatusCode();

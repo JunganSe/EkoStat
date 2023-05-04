@@ -152,7 +152,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Extrapris",
-                TimeStamp = dateTimeOffset1a,
+                Timestamp = dateTimeOffset1a,
                 Count = 1.5,
                 CostPerArticle = 20,
                 ArticleId = 1,
@@ -162,7 +162,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Extrapris",
-                TimeStamp = dateTimeOffset1a,
+                Timestamp = dateTimeOffset1a,
                 Count = 1,
                 CostPerArticle = 40,
                 ArticleId = 4,
@@ -172,7 +172,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "",
-                TimeStamp = dateTimeOffset1a,
+                Timestamp = dateTimeOffset1a,
                 Count = 500,
                 CostPerArticle = 35,
                 ArticleId = 3,
@@ -182,7 +182,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Dill",
-                TimeStamp = dateTimeOffset1b,
+                Timestamp = dateTimeOffset1b,
                 Count = 275,
                 CostPerArticle = 25,
                 ArticleId = 5,
@@ -192,7 +192,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Sour cream",
-                TimeStamp = dateTimeOffset1b,
+                Timestamp = dateTimeOffset1b,
                 Count = 275,
                 CostPerArticle = 25,
                 ArticleId = 5,
@@ -202,7 +202,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "",
-                TimeStamp = dateTimeOffset2,
+                Timestamp = dateTimeOffset2,
                 Count = 44.8,
                 CostPerArticle = 22.17m,
                 ArticleId = 6,
@@ -212,7 +212,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Tågbiljett",
-                TimeStamp = dateTimeOffset2,
+                Timestamp = dateTimeOffset2,
                 Count = 1,
                 CostPerArticle = 410,
                 ArticleId = 6,
@@ -222,7 +222,7 @@ public class SeedController : ControllerBase
             new Entry()
             {
                 Comment = "Parkering",
-                TimeStamp = dateTimeOffset2,
+                Timestamp = dateTimeOffset2,
                 Count = 1,
                 CostPerArticle = 80,
                 ArticleId = 6,

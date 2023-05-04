@@ -54,7 +54,7 @@ public class EkoStatContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Comment).IsRequired(false);
-            entity.Property(e => e.TimeStamp).IsRequired();
+            entity.Property(e => e.Timestamp).IsRequired();
             entity.Property(e => e.Count).IsRequired();
             entity.Property(e => e.CostPerArticle).IsRequired();
 
