@@ -22,4 +22,10 @@ public class DtoHelper
         }
         return output;
     }
+
+    public DateTimeOffset GetDateTimeOffset(DateTime dateTime)
+    {
+        var offset = new TimeSpan(2, 0, 0); // TODO: Hämta utifrån tidszon och vinter/sommartid.
+        return new DateTimeOffset(dateTime, offset);
+    }
 }
