@@ -26,7 +26,7 @@
         <tr>
             <td>@tag.Name</td>
             <td>
-                @await Html.PartialAsync("_EditButtonsPartial", tag.Id)
+                @await Html.PartialAsync(Constants.PartialViews.EditButtons, tag.Id)
             </td>
         </tr>
     }

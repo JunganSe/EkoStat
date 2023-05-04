@@ -21,6 +21,11 @@ internal static class Constants
         public const string Login = "/User/Login";
         public const string Logout = "/User/Logout";
     }
+    public static class PartialViews
+    {
+        public const string NavigationMenu = "_NavigationMenuPartial";
+        public const string EditButtons = "_EditButtonsPartial";
+    }
     public static class SessionData
     {
         public const string UserId = "UserId";
