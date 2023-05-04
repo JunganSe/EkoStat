@@ -8,16 +8,13 @@ namespace EkoStatRp.Pages.Entries;
 [BindProperties]
 public class EntriesAdd : PageModelBase<EntriesAdd>
 {
-    private readonly DtoHelper _dtoHelper;
-
     public EntryRequestDto NewEntry { get; set; } = new();
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public List<UnitResponseDto> Units { get; set; } = new();
 
-    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesAdd> logger)
+    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesAdd> logger)
         : base(httpHelper, userHelper, logger)
     {
-        _dtoHelper = dtoHelper;
     }
 
     public async Task<IActionResult> OnGetAsync()
