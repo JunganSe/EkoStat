@@ -1,9 +1,9 @@
 ﻿function editButtonClicked(button) {
-    const message = button.id;
-    alert(message);
+    const id = button.id.split("-")[1];
+    alert(`Edit tag ${id}`);
 }
 
 function deleteButtonClicked(button) {
-    const message = button.id;
-    alert(message);
+    const id = button.id.split("-")[1];
+    alert(`Delete tag ${id}`);
 }

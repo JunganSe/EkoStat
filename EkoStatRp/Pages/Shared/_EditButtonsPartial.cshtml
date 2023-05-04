@@ -1,8 +1,8 @@
 ﻿@model int
 @{
     int id = Model;
-    string editId = $"edit{id}";
-    string deleteId = $"delete{id}";
+    string editId = $"edit-{id}";
+    string deleteId = $"delete-{id}";
 }
 <i id="@editId" onclick="editButtonClicked(this)" class="@Constants.FontAwesome.Edit"></i>
 <i id="@deleteId" onclick="deleteButtonClicked(this)" class="@Constants.FontAwesome.Delete"></i>
