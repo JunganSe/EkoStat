@@ -34,8 +34,16 @@
                 <td>@entry.Unit.Name</td>
                 <td>@entry.CostPerArticle</td>
                 <td>@entry.TimeStamp</td>
-                <td>-knappar-</td>
+                <td>
+                    @await Html.PartialAsync("_EditButtonsPartial", entry.Id)
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+
+@section Scripts {
+    <script src="~/js/entries-index.js"></script>
+}

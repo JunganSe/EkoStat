@@ -25,7 +25,15 @@
     {
         <tr>
             <td>@tag.Name</td>
-            <td>-knappar-</td>
+            <td>
+                @await Html.PartialAsync("_EditButtonsPartial", tag.Id)
+            </td>
         </tr>
     }
 </table>
+
+
+
+@section Scripts {
+    <script src="~/js/tags-index.js"></script>
+}
