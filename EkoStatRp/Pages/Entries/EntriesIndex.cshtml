@@ -35,7 +35,7 @@
                 <td>@entry.CostPerArticle</td>
                 <td>@entry.TimeStamp</td>
                 <td>
-                    @await Html.PartialAsync(Constants.PartialViews.EditButtons, entry.Id)
+                    <partial name="@Constants.PartialViews.EditButtons" model="@entry.Id">
                 </td>
             </tr>
         }
