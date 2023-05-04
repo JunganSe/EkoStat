@@ -10,7 +10,7 @@ public class EntryRequestDto
 
     [Required]
     [Display(Name = "Timestamp")]
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTime Timestamp { get; set; }
 
     [Required]
     [Display(Name = "Count")]

@@ -11,7 +11,7 @@ public class Entry
 
     // Data
     public string Comment { get; set; }
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTime Timestamp { get; set; }
     public double Count { get; set; }
     public decimal CostPerArticle { get; set; }
 
