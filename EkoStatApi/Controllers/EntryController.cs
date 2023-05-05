@@ -188,15 +188,16 @@ public class EntryController : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
 
+            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
+            if (entry == null)
+                return NotFound($"Fail: Find entry with id '{id}' to update."); // 404
+
             var article = await _unitOfWork.Articles.GetMinimalAsync(dto.ArticleId);
             if (article == null)
                 return BadRequest("Can not find article."); // 400
             if (article.UserId != dto.UserId)
                 return BadRequest("Article and entry must have same user."); // 400
 
-            var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
-            if (entry == null)
-                return NotFound($"Fail: Find entry with id '{id}' to update."); // 404
             _mapper.Map(dto, entry);
 
             return (await _unitOfWork.TrySaveAsync())
