@@ -3,6 +3,7 @@ using EkoStatApi.Data;
 using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace EkoStatApi.Controllers;
 
@@ -127,6 +128,12 @@ public class EntryController : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
 
+            var article = await _unitOfWork.Articles.GetAsync(dto.ArticleId);
+            if (article == null)
+                return BadRequest("Can not find article."); // 400
+            if (article.UserId != dto.UserId)
+                return BadRequest("Article and entry must have same user."); // 400
+
             var entry = _mapper.Map<Entry>(dto);
             await _unitOfWork.Entries.AddAsync(entry);
 
@@ -148,6 +155,15 @@ public class EntryController : ControllerBase
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
+
+            foreach (var dto in dtos)
+            {
+                var article = await _unitOfWork.Articles.GetAsync(dto.ArticleId);
+                if (article == null)
+                    return BadRequest("Can not find article."); // 400
+                if (article.UserId != dto.UserId)
+                    return BadRequest("Article and entry must have same user."); // 400
+            }
 
             var entries = _mapper.Map<List<Entry>>(dtos);
             await _unitOfWork.Entries.AddRangeAsync(entries);
@@ -171,6 +187,12 @@ public class EntryController : ControllerBase
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
+
+            var article = await _unitOfWork.Articles.GetMinimalAsync(dto.ArticleId);
+            if (article == null)
+                return BadRequest("Can not find article."); // 400
+            if (article.UserId != dto.UserId)
+                return BadRequest("Article and entry must have same user."); // 400
 
             var entry = await _unitOfWork.Entries.GetMinimalAsync(id);
             if (entry == null)
