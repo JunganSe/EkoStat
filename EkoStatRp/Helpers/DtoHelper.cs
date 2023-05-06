@@ -22,4 +22,20 @@ public class DtoHelper
         }
         return output;
     }
+
+    public List<EntryGroup> GroupEntries(List<EntryResponseDto> entries)
+    {
+        var distinctTimestamps = entries
+            .Select(e => e.Timestamp)
+            .Distinct();
+
+        var groups = distinctTimestamps
+            .Select(dt => new EntryGroup(dt))
+            .ToList();
+
+        groups.ForEach(group => group.Entries 
+            = entries.Where(e => e.Timestamp == group.Timestamp).ToList());
+
+        return groups.OrderByDescending(e => e.Timestamp).ToList();
+    }
 }
