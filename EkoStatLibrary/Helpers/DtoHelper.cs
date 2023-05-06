@@ -1,7 +1,7 @@
 ﻿using EkoStatLibrary.Dtos;
 using Microsoft.Extensions.Primitives;
 
-namespace EkoStatRp.Helpers;
+namespace EkoStatLibrary.Helpers;
 
 public class DtoHelper
 {
