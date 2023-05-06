@@ -8,9 +8,9 @@ namespace EkoStatRp.Pages.Entries;
 [BindProperties]
 public class EntriesAdd : PageModelBase<EntriesAdd>
 {
-    public EntryRequestDto NewEntry { get; set; } = new();
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public List<UnitResponseDto> Units { get; set; } = new();
+    public EntryRequestDto NewEntry { get; set; } = new();
 
     public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesAdd> logger)
         : base(httpHelper, userHelper, logger)

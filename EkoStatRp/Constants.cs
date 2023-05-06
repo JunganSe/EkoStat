@@ -6,6 +6,7 @@ internal static class Constants
     {
         public const string ApiUrl = "ApiUrl";
     }
+
     public static class RazorPages
     {
         public const string Home = "/Index";
@@ -21,16 +22,12 @@ internal static class Constants
         public const string Login = "/User/Login";
         public const string Logout = "/User/Logout";
     }
+
     public static class PartialViews
     {
         public const string NavigationMenu = "_NavigationMenuPartial";
         public const string EditButtons = "_EditButtonsPartial";
         public const string ValidationScripts = "_ValidationScriptsPartial";
-    }
-    public static class SessionData
-    {
-        public const string UserId = "UserId";
-        public const string UserName = "UserName";
     }
 
     public static class Cookies
