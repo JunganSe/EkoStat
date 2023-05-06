@@ -34,4 +34,10 @@ public class PageModelBase<T> : PageModel
         string page = Constants.RazorPages.Home;
         return new RedirectToPageResult(page);
     }
+
+    protected RedirectToPageResult GoLogin()
+    {
+        string page = Constants.RazorPages.Login;
+        return new RedirectToPageResult(page);
+    }
 }
