@@ -1,5 +1,4 @@
 ﻿using EkoStatLibrary.Dtos;
-using Microsoft.Extensions.Primitives;
 
 namespace EkoStatLibrary.Helpers;
 
@@ -12,7 +11,7 @@ public class DtoHelper
     }
 
     // Hoppar över de som inte kunde konverteras.
-    public List<int> ParseValidToInt(StringValues strings)
+    public List<int> ParseValidStringsToInt(List<string> strings)
     {
         var output = new List<int>();
         foreach (var s in strings)

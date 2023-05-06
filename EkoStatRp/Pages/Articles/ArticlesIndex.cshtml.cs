@@ -52,7 +52,8 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
             using var httpClient = new HttpClient();
             string url = _apiUrl + LibraryConstants.ApiEndpoints.ArticleCreate;
             NewArticle.UserId = GetUserId();
-            NewArticle.TagIds = _dtoHelper.ParseValidToInt(Request.Form["tagIds"]);
+            var tagIds = Request.Form["tagIds"].ToList();
+            NewArticle.TagIds = _dtoHelper.ParseValidStringsToInt(tagIds);
             var response = await httpClient.PostAsJsonAsync(url, NewArticle);
             response.EnsureSuccessStatusCode();
         }
