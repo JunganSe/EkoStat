@@ -14,6 +14,7 @@
         <tr>
             <th>Article</th>
             <th>Count</th>
+            <th>Size</th>
             <th>Unit</th>
             <th>Cost per article</th>
             <th>Tags</th>
@@ -24,13 +25,14 @@
     <tbody>
         @foreach (var group in Model.EntryGroups)
         {
-            <tr><th colspan="7">@group.Timestamp</th></tr>
+            <tr><th colspan="100">@group.Timestamp</th></tr>
             @foreach (var entry in group.Entries)
             {
                 var tags = _dtoHelper.GetTagNamesAsString(entry.Article.Tags);
                 <tr>
                     <td>@entry.Article.Name</td>
                     <td>@entry.Count</td>
+                    <td>@entry.Size</td>
                     <td>@entry.Unit.Name</td>
                     <td>@entry.CostPerArticle</td>
                     <td>@tags</td>
