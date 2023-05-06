@@ -28,6 +28,7 @@ internal static class Constants
         public const string NavigationMenu = "_NavigationMenuPartial";
         public const string EditButtons = "_EditButtonsPartial";
         public const string ValidationScripts = "_ValidationScriptsPartial";
+        public const string MessageBox = "_MessageBoxPartial";
     }
 
     public static class Cookies

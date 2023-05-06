@@ -1,0 +1,9 @@
+﻿@model EkoStatRp.Models.MessageBox
+@{
+    string hidden = (string.IsNullOrWhiteSpace(Model.Message))
+        ? "hidden" : "";
+}
+
+<div @hidden class="messageBox @Model.ColorClass">
+    <span>@Model.Message</span>
+</div>

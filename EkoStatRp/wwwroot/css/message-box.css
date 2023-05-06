@@ -1,0 +1,17 @@
+﻿.messageBox {
+    color: black;
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+.messageBox-normal {
+    background-color: cornflowerblue
+}
+
+.messageBox-success {
+    background-color: limegreen;
+}
+
+.messageBox-error {
+    background-color: orangered;
+}
