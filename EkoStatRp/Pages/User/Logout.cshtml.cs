@@ -1,5 +1,6 @@
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EkoStatRp.Pages.User;
 
@@ -10,8 +11,9 @@ public class Logout : PageModelBase<Logout>
     {
     }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        HttpContext.Session.Remove(Constants.SessionData.UserId);
+        _userHelper.Logout();
+        return GoHome();
     }
 }

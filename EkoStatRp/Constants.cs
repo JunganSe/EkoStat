@@ -36,6 +36,7 @@ internal static class Constants
     public static class Cookies
     {
         public const int CookieLifetimeDays = 30;
+        public const string UserId = "UserId";
     }
 
     public static class FontAwesome

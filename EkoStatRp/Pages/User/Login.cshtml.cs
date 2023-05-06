@@ -1,5 +1,6 @@
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EkoStatRp.Pages.User;
 
@@ -10,8 +11,9 @@ public class Login : PageModelBase<Login>
     {
     }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        HttpContext.Session.SetString(Constants.SessionData.UserId, "1");
+        _userHelper.Login(1);
+        return GoHome();
     }
 }
