@@ -1,4 +1,6 @@
-﻿@model EkoStatRp.Models.MessageBox
+﻿@* Använd med: <partial name="@Constants.PartialViews.MessageBox" model="@Model.MessageBox" /> *@
+
+@model EkoStatRp.Models.MessageBox
 @{
     string hidden = (string.IsNullOrWhiteSpace(Model.Message))
         ? "hidden" : "";
