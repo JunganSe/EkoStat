@@ -10,7 +10,9 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<ArticleRequestDto, Article>();
         CreateMap<Article, ArticleResponseDto>();
 
-        CreateMap<EntryRequestDto, Entry>();
+        CreateMap<EntryRequestDto, Entry>()
+            .ForMember(dest => dest.Timestamp,
+                opt => opt.MapFrom(src => TruncateToMinutes(src.Timestamp)));
         CreateMap<Entry, EntryResponseDto>();
 
         CreateMap<TagRequestDto, Tag>();
@@ -22,4 +24,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<UserRequestDto, User>();
         CreateMap<User, UserResponseDto>();
     }
+
+    private DateTime TruncateToMinutes(DateTime input) 
+        => new DateTime(input.Year, input.Month, input.Day, input.Hour, input.Minute, 0);
 }

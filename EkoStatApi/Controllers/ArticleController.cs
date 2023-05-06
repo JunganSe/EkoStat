@@ -109,13 +109,12 @@ public class ArticleController : ControllerBase
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // 400
 
-            var article = _mapper.Map<Article>(dto);
-
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
-            if (!AllTagsHaveUserId(tags, article.UserId))
+            if (!AllTagsHaveUserId(tags, dto.UserId))
                 return BadRequest("Tags and article must have same user."); // 400
-            article.Tags = tags;
 
+            var article = _mapper.Map<Article>(dto);
+            article.Tags = tags;
             await _unitOfWork.Articles.AddAsync(article);
 
             return (await _unitOfWork.TrySaveAsync())
@@ -173,12 +172,13 @@ public class ArticleController : ControllerBase
             var article = await _unitOfWork.Articles.GetAsync(id);
             if (article == null)
                 return NotFound($"Fail: Find article with id '{id}' to update."); // 404
-            _mapper.Map(dto, article);
 
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
             if (!AllTagsHaveUserId(tags, article.UserId))
                 return BadRequest("Tags and article must have same user."); // 400
             article.Tags = tags;
+
+            _mapper.Map(dto, article);
 
             return (await _unitOfWork.TrySaveAsync())
                 ? NoContent() // 204
