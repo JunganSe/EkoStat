@@ -15,7 +15,12 @@ public class EntryRequestDto
     [Required]
     [Display(Name = "Count")]
     [Range(1, 1000000, ErrorMessage = "Must be {1} to {2}")]
-    public double Count { get; set; }
+    public int Count { get; set; }
+
+    [Required]
+    [Display(Name = "Size")]
+    [Range(1, 1000000, ErrorMessage = "Must be {1} to {2}")]
+    public double Size { get; set; }
 
     [Required]
     [Display(Name = "Cost per article")]

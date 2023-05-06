@@ -12,7 +12,8 @@ public class Entry
     // Data
     public string Comment { get; set; }
     public DateTime Timestamp { get; set; }
-    public double Count { get; set; }
+    public int Count { get; set; }
+    public double Size { get; set; }
     public decimal CostPerArticle { get; set; }
 
     // Navigation
