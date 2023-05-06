@@ -33,6 +33,11 @@ internal static class Constants
         public const string UserName = "UserName";
     }
 
+    public static class Cookies
+    {
+        public const int CookieLifetimeDays = 30;
+    }
+
     public static class FontAwesome
     {
         public const string Edit = "fa-regular fa-pen-to-square";
