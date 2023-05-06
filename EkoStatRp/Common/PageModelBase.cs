@@ -1,4 +1,5 @@
 ﻿using EkoStatRp.Helpers;
+using EkoStatRp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,6 +11,8 @@ public class PageModelBase<T> : PageModel
     protected readonly UserHelper _userHelper;
     protected readonly ILogger<T> _logger;
     protected readonly string _apiUrl;
+
+    public MessageBox MessageBox { get; set; } = new MessageBox("");
 
     public PageModelBase(HttpHelper httpHelper, UserHelper userHelper, ILogger<T> logger)
     {
