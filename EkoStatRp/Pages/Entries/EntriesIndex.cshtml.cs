@@ -8,11 +8,14 @@ namespace EkoStatRp.Pages.Entries;
 [BindProperties]
 public class EntriesIndex : PageModelBase<EntriesIndex>
 {
-    public List<EntryResponseDto> Entries { get; set; } = new();
+    private readonly DtoHelper _dtoHelper;
 
-    public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesIndex> logger)
+    public List<EntryGroup> EntryGroups { get; set; } = new();
+
+    public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
         : base(httpHelper, userHelper, logger)
     {
+        _dtoHelper = dtoHelper;
     }
 
     public async Task<IActionResult> OnGetAsync()
@@ -25,7 +28,8 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             using var httpClient = new HttpClient();
             var userId = GetUserId();
             string url = $"{_apiUrl}{LibraryConstants.ApiEndpoints.EntriesByUser}/{userId}";
-            Entries = await httpClient.GetFromJsonAsync<List<EntryResponseDto>>(url) ?? new();
+            var entries = await httpClient.GetFromJsonAsync<List<EntryResponseDto>>(url) ?? new();
+            EntryGroups = _dtoHelper.GroupEntries(entries);
         }
         catch (Exception ex)
         {

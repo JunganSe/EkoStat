@@ -12,32 +12,32 @@
 <table class="table-bordered">
     <thead>
         <tr>
-            <th>Comment</th>
             <th>Article</th>
-            <th>Tags</th>
             <th>Count</th>
             <th>Unit</th>
             <th>Cost per article</th>
-            <th>Timestamp</th>
+            <th>Tags</th>
+            <th>Comment</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var entry in Model.Entries)
+        @foreach (var group in Model.EntryGroups)
         {
-            var tags = _dtoHelper.GetTagNamesAsString(entry.Article.Tags);
-            <tr>
-                <td>@entry.Comment</td>
-                <td>@entry.Article.Name</td>
-                <td>@tags</td>
-                <td>@entry.Count</td>
-                <td>@entry.Unit.Name</td>
-                <td>@entry.CostPerArticle</td>
-                <td>@entry.Timestamp</td>
-                <td>
-                    <partial name="@Constants.PartialViews.EditButtons" model="@entry.Id">
-                </td>
-            </tr>
+            <tr><th colspan="7">@group.Timestamp</th></tr>
+            @foreach (var entry in group.Entries)
+            {
+                var tags = _dtoHelper.GetTagNamesAsString(entry.Article.Tags);
+                <tr>
+                    <td>@entry.Article.Name</td>
+                    <td>@entry.Count</td>
+                    <td>@entry.Unit.Name</td>
+                    <td>@entry.CostPerArticle</td>
+                    <td>@tags</td>
+                    <td>@entry.Comment</td>
+                    <td><partial name="@Constants.PartialViews.EditButtons" model="@entry.Id"></td>
+                </tr>
+            }
         }
     </tbody>
 </table>
