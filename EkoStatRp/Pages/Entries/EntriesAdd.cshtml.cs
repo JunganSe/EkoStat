@@ -69,7 +69,6 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     {
         string date = Request.Form["inputDate"];
         string time = Request.Form["inputTime"];
-        var dtr = DateTime.Parse($"{date} {time}");
-        return dtr;
+        return DateTime.Parse($"{date} {time}");
     }
 }
