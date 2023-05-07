@@ -52,7 +52,7 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
     {
         return await Entries
             .Where(e => e.UserId == userId)
-            .OrderByDescending(e => e.Timestamp)
+            .OrderByDescending(e => e.Id)
             .Take(count)
             .ToListAsync();
     }
