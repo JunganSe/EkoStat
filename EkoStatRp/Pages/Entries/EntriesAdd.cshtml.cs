@@ -49,6 +49,7 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
         {
             using var httpClient = new HttpClient();
             string url = _apiUrl + LibraryConstants.ApiEndpoints.EntryCreate;
+            NewEntry.Timestamp = GetFormTimestamp();
             NewEntry.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewEntry);
             response.EnsureSuccessStatusCode();
@@ -59,5 +60,16 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
             _logger.LogError(ex, "Fail: Create entry.");
         }
         return RedirectToPage();
+    }
+
+
+
+
+    private DateTime GetFormTimestamp()
+    {
+        string date = Request.Form["inputDate"];
+        string time = Request.Form["inputTime"];
+        var dtr = DateTime.Parse($"{date} {time}");
+        return dtr;
     }
 }
