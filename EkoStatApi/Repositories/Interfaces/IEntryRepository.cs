@@ -8,4 +8,5 @@ public interface IEntryRepository : IRepository<Entry>
     Task<ICollection<Entry>> GetByArticleAsync(int articleId);
     Task<ICollection<Entry>> GetByTagAsync(int tagId);
     Task<ICollection<Entry>> GetByUserAsync(int userId);
+    Task<ICollection<Entry>> GetLatestByUserAsync(int userId, int count);
 }

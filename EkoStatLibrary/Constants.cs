@@ -17,6 +17,7 @@ public static class Constants
         public const string EntriesByArticle = "/Entries/ByArticle";
         public const string EntriesByTag = "/Entries/ByTag";
         public const string EntriesByUser = "/Entries/ByUser";
+        public const string EntriesLatestByUser = "/Entries/LatestByUser";
         public const string EntriesFiltered = "/Entries/Filtered";
         public const string EntryCreate = "/Entries/";
         public const string EntryCreateMultiple = "/Entries/Multiple";

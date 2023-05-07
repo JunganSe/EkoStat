@@ -96,6 +96,23 @@ public class EntryController : ControllerBase
         }
     }
 
+    [HttpGet("LatestByUser/{userId}")]
+    public async Task<ActionResult<EntryResponseDto>> GetLatestByUser(int userId)
+    {
+        try
+        {
+            var entries = await _unitOfWork.Entries.GetLatestByUserAsync(userId, 1);
+            var dtos = _mapper.Map<EntryResponseDto>(entries.First());
+
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Fail: Get latest entry from database.");
+            return StatusCode(500, ex.Message); // Internal server error
+        }
+    }
+
     [HttpPost("Filtered/{userId}")]
     public async Task<ActionResult<List<EntryResponseDto>>> GetFiltered(int userId, EntryFilterRequestDto filter)
     {

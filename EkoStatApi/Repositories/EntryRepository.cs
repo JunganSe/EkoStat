@@ -47,4 +47,13 @@ public class EntryRepository : Repository<Entry>, IEntryRepository
             .Where(e => e.UserId == userId)
             .ToListAsync();
     }
+
+    public async Task<ICollection<Entry>> GetLatestByUserAsync(int userId, int count)
+    {
+        return await Entries
+            .Where(e => e.UserId == userId)
+            .OrderByDescending(e => e.Timestamp)
+            .Take(count)
+            .ToListAsync();
+    }
 }
