@@ -110,7 +110,7 @@ public class ArticleController : ControllerBase
                 return BadRequest(ModelState); // 400
 
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
-            if (!AllTagsHaveUserId(tags, dto.UserId))
+            if (!AllTagsHaveCorrectUserId(tags, dto.UserId))
                 return BadRequest("Tags and article must have same user."); // 400
 
             var article = _mapper.Map<Article>(dto);
@@ -141,7 +141,7 @@ public class ArticleController : ControllerBase
             {
                 var article = _mapper.Map<Article>(dto);
                 var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
-                if (!AllTagsHaveUserId(tags, article.UserId))
+                if (!AllTagsHaveCorrectUserId(tags, article.UserId))
                     return BadRequest("Tags and article must have same user."); // 400
                 article.Tags = tags;
                 articles.Add(article);
@@ -174,7 +174,7 @@ public class ArticleController : ControllerBase
                 return NotFound($"Fail: Find article with id '{id}' to update."); // 404
 
             var tags = (await _unitOfWork.Tags.GetByIdsAsync(dto.TagIds)).ToList();
-            if (!AllTagsHaveUserId(tags, article.UserId))
+            if (!AllTagsHaveCorrectUserId(tags, article.UserId))
                 return BadRequest("Tags and article must have same user."); // 400
             article.Tags = tags;
 
@@ -214,9 +214,7 @@ public class ArticleController : ControllerBase
 
 
 
-    private bool AllTagsHaveUserId(List<Tag> tags, int userId)
-    {
-        return tags.All(t => t.UserId == userId);
-    }
+    private static bool AllTagsHaveCorrectUserId(List<Tag> tags, int userId) 
+        => tags.All(t => t.UserId == userId);
     #endregion
 }
