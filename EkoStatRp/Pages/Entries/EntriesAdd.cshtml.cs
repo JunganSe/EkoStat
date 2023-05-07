@@ -27,7 +27,9 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
             using var httpClient = new HttpClient();
             var userId = GetUserId();
 
-            NewEntry.Timestamp = DateTime.Today; // TODO: Använd timestamp från senaste entry, om den entryn är minre än en timme gammal.
+            string latestEntryUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.EntriesLatestByUser}/{userId}";
+            var latestEntry = await httpClient.GetFromJsonAsync<EntryResponseDto>(latestEntryUrl);
+            NewEntry.Timestamp = latestEntry?.Timestamp ?? DateTime.Today;
 
             string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
             Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();

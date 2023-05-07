@@ -2,6 +2,8 @@
 @model EkoStatRp.Pages.Entries.EntriesAdd
 @{
     ViewData["Title"] = "Add Entries";
+    string presetDate = Model.NewEntry.Timestamp.ToString("yyyy-MM-dd");
+    string presetTime = Model.NewEntry.Timestamp.TimeOfDay.ToString();
 }
 
 <h1>Add Entries</h1>
@@ -12,11 +14,11 @@
         <div class="flexRow">
             <div>
                 <label for="inputDate">Date</label>
-                <input type="date" id="inputDate" name="inputDate" />
+                <input type="date" value="@presetDate" id="inputDate" name="inputDate" />
             </div>
             <div>
                 <label for="inputTime">Time (optional)</label>
-                <input type="time" id="inputTime" name="inputTime" />
+                <input type="time" value="@presetTime" id="inputTime" name="inputTime" />
             </div>
         </div>
         <div>
