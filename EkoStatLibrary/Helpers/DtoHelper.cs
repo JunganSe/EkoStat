@@ -10,16 +10,10 @@ public class DtoHelper
         return string.Join(", ", names);
     }
 
-    // Hoppar över de som inte kunde konverteras.
-    public List<int> ParseValidStringsToInt(List<string> strings)
+    public List<int> ParseStringsToInts(List<string> strings)
     {
-        var output = new List<int>();
-        foreach (var s in strings)
-        {
-            if (int.TryParse(s, out int parsedValue))
-                output.Add(parsedValue);
-        }
-        return output;
+        // Kastar FormatException om en sträng inte kan parseas.
+        return strings.Select(int.Parse).ToList();
     }
 
     public List<EntryGroup> GroupEntries(List<EntryResponseDto> entries)

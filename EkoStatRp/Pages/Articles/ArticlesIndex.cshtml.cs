@@ -53,7 +53,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
             string url = _apiUrl + LibraryConstants.ApiEndpoints.ArticleCreate;
             NewArticle.UserId = GetUserId();
             var tagIds = Request.Form["tagIds"].ToList();
-            NewArticle.TagIds = _dtoHelper.ParseValidStringsToInt(tagIds);
+            NewArticle.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
             var response = await httpClient.PostAsJsonAsync(url, NewArticle);
             response.EnsureSuccessStatusCode();
         }
