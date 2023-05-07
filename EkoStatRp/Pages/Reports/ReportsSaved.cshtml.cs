@@ -3,9 +3,9 @@ using EkoStatRp.Helpers;
 
 namespace EkoStatRp.Pages.Reports;
 
-public class ReportsCreate : PageModelBase<ReportsCreate>
+public class ReportsSaved : PageModelBase<ReportsSaved>
 {
-    public ReportsCreate(HttpHelper httpHelper, UserHelper userHelper, ILogger<ReportsCreate> logger)
+    public ReportsSaved(HttpHelper httpHelper, UserHelper userHelper, ILogger<ReportsSaved> logger)
         : base(httpHelper, userHelper, logger)
     {
     }

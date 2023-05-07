@@ -15,7 +15,7 @@ internal static class Constants
         public const string ArticlesIndex = "/Articles/ArticlesIndex";
         public const string TagsIndex = "/Tags/TagsIndex";
         public const string ReportsIndex = "/Reports/ReportsIndex";
-        public const string ReportsCreate = "/Reports/ReportsCreate";
+        public const string ReportsSaved = "/Reports/ReportsSaved";
         public const string Settings = "/User/Settings";
         public const string About = "/About";
         public const string Register = "/User/Register";
