@@ -1,0 +1,72 @@
+[
+	{
+		"name": "Frysta ärtor",
+		"tagIds": [1, 2, 7],
+		"userId": 1
+	},
+	{
+		"name": "Nuggets",
+		"tagIds": [1, 2, 8],
+		"userId": 1
+	},
+	{
+		"name": "Ris",
+		"tagIds": [1, 3],
+		"userId": 1
+	},
+	{
+		"name": "Makaroner",
+		"tagIds": [1, 3],
+		"userId": 1
+	},
+	{
+		"name": "Tomater",
+		"tagIds": [1, 7],
+		"userId": 1
+	},
+	{
+		"name": "Gurka",
+		"tagIds": [1, 7],
+		"userId": 1
+	},
+	{
+		"name": "Chips",
+		"tagIds": [1, 4],
+		"userId": 1
+	},
+	{
+		"name": "Lösgodis",
+		"tagIds": [1, 4],
+		"userId": 1
+	},
+	{
+		"name": "Bröd",
+		"tagIds": [1],
+		"userId": 1
+	},
+	{
+		"name": "Ost",
+		"tagIds": [1, 6],
+		"userId": 1
+	},
+	{
+		"name": "Margarin",
+		"tagIds": [1, 6],
+		"userId": 1
+	},
+	{
+		"name": "Pizza",
+		"tagIds": [1, 9, 10],
+		"userId": 1
+	},
+	{
+		"name": "Hamburgare",
+		"tagIds": [1, 9, 10],
+		"userId": 1
+	},
+	{
+		"name": "Sallad (måltid)",
+		"tagIds": [1, 10],
+		"userId": 1
+	}
+]

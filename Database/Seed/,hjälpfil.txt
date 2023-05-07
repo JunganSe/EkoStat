@@ -1,0 +1,39 @@
+Tags
+1  Ätbart
+2  Frysvaror
+3  Torrvaror
+4  Snacks/godis
+5  Konserver
+6  Kylvaror
+7  Frukt/grönt
+8  Halvfabrikat
+9  Snabbmat
+10 Utemat
+
+Articles
+1  Frysta ärtor
+2  Nuggets
+3  Ris
+4  Makaroner
+5  Tomater
+6  Gurka
+7  Chips
+8  Lösgodis
+9  Bröd
+10 Ost
+11 Margarin
+12 Pizza
+13 Hamburgare
+14 Sallad (måltid)
+
+Units
+1 gram
+2 kilo
+3 liter
+4 styck
+
+"2023-04-28T00:00:00" mataffär
+"2023-04-19T20:35:00" mataffär
+"2023-04-14T12:35:00" lunch ute
+"2023-04-10T17:20:00" mataffär
+"2023-04-07T12:10:00" lunch ute

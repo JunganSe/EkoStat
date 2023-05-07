@@ -1,0 +1,204 @@
+[
+	{
+		"timestamp": "2023-04-07T12:10:00",
+		"articleId": 14,
+		"count": 1,
+		"size": 1,
+		"unitId": 4,
+		"costPerArticle": 125,
+		"comment": "",
+		"userId": 1
+	},
+	
+	
+	
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 3,
+		"count": 1,
+		"size": 1,
+		"unitId": 2,
+		"costPerArticle": 25,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 5,
+		"count": 1,
+		"size": 716,
+		"unitId": 1,
+		"costPerArticle": 60.44,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 6,
+		"count": 2,
+		"size": 1,
+		"unitId": 4,
+		"costPerArticle": 10,
+		"comment": "Svensk",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 4,
+		"count": 1,
+		"size": 750,
+		"unitId": 1,
+		"costPerArticle": 18,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 1,
+		"count": 2,
+		"size": 0.5,
+		"unitId": 2,
+		"costPerArticle": 22,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-10T17:20:00",
+		"articleId": 7,
+		"count": 1,
+		"size": 275,
+		"unitId": 1,
+		"costPerArticle": 28,
+		"comment": "Dillchips",
+		"userId": 1
+	},
+	
+	
+	
+	{
+		"timestamp": "2023-04-14T12:35:00",
+		"articleId": 13,
+		"count": 1,
+		"size": 1,
+		"unitId": 4,
+		"costPerArticle": 155,
+		"comment": "Meny med pommes och dricka",
+		"userId": 1
+	},
+	
+	
+	
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 2,
+		"count": 1,
+		"size": 300,
+		"unitId": 1,
+		"costPerArticle": 40,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 9,
+		"count": 2,
+		"size": 0.8,
+		"unitId": 2,
+		"costPerArticle": 38,
+		"comment": "Rostbröd",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 11,
+		"count": 1,
+		"size": 600,
+		"unitId": 1,
+		"costPerArticle": 45,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 10,
+		"count": 1,
+		"size": 500,
+		"unitId": 1,
+		"costPerArticle": 57,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 5,
+		"count": 1,
+		"size": 421,
+		"unitId": 1,
+		"costPerArticle": 36,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 3,
+		"count": 3,
+		"size": 250,
+		"unitId": 1,
+		"costPerArticle": 10,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-19T20:35:00",
+		"articleId": 8,
+		"count": 1,
+		"size": 1.1,
+		"unitId": 2,
+		"costPerArticle": 102,
+		"comment": "",
+		"userId": 1
+	},
+	
+	
+	
+	{
+		"timestamp": "2023-04-28T00:00:00",
+		"articleId": 2,
+		"count": 2,
+		"size": 300,
+		"unitId": 1,
+		"costPerArticle": 33,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-28T00:00:00",
+		"articleId": 7,
+		"count": 1,
+		"size": 150,
+		"unitId": 1,
+		"costPerArticle": 25,
+		"comment": "Lyxchips",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-28T00:00:00",
+		"articleId": 1,
+		"count": 1,
+		"size": 1,
+		"unitId": 2,
+		"costPerArticle": 18,
+		"comment": "",
+		"userId": 1
+	},
+	{
+		"timestamp": "2023-04-28T00:00:00",
+		"articleId": 6,
+		"count": 1,
+		"size": 1,
+		"unitId": 4,
+		"costPerArticle": 12,
+		"comment": "",
+		"userId": 1
+	}
+]
