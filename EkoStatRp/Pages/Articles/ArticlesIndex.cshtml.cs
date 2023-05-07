@@ -9,16 +9,13 @@ namespace EkoStatRp.Pages.Articles;
 [BindProperties]
 public class ArticlesIndex : PageModelBase<ArticlesIndex>
 {
-    private readonly DtoHelper _dtoHelper;
-
     public List<ArticleResponseDto> Articles { get; set; } = new();
     public List<TagResponseDto> Tags { get; set; } = new();
     public ArticleRequestDto NewArticle { get; set; } = new();
 
     public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<ArticlesIndex> logger)
-        : base(httpHelper, userHelper, logger)
+        : base(httpHelper, userHelper, dtoHelper, logger)
     {
-        _dtoHelper = dtoHelper;
     }
 
     public async Task<IActionResult> OnGetAsync()

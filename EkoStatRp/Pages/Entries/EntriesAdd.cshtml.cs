@@ -1,4 +1,5 @@
 using EkoStatLibrary.Dtos;
+using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,8 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     public List<UnitResponseDto> Units { get; set; } = new();
     public EntryRequestDto NewEntry { get; set; } = new();
 
-    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, ILogger<EntriesAdd> logger)
-        : base(httpHelper, userHelper, logger)
+    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesAdd> logger)
+        : base(httpHelper, userHelper, dtoHelper, logger)
     {
     }
 

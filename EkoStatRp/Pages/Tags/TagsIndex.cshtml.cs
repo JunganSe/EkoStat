@@ -1,4 +1,5 @@
 using EkoStatLibrary.Dtos;
+using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,8 @@ public class TagsIndex : PageModelBase<TagsIndex>
     public List<TagResponseDto> Tags { get; set; } = new();
     public TagRequestDto NewTag { get; set; } = new();
 
-    public TagsIndex(HttpHelper httpHelper, UserHelper userHelper, ILogger<TagsIndex> logger)
-        : base(httpHelper, userHelper, logger)
+    public TagsIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<TagsIndex> logger)
+        : base(httpHelper, userHelper, dtoHelper, logger)
     {
     }
 

@@ -9,14 +9,11 @@ namespace EkoStatRp.Pages.Entries;
 [BindProperties]
 public class EntriesIndex : PageModelBase<EntriesIndex>
 {
-    private readonly DtoHelper _dtoHelper;
-
     public List<EntryGroup> EntryGroups { get; set; } = new();
 
     public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
-        : base(httpHelper, userHelper, logger)
+        : base(httpHelper, userHelper, dtoHelper, logger)
     {
-        _dtoHelper = dtoHelper;
     }
 
     public async Task<IActionResult> OnGetAsync()
