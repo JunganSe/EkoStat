@@ -84,7 +84,7 @@ public class EntryController : ControllerBase
     {
         try
         {
-            var entries = await _unitOfWork.Entries.GetByTagAsync(userId);
+            var entries = await _unitOfWork.Entries.GetByUserAsync(userId);
             var dtos = _mapper.Map<List<EntryResponseDto>>(entries);
 
             return Ok(dtos);
