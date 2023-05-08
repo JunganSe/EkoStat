@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using EkoStatApi.Data;
-using EkoStatLibrary.Dtos;
 using EkoStatApi.Models;
+using EkoStatLibrary.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace EkoStatApi.Controllers;
 
