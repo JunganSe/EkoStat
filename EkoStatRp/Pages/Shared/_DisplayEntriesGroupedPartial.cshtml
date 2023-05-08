@@ -1,6 +1,9 @@
 ﻿@using EkoStatLibrary.Dtos;
 @model List<EntryGroup>
 @inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
+@{
+    bool showEditButtons = (bool)(ViewData["ShowEditButtons"] ?? false);
+}
 
 <table class="table-bordered">
     <thead>
@@ -12,7 +15,10 @@
             <th>Cost per article</th>
             <th>Tags</th>
             <th>Comment</th>
-            <th></th>
+            @if (showEditButtons)
+            {
+                <th></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -30,7 +36,10 @@
                     <td>@entry.CostPerArticle</td>
                     <td>@tags</td>
                     <td>@entry.Comment</td>
-                    <td><partial name="@Constants.PartialViews.EditButtons" model="@entry.Id"></td>
+                    @if (showEditButtons)
+                    {
+                        <td><partial name="@Constants.PartialViews.EditButtons" model="@entry.Id"></td>
+                    }
                 </tr>
             }
         }
