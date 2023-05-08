@@ -257,7 +257,7 @@ public class EntryController : ControllerBase
         FilterByArticles();
         FilterByTags();
         FilterByPrice();
-        FilterByTimestamps();
+        FilterByTimestamp();
         return entries;
 
 
@@ -309,7 +309,7 @@ public class EntryController : ControllerBase
                     .ToList();
         }
 
-        void FilterByTimestamps()
+        void FilterByTimestamp()
         {
             if (filter.TimestampFrom != null)
                 entries = entries
