@@ -274,11 +274,10 @@ public class EntryController : ControllerBase
 
         void FilterByTags()
         {
-            if (filter.MustHaveAllTags != null
-            && filter.TagIds != null
+            if (filter.TagIds != null
             && filter.TagIds.Count > 0)
             {
-                if ((bool)filter.MustHaveAllTags) // Kolla om artiklen i entry har alla taggar.
+                if (filter.MustHaveAllTags) // Kolla om artiklen i entry har alla taggar.
                 {
                     entries = entries
                         .Where(entry => filter.TagIds
@@ -299,13 +298,13 @@ public class EntryController : ControllerBase
 
         void FilterByPrice()
         {
-            if (filter.PriceMin != null)
+            if (filter.CostPerArticleMin != null)
                 entries = entries
-                    .Where(entry => entry.CostPerArticle >= filter.PriceMin)
+                    .Where(entry => entry.CostPerArticle >= filter.CostPerArticleMin)
                     .ToList();
-            if (filter.PriceMax != null)
+            if (filter.CostPerArticleMax != null)
                 entries = entries
-                    .Where(entry => entry.CostPerArticle <= filter.PriceMax)
+                    .Where(entry => entry.CostPerArticle <= filter.CostPerArticleMax)
                     .ToList();
         }
 
