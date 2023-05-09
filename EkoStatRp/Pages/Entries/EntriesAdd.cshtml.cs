@@ -43,12 +43,9 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     {
         try
         {
-            using var httpClient = _httpHelper.GetHttpClient();
-            string url = LibraryConstants.ApiEndpoints.EntryCreate;
-
             NewEntry.Timestamp = GetFormTimestamp();
             NewEntry.UserId = GetUserId();
-            var response = await httpClient.PostAsJsonAsync(url, NewEntry);
+            var response = await _apiHandler.CreateEntryAsync(NewEntry);
             response.EnsureSuccessStatusCode();
         }
         catch (Exception ex)

@@ -41,13 +41,10 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
     {
         try
         {
-            using var httpClient = _httpHelper.GetHttpClient();
-            string url = LibraryConstants.ApiEndpoints.ArticleCreate;
-
-            NewArticle.UserId = GetUserId();
             var tagIds = Request.Form["tagIds"].ToList();
             NewArticle.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
-            var response = await httpClient.PostAsJsonAsync(url, NewArticle);
+            NewArticle.UserId = GetUserId();
+            var response = await _apiHandler.CreateArticleAsync(NewArticle);
             response.EnsureSuccessStatusCode();
         }
         catch (Exception ex)

@@ -39,11 +39,8 @@ public class TagsIndex : PageModelBase<TagsIndex>
     {
         try
         {
-            using var httpClient = _httpHelper.GetHttpClient();
-            string url = LibraryConstants.ApiEndpoints.TagCreate;
-
             NewTag.UserId = GetUserId();
-            var response = await httpClient.PostAsJsonAsync(url, NewTag);
+            var response = await _apiHandler.CreateTagAsync(NewTag);
             response.EnsureSuccessStatusCode();
         }
         catch (Exception ex)

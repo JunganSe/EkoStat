@@ -52,19 +52,14 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     {
         try
         {
-            using var httpClient = _httpHelper.GetHttpClient();
-            var userId = GetUserId();
-
             var articleIds = Request.Form["articleIds"].ToList();
             FilterViewModel.Filter.ArticleIds = _dtoHelper.ParseStringsToInts(articleIds);
 
             var tagIds = Request.Form["tagIds"].ToList();
             FilterViewModel.Filter.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
 
-            string url = LibraryConstants.ApiEndpoints.EntriesFiltered + userId;
-            var response = await httpClient.PostAsJsonAsync(url, FilterViewModel.Filter);
-            response.EnsureSuccessStatusCode();
-            var entries = await response.Content.ReadFromJsonAsync<List<EntryResponseDto>>() ?? new();
+            var userId = GetUserId();
+            var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
             EntryGroups = _dtoHelper.GroupEntries(entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
