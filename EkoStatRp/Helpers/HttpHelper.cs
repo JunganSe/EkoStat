@@ -22,7 +22,7 @@ public class HttpHelper
 
     public string GetApiUrl()
     {
-        return _configuration.GetValue<string>(Constants.AppsettingsJsonNames.ApiUrl);
+        return _configuration.GetValue<string>(Constants.AppsettingsKeys.ApiUrl);
     }
 
     public void SetSessionData(string key, string value)

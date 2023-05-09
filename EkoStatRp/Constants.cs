@@ -2,7 +2,7 @@
 
 internal static class Constants
 {
-    public static class AppsettingsJsonNames
+    public static class AppsettingsKeys
     {
         public const string ApiUrl = "ApiUrl";
     }
