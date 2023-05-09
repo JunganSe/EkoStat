@@ -2,33 +2,20 @@
 
 public class HttpHelper
 {
-    private readonly IConfiguration _configuration;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly CookieOptions _cookieOptions;
 
     public HttpContext HttpContext => _httpContextAccessor.HttpContext 
         ?? throw new NullReferenceException(nameof(HttpContext));
 
-    public HttpHelper(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+    public HttpHelper(IHttpContextAccessor httpContextAccessor)
     {
-        _configuration = configuration;
         _httpContextAccessor = httpContextAccessor;
         _cookieOptions = new CookieOptions()
         {
             Secure = true,
             Expires = DateTimeOffset.Now.AddDays(Constants.Cookies.CookieLifetimeDays)
         };
-    }
-
-    public HttpClient GetHttpClient()
-    {
-        string apiUrl = GetApiUrl();
-        return new HttpClient() { BaseAddress = new Uri(apiUrl) };
-    }
-
-    public string GetApiUrl()
-    {
-        return _configuration.GetValue<string>(Constants.AppsettingsKeys.ApiUrl);
     }
 
     public void SetSessionData(string key, string value)
