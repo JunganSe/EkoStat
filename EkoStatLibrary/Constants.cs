@@ -2,6 +2,10 @@
 
 public static class Constants
 {
+    public static class Http
+    {
+        public const int TimeoutSeconds = 10;
+    }
     public static class ApiEndpoints
     {
         public const string ArticleGet = "Articles/";

@@ -13,7 +13,13 @@ public class ApiHandler
     }
 
     private HttpClient GetHttpClient()
-        => new HttpClient() { BaseAddress = new Uri(_apiUrl) };
+    {
+        return new HttpClient()
+        {
+            BaseAddress = new Uri(_apiUrl),
+            Timeout = TimeSpan.FromSeconds(Constants.Http.TimeoutSeconds)
+        };
+    }
 
     private async Task<T?> GetAsync<T>(string endpoint)
     {
