@@ -24,11 +24,8 @@ public class TagsIndex : PageModelBase<TagsIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
-
-            string url = LibraryConstants.ApiEndpoints.TagsByUser + userId;
-            Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(url) ?? new();
+            Tags = await _apiHandler.GetTagsByUserAsync(userId);
         }
         catch (Exception ex)
         {

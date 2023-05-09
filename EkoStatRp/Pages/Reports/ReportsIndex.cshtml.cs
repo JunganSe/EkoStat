@@ -25,15 +25,12 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
-            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
-            FilterViewModel.Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
-            SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
+            FilterViewModel.Articles = await _apiHandler.GetArticlesByUserAsync(userId);
+            FilterViewModel.Tags = await _apiHandler.GetTagsByUserAsync(userId);
 
-            string tagsUrl = LibraryConstants.ApiEndpoints.TagsByUser + userId;
-            FilterViewModel.Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
+            SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
             SetTempData(nameof(FilterViewModel.Tags), FilterViewModel.Tags);
         }
         catch (Exception ex)

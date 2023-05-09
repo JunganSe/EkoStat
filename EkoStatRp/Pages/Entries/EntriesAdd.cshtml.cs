@@ -25,18 +25,11 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
-
-            string latestEntryUrl = LibraryConstants.ApiEndpoints.EntriesLatestByUser + userId;
-            var latestEntry = await httpClient.GetFromJsonAsync<EntryResponseDto>(latestEntryUrl);
+            Articles = await _apiHandler.GetArticlesByUserAsync(userId);
+            Units = await _apiHandler.GetAllUnitsAsync();
+            var latestEntry = await _apiHandler.GetLatestEntryByUserAsync(userId);
             NewEntry.Timestamp = latestEntry?.Timestamp ?? DateTime.Today;
-
-            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
-            Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
-
-            string unitsUrl = LibraryConstants.ApiEndpoints.UnitsAll;
-            Units = await httpClient.GetFromJsonAsync<List<UnitResponseDto>>(unitsUrl) ?? new();
         }
         catch (Exception ex)
         {

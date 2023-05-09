@@ -25,20 +25,15 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
-            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
-            FilterViewModel.Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
-            SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
-
-            string tagsUrl = LibraryConstants.ApiEndpoints.TagsByUser + userId;
-            FilterViewModel.Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
-            SetTempData(nameof(FilterViewModel.Tags), FilterViewModel.Tags);
-
-            string url = LibraryConstants.ApiEndpoints.EntriesByUser + userId;
-            var entries = await httpClient.GetFromJsonAsync<List<EntryResponseDto>>(url) ?? new();
+            FilterViewModel.Articles = await _apiHandler.GetArticlesByUserAsync(userId);
+            FilterViewModel.Tags = await _apiHandler.GetTagsByUserAsync(userId);
+            var entries = await _apiHandler.GetEntriesByUserAsync(userId);
             EntryGroups = _dtoHelper.GroupEntries(entries);
+
+            SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
+            SetTempData(nameof(FilterViewModel.Tags), FilterViewModel.Tags);
         }
         catch (Exception ex)
         {

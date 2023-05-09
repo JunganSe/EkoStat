@@ -25,14 +25,9 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
-
-            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
-            Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
-
-            string tagsUrl = LibraryConstants.ApiEndpoints.TagsByUser + userId;
-            Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
+            Articles = await _apiHandler.GetArticlesByUserAsync(userId);
+            Tags = await _apiHandler.GetTagsByUserAsync(userId);
         }
         catch (Exception ex)
         {
