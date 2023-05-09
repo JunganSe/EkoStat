@@ -1,6 +1,5 @@
 ﻿@page "/Entries"
 @model EkoStatRp.Pages.Entries.EntriesIndex
-@inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Entries";
     ViewData["ShowEditButtons"] = true;
@@ -10,6 +9,11 @@
 <a asp-page="@Constants.RazorPages.EntriesAdd">Add entries</a>
 <hr />
 
+<h2>Filter</h2>
+<partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
+<hr />
+
+<h2>Entries</h2>
 <partial name="@Constants.PartialViews.DisplayEntries" model="@Model.EntryGroups" />
 
 
