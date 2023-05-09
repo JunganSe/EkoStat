@@ -20,16 +20,12 @@ public class HttpHelper
 
     public void SetSessionData(string key, string value)
     {
-        if (_httpContextAccessor.HttpContext == null)
-            throw new NullReferenceException(nameof(HttpContext));
-        _httpContextAccessor.HttpContext.Session.SetString(key, value);
+        HttpContext.Session.SetString(key, value);
     }
 
     public string? GetSessionData(string key)
     {
-        if (_httpContextAccessor.HttpContext == null)
-            throw new NullReferenceException(nameof(HttpContext));
-        return _httpContextAccessor.HttpContext.Session.GetString(key);
+        return HttpContext.Session.GetString(key);
     }
 
     public void SetCookie(string key, string value)
