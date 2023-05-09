@@ -30,6 +30,7 @@ internal static class Constants
         public const string ValidationScripts = "_ValidationScriptsPartial";
         public const string MessageBox = "_MessageBoxPartial";
         public const string DisplayEntries = "_DisplayEntriesGroupedPartial";
+        public const string FilterEntries = "_FilterEntriesPartial";
     }
 
     public static class Cookies
