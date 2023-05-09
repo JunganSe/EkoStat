@@ -39,6 +39,12 @@ internal static class Constants
         public const string UserId = "UserId";
     }
 
+    public static class Html
+    {
+        public const string FilterFormArticleIds = "articleIds";
+        public const string FilterFormTagIds = "tagIds";
+    }
+
     public static class FontAwesome
     {
         public const string Edit = "fa-regular fa-pen-to-square";

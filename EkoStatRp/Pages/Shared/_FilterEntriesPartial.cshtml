@@ -14,7 +14,7 @@
         </div>
         <div>
             <label asp-for="@Model.Filter.ArticleIds"></label>
-            <select multiple name="articleIds">
+            <select multiple name="@Constants.Html.FilterFormArticleIds">
                 @foreach (var article in Model.Articles)
                 {
                     bool preselect = Model.Filter.ArticleIds?.Contains(article.Id) ?? false;
@@ -24,7 +24,7 @@
         </div>
         <div>
             <label asp-for="@Model.Filter.TagIds"></label>
-            <select multiple name="tagIds">
+            <select multiple name="@Constants.Html.FilterFormTagIds">
                 @foreach (var tag in Model.Tags)
                 {
                     bool preselect = Model.Filter.TagIds?.Contains(tag.Id) ?? false;

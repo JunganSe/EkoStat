@@ -52,10 +52,10 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     {
         try
         {
-            var articleIds = Request.Form["articleIds"].ToList();
+            var articleIds = Request.Form[Constants.Html.FilterFormArticleIds].ToList();
             FilterViewModel.Filter.ArticleIds = _dtoHelper.ParseStringsToInts(articleIds);
 
-            var tagIds = Request.Form["tagIds"].ToList();
+            var tagIds = Request.Form[Constants.Html.FilterFormTagIds].ToList();
             FilterViewModel.Filter.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
 
             var userId = GetUserId();
