@@ -23,18 +23,7 @@ public class ApiHandler
 
 
 
-    public async Task<List<TagResponseDto>> GetTagsByUserAsync(int userId)
-    {
-        string endpoint = Constants.ApiEndpoints.TagsByUser + userId;
-        return await GetAsync<List<TagResponseDto>>(endpoint) ?? new();
-    }
-
-    public async Task<List<ArticleResponseDto>> GetArticlesByUserAsync(int userId)
-    {
-        string endpoint = Constants.ApiEndpoints.ArticlesByUser + userId;
-        return await GetAsync<List<ArticleResponseDto>>(endpoint) ?? new();
-    }
-
+    #region Entries
     public async Task<List<EntryResponseDto>> GetEntriesByUserAsync(int userId)
     {
         string endpoint = Constants.ApiEndpoints.EntriesByUser + userId;
@@ -46,10 +35,34 @@ public class ApiHandler
         string endpoint = Constants.ApiEndpoints.EntryLatestByUser + userId;
         return await GetAsync<EntryResponseDto>(endpoint) ?? new();
     }
+    #endregion
 
+    #region Articles
+    public async Task<List<ArticleResponseDto>> GetArticlesByUserAsync(int userId)
+    {
+        string endpoint = Constants.ApiEndpoints.ArticlesByUser + userId;
+        return await GetAsync<List<ArticleResponseDto>>(endpoint) ?? new();
+    }
+    #endregion
+
+    #region Tags
+    public async Task<List<TagResponseDto>> GetTagsByUserAsync(int userId)
+    {
+        string endpoint = Constants.ApiEndpoints.TagsByUser + userId;
+        return await GetAsync<List<TagResponseDto>>(endpoint) ?? new();
+    }
+    #endregion
+
+    #region Units
     public async Task<List<UnitResponseDto>> GetAllUnitsAsync()
     {
         string endpoint = Constants.ApiEndpoints.UnitsAll;
         return await GetAsync<List<UnitResponseDto>>(endpoint) ?? new();
     }
+    #endregion
+
+
+
+
+
 }
