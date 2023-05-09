@@ -13,8 +13,8 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
     public List<EntryResponseDto> Entries { get; set; } = new();
 
-    public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<ReportsIndex> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ReportsIndex> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

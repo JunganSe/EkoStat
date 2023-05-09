@@ -13,8 +13,8 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
     public List<TagResponseDto> Tags { get; set; } = new();
     public ArticleRequestDto NewArticle { get; set; } = new();
 
-    public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<ArticlesIndex> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public ArticlesIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ArticlesIndex> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

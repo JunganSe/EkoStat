@@ -7,8 +7,8 @@ namespace EkoStatRp.Pages.User;
 
 public class Login : PageModelBase<Login>
 {
-    public Login(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<Login> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public Login(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<Login> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

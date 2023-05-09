@@ -12,8 +12,8 @@ public class TagsIndex : PageModelBase<TagsIndex>
     public List<TagResponseDto> Tags { get; set; } = new();
     public TagRequestDto NewTag { get; set; } = new();
 
-    public TagsIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<TagsIndex> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public TagsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<TagsIndex> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

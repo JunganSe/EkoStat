@@ -7,8 +7,8 @@ namespace EkoStatRp.Pages.User;
 
 public class Logout : PageModelBase<Logout>
 {
-    public Logout(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<Logout> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public Logout(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<Logout> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

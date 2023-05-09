@@ -13,8 +13,8 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     public List<UnitResponseDto> Units { get; set; } = new();
     public EntryRequestDto NewEntry { get; set; } = new();
 
-    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesAdd> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public EntriesAdd(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<EntriesAdd> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

@@ -13,8 +13,8 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
     public List<EntryGroup> EntryGroups { get; set; } = new();
 
-    public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
-        : base(httpHelper, userHelper, dtoHelper, logger)
+    public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
+        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
     }
 

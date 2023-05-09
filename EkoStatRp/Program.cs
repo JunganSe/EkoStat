@@ -27,6 +27,7 @@ public class Program
         builder.Services.AddTransient<DtoHelper>();
         builder.Services.AddTransient<HttpHelper>();
         builder.Services.AddScoped<UserHelper>();
+        builder.Services.AddScoped<ApiHandler>();
 
         var app = builder.Build();
         // --- Configure the HTTP request pipeline. ---

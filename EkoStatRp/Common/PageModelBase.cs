@@ -11,16 +11,18 @@ public class PageModelBase<TPageModel> : PageModel
 {
     protected readonly HttpHelper _httpHelper;
     protected readonly UserHelper _userHelper;
+    private readonly ApiHandler _apiHandler;
     protected readonly DtoHelper _dtoHelper;
     protected readonly ILogger<TPageModel> _logger;
     private readonly JsonSerializerOptions _jsonOptions;
 
     public MessageBox MessageBox { get; set; } = new MessageBox("");
 
-    public PageModelBase(HttpHelper httpHelper, UserHelper userHelper, DtoHelper dtoHelper, ILogger<TPageModel> logger)
+    public PageModelBase(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<TPageModel> logger)
     {
         _httpHelper = httpHelper;
         _userHelper = userHelper;
+        _apiHandler = apiHandler;
         _dtoHelper = dtoHelper;
         _logger = logger;
         _jsonOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
