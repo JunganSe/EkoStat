@@ -35,8 +35,13 @@ public class TagRepository : Repository<Tag>, ITagRepository
 
     public async Task<ICollection<Tag>> GetByIdsAsync(List<int> tagIds)
     {
-        return await Tags
+        var tags = await Tags
             .Where(t => tagIds.Contains(t.Id))
             .ToListAsync();
+        if (tags.Count == tagIds.Count)
+            return tags;
+
+        var missingIds = tagIds.Except(tags.Select(t => t.Id));
+        throw new ArgumentException($"Could not find tags with IDs: {string.Join(", ", missingIds)}");
     }
 }
