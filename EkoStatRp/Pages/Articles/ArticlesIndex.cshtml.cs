@@ -25,13 +25,13 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = new HttpClient();
+            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
-            string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
+            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
             Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
 
-            string tagsUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.TagsByUser}/{userId}";
+            string tagsUrl = LibraryConstants.ApiEndpoints.TagsByUser + userId;
             Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
         }
         catch (Exception ex)
@@ -46,8 +46,9 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
     {
         try
         {
-            using var httpClient = new HttpClient();
-            string url = _apiUrl + LibraryConstants.ApiEndpoints.ArticleCreate;
+            using var httpClient = _httpHelper.GetHttpClient();
+            string url = LibraryConstants.ApiEndpoints.ArticleCreate;
+
             NewArticle.UserId = GetUserId();
             var tagIds = Request.Form["tagIds"].ToList();
             NewArticle.TagIds = _dtoHelper.ParseStringsToInts(tagIds);

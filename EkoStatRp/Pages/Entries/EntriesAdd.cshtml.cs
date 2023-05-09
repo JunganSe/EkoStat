@@ -25,17 +25,17 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = new HttpClient();
+            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
-            string latestEntryUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.EntriesLatestByUser}/{userId}";
+            string latestEntryUrl = LibraryConstants.ApiEndpoints.EntriesLatestByUser + userId;
             var latestEntry = await httpClient.GetFromJsonAsync<EntryResponseDto>(latestEntryUrl);
             NewEntry.Timestamp = latestEntry?.Timestamp ?? DateTime.Today;
 
-            string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
+            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
             Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
 
-            string unitsUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.UnitsAll}";
+            string unitsUrl = LibraryConstants.ApiEndpoints.UnitsAll;
             Units = await httpClient.GetFromJsonAsync<List<UnitResponseDto>>(unitsUrl) ?? new();
         }
         catch (Exception ex)
@@ -50,8 +50,9 @@ public class EntriesAdd : PageModelBase<EntriesAdd>
     {
         try
         {
-            using var httpClient = new HttpClient();
-            string url = _apiUrl + LibraryConstants.ApiEndpoints.EntryCreate;
+            using var httpClient = _httpHelper.GetHttpClient();
+            string url = LibraryConstants.ApiEndpoints.EntryCreate;
+
             NewEntry.Timestamp = GetFormTimestamp();
             NewEntry.UserId = GetUserId();
             var response = await httpClient.PostAsJsonAsync(url, NewEntry);

@@ -25,18 +25,18 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             if (!IsLoggedIn())
                 return GoHome();
 
-            using var httpClient = new HttpClient();
+            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
-            string articlesUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.ArticlesByUser}/{userId}";
+            string articlesUrl = LibraryConstants.ApiEndpoints.ArticlesByUser + userId;
             FilterViewModel.Articles = await httpClient.GetFromJsonAsync<List<ArticleResponseDto>>(articlesUrl) ?? new();
             SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
 
-            string tagsUrl = $"{_apiUrl}{LibraryConstants.ApiEndpoints.TagsByUser}/{userId}";
+            string tagsUrl = LibraryConstants.ApiEndpoints.TagsByUser + userId;
             FilterViewModel.Tags = await httpClient.GetFromJsonAsync<List<TagResponseDto>>(tagsUrl) ?? new();
             SetTempData(nameof(FilterViewModel.Tags), FilterViewModel.Tags);
 
-            string url = $"{_apiUrl}{LibraryConstants.ApiEndpoints.EntriesByUser}/{userId}";
+            string url = LibraryConstants.ApiEndpoints.EntriesByUser + userId;
             var entries = await httpClient.GetFromJsonAsync<List<EntryResponseDto>>(url) ?? new();
             EntryGroups = _dtoHelper.GroupEntries(entries);
         }
@@ -52,7 +52,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     {
         try
         {
-            using var httpClient = new HttpClient();
+            using var httpClient = _httpHelper.GetHttpClient();
             var userId = GetUserId();
 
             var articleIds = Request.Form["articleIds"].ToList();
@@ -61,7 +61,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             var tagIds = Request.Form["tagIds"].ToList();
             FilterViewModel.Filter.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
 
-            string url = $"{_apiUrl}{LibraryConstants.ApiEndpoints.EntriesFiltered}/{userId}";
+            string url = LibraryConstants.ApiEndpoints.EntriesFiltered + userId;
             var response = await httpClient.PostAsJsonAsync(url, FilterViewModel.Filter);
             response.EnsureSuccessStatusCode();
             var entries = await response.Content.ReadFromJsonAsync<List<EntryResponseDto>>() ?? new();

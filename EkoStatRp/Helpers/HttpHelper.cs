@@ -20,6 +20,12 @@ public class HttpHelper
         };
     }
 
+    public HttpClient GetHttpClient()
+    {
+        string apiUrl = GetApiUrl();
+        return new HttpClient() { BaseAddress = new Uri(apiUrl) };
+    }
+
     public string GetApiUrl()
     {
         return _configuration.GetValue<string>(Constants.AppsettingsKeys.ApiUrl);

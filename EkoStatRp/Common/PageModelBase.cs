@@ -13,7 +13,6 @@ public class PageModelBase<TPageModel> : PageModel
     protected readonly UserHelper _userHelper;
     protected readonly DtoHelper _dtoHelper;
     protected readonly ILogger<TPageModel> _logger;
-    protected readonly string _apiUrl;
     private readonly JsonSerializerOptions _jsonOptions;
 
     public MessageBox MessageBox { get; set; } = new MessageBox("");
@@ -24,7 +23,6 @@ public class PageModelBase<TPageModel> : PageModel
         _userHelper = userHelper;
         _dtoHelper = dtoHelper;
         _logger = logger;
-        _apiUrl = _httpHelper.GetApiUrl();
         _jsonOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
     }
 
