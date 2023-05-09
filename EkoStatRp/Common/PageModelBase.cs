@@ -11,7 +11,7 @@ public class PageModelBase<TPageModel> : PageModel
 {
     protected readonly HttpHelper _httpHelper;
     protected readonly UserHelper _userHelper;
-    private readonly ApiHandler _apiHandler;
+    protected readonly ApiHandler _apiHandler;
     protected readonly DtoHelper _dtoHelper;
     protected readonly ILogger<TPageModel> _logger;
     private readonly JsonSerializerOptions _jsonOptions;
