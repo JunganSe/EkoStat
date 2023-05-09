@@ -10,12 +10,17 @@ namespace EkoStatRp.Pages.Entries;
 [BindProperties]
 public class EntriesIndex : PageModelBase<EntriesIndex>
 {
+    private readonly string _articlesKey;
+    private readonly string _tagsKey;
+
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
     public List<EntryGroup> EntryGroups { get; set; } = new();
 
     public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
         : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
     {
+        _articlesKey = "Articles";
+        _tagsKey = "Tags";
     }
 
     public async Task<IActionResult> OnGetAsync()
@@ -32,8 +37,8 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             var entries = await _apiHandler.GetEntriesByUserAsync(userId);
             EntryGroups = _dtoHelper.GroupEntries(entries);
 
-            SetTempData(nameof(FilterViewModel.Articles), FilterViewModel.Articles);
-            SetTempData(nameof(FilterViewModel.Tags), FilterViewModel.Tags);
+            SetTempData(_articlesKey, FilterViewModel.Articles);
+            SetTempData(_tagsKey, FilterViewModel.Tags);
         }
         catch (Exception ex)
         {
@@ -62,8 +67,8 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             var entries = await response.Content.ReadFromJsonAsync<List<EntryResponseDto>>() ?? new();
             EntryGroups = _dtoHelper.GroupEntries(entries);
 
-            FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(nameof(FilterViewModel.Articles));
-            FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(nameof(FilterViewModel.Tags));
+            FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
+            FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);
             return Page();
         }
         catch (Exception ex)
