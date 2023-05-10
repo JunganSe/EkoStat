@@ -1,3 +1,4 @@
+using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
@@ -14,7 +15,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     private readonly string _tagsKey;
 
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
-    public List<EntryResponseDto> Entries { get; set; } = new();
+    public List<EntryGroupByArticle> EntryGroups { get; set; } = new();
 
     public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ReportsIndex> logger)
         : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
@@ -57,7 +58,8 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             FilterViewModel.Filter.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
 
             var userId = GetUserId();
-            Entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
+            var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
+            EntryGroups = _dtoHelper.GroupEntriesByArticle(entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
             FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);
