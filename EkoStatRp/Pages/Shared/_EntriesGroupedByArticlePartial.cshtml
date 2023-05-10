@@ -8,15 +8,18 @@
             <th>Article</th>
             <th>Count</th>
             <th>Total cost</th>
+            <th>Tags</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var group in Model)
         {
+            var tags = _dtoHelper.GetTagNamesAsString(group.Article.Tags);
             <tr>
                 <td>@group.Article.Name</td>
                 <td>@group.TotalCount</td>
                 <td>@group.TotalCost</td>
+                <td>@tags</td>
             </tr>
         }
     </tbody>
