@@ -17,14 +17,14 @@ public class DtoHelper
         return strings.Select(int.Parse).ToList();
     }
 
-    public List<EntryGroup> GroupEntries(List<EntryResponseDto> entries)
+    public List<EntryGroupByTimestamp> GroupEntries(List<EntryResponseDto> entries)
     {
         var distinctTimestamps = entries
             .Select(e => e.Timestamp)
             .Distinct();
 
         var groups = distinctTimestamps
-            .Select(dt => new EntryGroup(dt))
+            .Select(dt => new EntryGroupByTimestamp(dt))
             .ToList();
 
         groups.ForEach(group => group.Entries 

@@ -15,7 +15,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     private readonly string _tagsKey;
 
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
-    public List<EntryGroup> EntryGroups { get; set; } = new();
+    public List<EntryGroupByTimestamp> EntryGroups { get; set; } = new();
 
     public EntriesIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<EntriesIndex> logger)
         : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)

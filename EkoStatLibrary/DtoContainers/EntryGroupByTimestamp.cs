@@ -2,12 +2,12 @@
 
 namespace EkoStatLibrary.DtoContainers;
 
-public class EntryGroup
+public class EntryGroupByTimestamp
 {
     public DateTime Timestamp { get; set; }
     public List<EntryResponseDto> Entries { get; set; } = new();
 
-    public EntryGroup(DateTime timestamp)
+    public EntryGroupByTimestamp(DateTime timestamp)
     {
         Timestamp = timestamp;
     }
