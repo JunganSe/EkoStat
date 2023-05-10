@@ -23,12 +23,13 @@ public class DtoHelper
             .Select(e => e.Timestamp)
             .Distinct();
 
-        var groups = distinctTimestamps
-            .Select(dt => new EntryGroupByTimestamp(dt))
-            .ToList();
-
-        groups.ForEach(group => group.Entries 
-            = entries.Where(e => e.Timestamp == group.Timestamp).ToList());
+        var groups = new List<EntryGroupByTimestamp>();
+        foreach (var groupTimestamp in distinctTimestamps)
+        {
+            var groupedEntries = entries.Where(e => e.Timestamp == groupTimestamp).ToList();
+            var newGroup = new EntryGroupByTimestamp(groupedEntries);
+            groups.Add(newGroup);
+        }
 
         return groups.OrderByDescending(e => e.Timestamp).ToList();
     }
