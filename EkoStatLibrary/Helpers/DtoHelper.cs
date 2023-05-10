@@ -33,4 +33,21 @@ public class DtoHelper
 
         return groups.OrderByDescending(e => e.Timestamp).ToList();
     }
+
+    public List<EntryGroupByArticle> GroupEntriesByArticle(List<EntryResponseDto> entries)
+    {
+        var distinctArticles = entries
+            .GroupBy(e => e.Article.Id)
+            .Select(group => group.First().Article);
+
+        var groups = new List<EntryGroupByArticle>();
+        foreach (var article in distinctArticles)
+        {
+            var groupedEntries = entries.Where(e => e.Article.Id == article.Id).ToList();
+            var newGroup = new EntryGroupByArticle(groupedEntries);
+            groups.Add(newGroup);
+        }
+
+        return groups.OrderBy(e => e.Article.Name).ToList();
+    }
 }
