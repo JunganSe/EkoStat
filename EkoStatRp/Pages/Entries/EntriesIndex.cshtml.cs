@@ -36,7 +36,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
             FilterViewModel.Articles = await _apiHandler.GetArticlesByUserAsync(userId);
             FilterViewModel.Tags = await _apiHandler.GetTagsByUserAsync(userId);
             var entries = await _apiHandler.GetEntriesByUserAsync(userId);
-            EntryGroups = _dtoHelper.GroupEntries(entries);
+            EntryGroups = _dtoHelper.GroupEntriesByTimestamp(entries);
 
             SetTempData(_articlesKey, FilterViewModel.Articles);
             SetTempData(_tagsKey, FilterViewModel.Tags);
@@ -61,7 +61,7 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
 
             var userId = GetUserId();
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
-            EntryGroups = _dtoHelper.GroupEntries(entries);
+            EntryGroups = _dtoHelper.GroupEntriesByTimestamp(entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
             FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);

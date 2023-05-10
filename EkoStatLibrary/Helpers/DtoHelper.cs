@@ -17,7 +17,7 @@ public class DtoHelper
         return strings.Select(int.Parse).ToList();
     }
 
-    public List<EntryGroupByTimestamp> GroupEntries(List<EntryResponseDto> entries)
+    public List<EntryGroupByTimestamp> GroupEntriesByTimestamp(List<EntryResponseDto> entries)
     {
         var distinctTimestamps = entries
             .Select(e => e.Timestamp)
