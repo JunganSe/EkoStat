@@ -12,7 +12,7 @@ public class EntryGroupByTimestamp
         if (entries.Count > 0)
         {
             EnsureSameTimestamp(entries);
-            Timestamp = entries[0].Timestamp;
+            Timestamp = entries.First().Timestamp;
             Entries = entries;
         }
     }

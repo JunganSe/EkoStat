@@ -14,7 +14,7 @@ public class EntryGroupByArticle
         if (entries.Count > 0)
         {
             EnsureSameArticle(entries);
-            Article = entries[0].Article;
+            Article = entries.First().Article;
             Entries = entries;
         }
     }
