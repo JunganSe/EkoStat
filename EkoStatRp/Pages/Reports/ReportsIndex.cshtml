@@ -12,5 +12,7 @@
 <partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
 <hr />
 
-<b>TODO: Visa entries här</b>
-<p>Entries: @Model.Entries.Count</p>
+<h2>Articles</h2>
+<div>Entries: @Model.EntryGroups.Sum(g => g.Entries.Count)</div>
+<div>Articles: @Model.EntryGroups.Count</div>
+<partial name="@Constants.PartialViews.EntriesGroupedByArticle" model="@Model.EntryGroups" />
