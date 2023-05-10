@@ -37,8 +37,8 @@ public class SeedController : ControllerBase
         try
         {
             await ResetDatabaseAsync();
-            await SeedUnitsAsync();
             await SeedUsersAsync();
+            await SeedUnitsAsync();
             await SeedTagsAsync();
             await SeedArticlesAsync();
             await SeedEntriesAsync();
@@ -56,16 +56,6 @@ public class SeedController : ControllerBase
         await _ekoStatContext.Database.MigrateAsync();
     }
 
-    private async Task SeedUnitsAsync()
-    {
-        string jsonData = await System.IO.File.ReadAllTextAsync($"{_seedLocation}/Units.json");
-        var units = JsonSerializer.Deserialize<List<Unit>>(jsonData, _jsonOptions);
-
-        await _unitOfWork.Units.AddRangeAsync(units!);
-        if (!await _unitOfWork.TrySaveAsync())
-            throw new Exception("Fail: Seed units.");
-    }
-
     private async Task SeedUsersAsync()
     {
         string jsonData = await System.IO.File.ReadAllTextAsync($"{_seedLocation}/Users.json");
@@ -74,6 +64,16 @@ public class SeedController : ControllerBase
         await _unitOfWork.Users.AddRangeAsync(users!);
         if (!await _unitOfWork.TrySaveAsync())
             throw new Exception("Fail: Seed users.");
+    }
+
+    private async Task SeedUnitsAsync()
+    {
+        string jsonData = await System.IO.File.ReadAllTextAsync($"{_seedLocation}/Units.json");
+        var units = JsonSerializer.Deserialize<List<Unit>>(jsonData, _jsonOptions);
+
+        await _unitOfWork.Units.AddRangeAsync(units!);
+        if (!await _unitOfWork.TrySaveAsync())
+            throw new Exception("Fail: Seed units.");
     }
 
     private async Task SeedTagsAsync()
