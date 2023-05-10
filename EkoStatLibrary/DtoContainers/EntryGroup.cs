@@ -1,4 +1,6 @@
-﻿namespace EkoStatLibrary.Dtos;
+﻿using EkoStatLibrary.Dtos;
+
+namespace EkoStatLibrary.DtoContainers;
 
 public class EntryGroup
 {

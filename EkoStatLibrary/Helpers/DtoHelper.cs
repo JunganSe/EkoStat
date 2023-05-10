@@ -1,4 +1,5 @@
-﻿using EkoStatLibrary.Dtos;
+﻿using EkoStatLibrary.DtoContainers;
+using EkoStatLibrary.Dtos;
 
 namespace EkoStatLibrary.Helpers;
 
