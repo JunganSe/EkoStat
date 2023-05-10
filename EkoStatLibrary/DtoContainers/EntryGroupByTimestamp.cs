@@ -17,7 +17,7 @@ public class EntryGroupByTimestamp
         }
     }
 
-    public void EnsureSameTimestamp(List<EntryResponseDto> entries)
+    private void EnsureSameTimestamp(List<EntryResponseDto> entries)
     {
         var firstTimestamp = entries[0].Timestamp;
         if (!entries.All(e => e.Timestamp == firstTimestamp))
