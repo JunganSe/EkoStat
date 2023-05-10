@@ -1,72 +1,102 @@
 [
 	{
 		"name": "Frysta ärtor",
-		"tagIds": [1, 2, 7],
-		"userId": 1
+		"tagIds": [1,4,8],
 	},
 	{
 		"name": "Nuggets",
-		"tagIds": [1, 2, 8],
-		"userId": 1
+		"tagIds": [1,4,9],
 	},
 	{
 		"name": "Ris",
-		"tagIds": [1, 3],
-		"userId": 1
+		"tagIds": [1,5],
 	},
 	{
 		"name": "Makaroner",
-		"tagIds": [1, 3],
-		"userId": 1
+		"tagIds": [1,5],
 	},
 	{
 		"name": "Tomater",
-		"tagIds": [1, 7],
-		"userId": 1
+		"tagIds": [1,8],
 	},
 	{
 		"name": "Gurka",
-		"tagIds": [1, 7],
-		"userId": 1
+		"tagIds": [1,8],
 	},
 	{
 		"name": "Chips",
-		"tagIds": [1, 4],
-		"userId": 1
+		"tagIds": [3],
 	},
 	{
 		"name": "Lösgodis",
-		"tagIds": [1, 4],
-		"userId": 1
+		"tagIds": [3],
 	},
 	{
 		"name": "Bröd",
 		"tagIds": [1],
-		"userId": 1
 	},
 	{
 		"name": "Ost",
-		"tagIds": [1, 6],
-		"userId": 1
+		"tagIds": [1,7,13],
 	},
 	{
 		"name": "Margarin",
-		"tagIds": [1, 6],
-		"userId": 1
+		"tagIds": [1,7],
 	},
 	{
 		"name": "Pizza",
-		"tagIds": [1, 9, 10],
-		"userId": 1
+		"tagIds": [1,11,12],
 	},
 	{
 		"name": "Hamburgare",
-		"tagIds": [1, 9, 10],
-		"userId": 1
+		"tagIds": [1,11,12],
 	},
 	{
 		"name": "Sallad (måltid)",
-		"tagIds": [1, 10],
-		"userId": 1
+		"tagIds": [1,12],
+	},
+	{
+		"name": "Morötter",
+		"tagIds": [1,8,7],
+	},
+	{
+		"name": "Bananer",
+		"tagIds": [1,8],
+	},
+	{
+		"name": "Kaviar",
+		"tagIds": [1,7,13],
+	},
+	{
+		"name": "Sallad (grönsak)",
+		"tagIds": [1,8,7],
+	},
+	{
+		"name": "Havredryck",
+		"tagIds": [2,7],
+	},
+	{
+		"name": "Läsk",
+		"tagIds": [2],
+	},
+	{
+		"name": "Öl",
+		"tagIds": [2],
+	},
+	{
+		"name": "Chokladkaka",
+		"tagIds": [3],
+	},
+	{
+		"name": "Korv",
+		"tagIds": [1,4,9],
+	},
+	{
+		"name": "Champinjoner (konserv)",
+		"tagIds": [1,6],
+	},
+	{
+		"name": "Krossade tomater",
+		"tagIds": [1,6],
 	}
 ]
