@@ -4,6 +4,8 @@ namespace EkoStatLibrary.DtoContainers;
 
 public class EntryGroupByTimestamp
 {
+    public decimal TotalCost => Entries.Sum(e => e.CostPerArticle * e.Count);
+
     public DateTime Timestamp { get; init; }
     public List<EntryResponseDto> Entries { get; init; } = new();
 
