@@ -17,6 +17,16 @@
 <h2>Filter</h2>
 <form method="post">
     <partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
+    <div>
+        <label asp-for="@Model.FilterViewModel.Filter.CostPerArticleMin"></label>
+        <input asp-for="@Model.FilterViewModel.Filter.CostPerArticleMin" />
+        <span asp-validation-for="@Model.FilterViewModel.Filter.CostPerArticleMin" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.FilterViewModel.Filter.CostPerArticleMax"></label>
+        <input asp-for="@Model.FilterViewModel.Filter.CostPerArticleMax" />
+        <span asp-validation-for="@Model.FilterViewModel.Filter.CostPerArticleMax" class="text-danger"></span>
+    </div>
     <button type="submit">Filter</button>
 </form>
 <hr />
