@@ -15,6 +15,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     private readonly string _tagsKey;
 
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
+    public ReportSettingsViewModel Report { get; set; } = new();
     public List<EntryGroupByArticle> EntryGroups { get; set; } = new();
 
     public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ReportsIndex> logger)

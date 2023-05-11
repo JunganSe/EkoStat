@@ -1,4 +1,5 @@
 ﻿@page "/Reports"
+@using EkoStatLibrary.Enums;
 @model EkoStatRp.Pages.Reports.ReportsIndex
 @{
     ViewData["Title"] = "Reports";
@@ -24,12 +25,33 @@
 
 <h1>Reports</h1>
 <a asp-page="@Constants.RazorPages.ReportsSaved">Saved reports</a>
-<hr />
 
-<h2>Filter</h2>
 <form method="post">
+    <hr />
+    <h2>Filter</h2>
     <partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
-    <button type="submit">Filter</button>
+
+    <hr />
+    <h2>Report settings</h2>
+    <div class="flexRow">
+        <div>
+            <label asp-for="@Model.Report.CostLimit"></label>
+            <input asp-for="@Model.Report.CostLimit" />
+            <span asp-validation-for="@Model.Report.CostLimit" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.Report.CostLimitType"></label>
+            <select asp-for="@Model.Report.CostLimitType">
+                @foreach (var costLimitType in Enum.GetValues(typeof(LimitType)))
+                {
+                    <option value="@costLimitType">@costLimitType</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.Report.CostLimitType" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit">Generate report</button>
 </form>
 
 @if (entriesCount > 0)
