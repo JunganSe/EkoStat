@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Entries";
     ViewData["ShowEditButtons"] = true;
+    int entriesCount = Model.EntryGroups.Sum(eg => eg.Entries.Count);
+    DateTime? earliestTimestamp = (entriesCount > 0)
+        ? Model.EntryGroups.Select(eg => eg.Timestamp).Min() : null;
+    DateTime? latestTimestamp = (entriesCount > 0)
+        ? Model.EntryGroups.Select(eg => eg.Timestamp).Max() : null;
 }
 
 <h1>Entries</h1>
@@ -14,6 +19,13 @@
 <hr />
 
 <h2>Entries</h2>
+<p>
+    @entriesCount entries 
+    @if (entriesCount > 0)
+    {
+        <span>from @earliestTimestamp until @latestTimestamp</span>
+    }
+</p>
 <partial name="@Constants.PartialViews.EntriesGroupedByTimestamp" model="@Model.EntryGroups" />
 
 
