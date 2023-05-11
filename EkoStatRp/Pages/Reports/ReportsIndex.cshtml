@@ -22,6 +22,20 @@
         years = Math.Round(days / 365.25, 2);
     }
     var totalCost = Model.EntryGroups.Sum(eg => eg.TotalCost);
+
+    decimal highligtCostThreshold = decimal.MaxValue;
+    if (Model.Report.CostLimit != null)
+    {
+        if (Model.Report.CostLimitType == LimitType.Fixed)
+            highligtCostThreshold = (decimal)Model.Report.CostLimit;
+        else if (Model.Report.CostLimitType == LimitType.Percentile)
+        {
+            decimal lowestCost = Model.EntryGroups.Select(eg => eg.TotalCost).Min();
+            decimal highestCost = Model.EntryGroups.Select(eg => eg.TotalCost).Max();
+            decimal costSpan = highestCost - lowestCost;
+            highligtCostThreshold = lowestCost + costSpan * (decimal)Model.Report.CostLimit / 100;
+        }
+    }
 }
 
 <h1>Reports</h1>
@@ -36,7 +50,7 @@
     <h2>Report settings</h2>
     <div class="flexRow">
         <div>
-            <label asp-for="@Model.Report.CostLimit"></label>
+            <label asp-for="@Model.Report.CostLimit">Highlight cost above</label>
             <input asp-for="@Model.Report.CostLimit" />
             <span asp-validation-for="@Model.Report.CostLimit" class="text-danger"></span>
         </div>
@@ -81,7 +95,8 @@
             @foreach (var group in Model.EntryGroups)
             {
                 var tags = _dtoHelper.GetTagNamesAsString(group.Article.Tags);
-                <tr>
+                string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
+                <tr class="@highlight">
                     <td>@group.Article.Name</td>
                     <td>@group.TotalCount</td>
                     <td>@group.TotalCost</td>
