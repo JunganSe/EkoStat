@@ -1,51 +1,46 @@
 ﻿@model EkoStatRp.Models.EntriesFilterViewModel
 
-<form method="post">
-    <div>
-        <div>
-            <label asp-for="@Model.Filter.TimestampFrom"></label>
-            <input asp-for="@Model.Filter.TimestampFrom" />
-            <span asp-validation-for="@Model.Filter.TimestampFrom" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.TimestampUntil"></label>
-            <input asp-for="@Model.Filter.TimestampUntil" />
-            <span asp-validation-for="@Model.Filter.TimestampUntil" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.ArticleIds"></label>
-            <select multiple name="@Constants.Html.FilterFormArticleIds">
-                @foreach (var article in Model.Articles)
-                {
-                    bool preselect = Model.Filter.ArticleIds?.Contains(article.Id) ?? false;
-                    <option selected="@preselect" value="@article.Id">@article.Name</option>
-                }
-            </select>
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.TagIds"></label>
-            <select multiple name="@Constants.Html.FilterFormTagIds">
-                @foreach (var tag in Model.Tags)
-                {
-                    bool preselect = Model.Filter.TagIds?.Contains(tag.Id) ?? false;
-                    <option selected="@preselect" value="@tag.Id">@tag.Name</option>
-                }
-            </select>
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.MustHaveAllTags"></label>
-            <input asp-for="@Model.Filter.MustHaveAllTags" />
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.CostPerArticleMin"></label>
-            <input asp-for="@Model.Filter.CostPerArticleMin" />
-            <span asp-validation-for="@Model.Filter.CostPerArticleMin" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="@Model.Filter.CostPerArticleMax"></label>
-            <input asp-for="@Model.Filter.CostPerArticleMax" />
-            <span asp-validation-for="@Model.Filter.CostPerArticleMax" class="text-danger"></span>
-        </div>
-    </div>
-    <button type="submit">Filter</button>
-</form>
+<div>
+    <label asp-for="@Model.Filter.TimestampFrom"></label>
+    <input asp-for="@Model.Filter.TimestampFrom" />
+    <span asp-validation-for="@Model.Filter.TimestampFrom" class="text-danger"></span>
+</div>
+<div>
+    <label asp-for="@Model.Filter.TimestampUntil"></label>
+    <input asp-for="@Model.Filter.TimestampUntil" />
+    <span asp-validation-for="@Model.Filter.TimestampUntil" class="text-danger"></span>
+</div>
+<div>
+    <label asp-for="@Model.Filter.ArticleIds"></label>
+    <select multiple name="@Constants.Html.FilterFormArticleIds">
+        @foreach (var article in Model.Articles)
+        {
+            bool preselect = Model.Filter.ArticleIds?.Contains(article.Id) ?? false;
+            <option selected="@preselect" value="@article.Id">@article.Name</option>
+        }
+    </select>
+</div>
+<div>
+    <label asp-for="@Model.Filter.TagIds"></label>
+    <select multiple name="@Constants.Html.FilterFormTagIds">
+        @foreach (var tag in Model.Tags)
+        {
+            bool preselect = Model.Filter.TagIds?.Contains(tag.Id) ?? false;
+            <option selected="@preselect" value="@tag.Id">@tag.Name</option>
+        }
+    </select>
+</div>
+<div>
+    <label asp-for="@Model.Filter.MustHaveAllTags"></label>
+    <input asp-for="@Model.Filter.MustHaveAllTags" />
+</div>
+<div>
+    <label asp-for="@Model.Filter.CostPerArticleMin"></label>
+    <input asp-for="@Model.Filter.CostPerArticleMin" />
+    <span asp-validation-for="@Model.Filter.CostPerArticleMin" class="text-danger"></span>
+</div>
+<div>
+    <label asp-for="@Model.Filter.CostPerArticleMax"></label>
+    <input asp-for="@Model.Filter.CostPerArticleMax" />
+    <span asp-validation-for="@Model.Filter.CostPerArticleMax" class="text-danger"></span>
+</div>

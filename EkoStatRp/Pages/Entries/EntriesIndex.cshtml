@@ -15,7 +15,10 @@
 <hr />
 
 <h2>Filter</h2>
-<partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
+<form method="post">
+    <partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
+    <button type="submit">Filter</button>
+</form>
 <hr />
 
 <h2>Entries</h2>
