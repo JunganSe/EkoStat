@@ -1,6 +1,7 @@
 ﻿@page "/Reports"
 @using EkoStatLibrary.Enums;
 @model EkoStatRp.Pages.Reports.ReportsIndex
+@inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Reports";
     var earliestTimestamp = new DateTime();
@@ -67,5 +68,26 @@
 
     <hr />
     <h2>Articles</h2>
-    <partial name="@Constants.PartialViews.EntriesGroupedByArticle" model="@Model.EntryGroups" />
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Count</th>
+                <th>Total cost</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model.EntryGroups)
+            {
+                var tags = _dtoHelper.GetTagNamesAsString(group.Article.Tags);
+                <tr>
+                    <td>@group.Article.Name</td>
+                    <td>@group.TotalCount</td>
+                    <td>@group.TotalCost</td>
+                    <td>@tags</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
