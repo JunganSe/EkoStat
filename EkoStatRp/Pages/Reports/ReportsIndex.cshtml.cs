@@ -2,6 +2,7 @@ using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
 using EkoStatLibrary.Enums;
 using EkoStatLibrary.Extensions;
+using EkoStatLibrary.Extensions.DtoExtensions;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
@@ -62,7 +63,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
 
             var userId = GetUserId();
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
-            EntryGroups = _dtoHelper.GroupEntriesByArticle(entries);
+            EntryGroups = entries.GroupByArticle();
 
             ViewData["CostHighlightThreshold"] = GetCostHighlightThreshold();
 

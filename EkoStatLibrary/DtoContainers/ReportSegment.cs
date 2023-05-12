@@ -1,5 +1,5 @@
 ﻿using EkoStatLibrary.Dtos;
-using EkoStatLibrary.Helpers;
+using EkoStatLibrary.Extensions.DtoExtensions;
 using EkoStatLibrary.Models;
 
 namespace EkoStatLibrary.DtoContainers;
@@ -16,6 +16,6 @@ public class ReportSegment
             .Where(e => e.Timestamp >= TimePeriod.Start)
             .Where(e => e.Timestamp < TimePeriod.End)
             .ToList();
-        EntryGroupsByArticle = new DtoHelper().GroupEntriesByArticle(relevantEntries);
+        EntryGroupsByArticle = relevantEntries.GroupByArticle();
     }
 }
