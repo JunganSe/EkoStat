@@ -6,8 +6,8 @@ public class TimePeriod
 {
     private readonly Period _nodaPeriod;
 
-    public DateTime Start { get; set; }
-    public DateTime End { get; set; }
+    public DateTime Start { get; init; }
+    public DateTime End { get; init; }
 
     public TimeSpan Duration => End - Start;
     public int Years => _nodaPeriod.Years;
