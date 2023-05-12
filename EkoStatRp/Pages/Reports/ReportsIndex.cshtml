@@ -1,8 +1,8 @@
 ﻿@page "/Reports"
 @model EkoStatRp.Pages.Reports.ReportsIndex
-@using EkoStatLibrary.Enums;
-@using EkoStatLibrary.Extensions.DtoExtensions;
-@using EkoStatLibrary.Models;
+@using EkoStatLibrary.Enums
+@using EkoStatLibrary.Extensions.DtoExtensions
+@using EkoStatLibrary.Models
 @{
     ViewData["Title"] = "Reports";
     var earliestTimestamp = Model.EntryGroups.GetEarliestTimestamp() ?? new DateTime();
