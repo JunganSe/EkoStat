@@ -75,13 +75,12 @@
         <tbody>
             @foreach (var group in Model.EntryGroups)
             {
-                var tags = group.Article.Tags.GetNamesAsString();
                 string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
                 <tr class="@highlight">
                     <td>@group.Article.Name</td>
                     <td>@group.TotalCount</td>
                     <td>@group.TotalCost</td>
-                    <td>@tags</td>
+                    <td>@group.Article.Tags.GetNamesAsString()</td>
                 </tr>
             }
         </tbody>

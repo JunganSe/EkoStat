@@ -38,10 +38,9 @@
     <tbody>
         @foreach (var article in Model.Articles)
         {
-            var tags = article.Tags.GetNamesAsString();
             <tr>
                 <td>@article.Name</td>
-                <td>@tags</td>
+                <td>@article.Tags.GetNamesAsString()</td>
                 <td>
                     <partial name="@Constants.PartialViews.EditButtons" model="@article.Id">
                 </td>

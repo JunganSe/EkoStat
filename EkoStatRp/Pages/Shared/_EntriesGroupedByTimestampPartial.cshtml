@@ -27,14 +27,13 @@
             <tr><th colspan="100">@group.Timestamp</th></tr>
             @foreach (var entry in group.Entries)
             {
-                var tags = entry.Article.Tags.GetNamesAsString();
                 <tr>
                     <td>@entry.Article.Name</td>
                     <td>@entry.Count</td>
                     <td>@entry.Size</td>
                     <td>@entry.Unit.Name</td>
                     <td>@entry.CostPerArticle</td>
-                    <td>@tags</td>
+                    <td>@entry.Article.Tags.GetNamesAsString()</td>
                     <td>@entry.Comment</td>
                     @if (showEditButtons)
                     {
