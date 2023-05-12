@@ -1,5 +1,6 @@
 using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
+using EkoStatLibrary.Enums;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
@@ -62,6 +63,8 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
             EntryGroups = _dtoHelper.GroupEntriesByArticle(entries);
 
+            ViewData["CostHighlightThreshold"] = GetCostHighlightThreshold();
+
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
             FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);
             return Page();
@@ -72,5 +75,23 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             _logger.LogError(ex, "Fail: Generate report.");
             return RedirectToPage();
         }
+    }
+
+    private decimal GetCostHighlightThreshold()
+    {
+        if (Report.CostLimit == null)
+            return decimal.MaxValue;
+
+        if (Report.CostLimitType == LimitType.Fixed)
+            return (decimal)Report.CostLimit;
+        else if (Report.CostLimitType == LimitType.Percentile)
+        {
+            decimal lowestCost = EntryGroups.Select(eg => eg.TotalCost).Min();
+            decimal highestCost = EntryGroups.Select(eg => eg.TotalCost).Max();
+            decimal costSpan = highestCost - lowestCost;
+            return lowestCost + costSpan * (decimal)Report.CostLimit / 100;
+        }
+
+        return decimal.MaxValue;
     }
 }

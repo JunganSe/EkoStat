@@ -1,46 +1,23 @@
 ﻿@page "/Reports"
-@using EkoStatLibrary.Enums;
 @model EkoStatRp.Pages.Reports.ReportsIndex
+@using EkoStatLibrary.Enums;
+@using EkoStatLibrary.Extensions.DtoExtensions;
+@using EkoStatRp.Models;
 @inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Reports";
-    var earliestTimestamp = new DateTime();
-    var latestTimestamp = new DateTime();
-    double days = 0;
-    double weeks = 0;
-    double months = 0;
-    double years = 0;
-    int entriesCount = Model.EntryGroups.Sum(eg => eg.Entries.Count);
-    if (entriesCount > 0)
-    {
-        earliestTimestamp = Model.EntryGroups.SelectMany(eg => eg.Entries).Select(e => e.Timestamp).Min();
-        latestTimestamp = Model.EntryGroups.SelectMany(eg => eg.Entries).Select(e => e.Timestamp).Max();
-        var timeSpan = latestTimestamp - earliestTimestamp;
-        days = timeSpan.TotalDays;
-        weeks = Math.Round(days / 7, 2);
-        months = Math.Round(days / 30.44, 2);
-        years = Math.Round(days / 365.25, 2);
-    }
-    var totalCost = Model.EntryGroups.Sum(eg => eg.TotalCost);
-
-    decimal highligtCostThreshold = decimal.MaxValue;
-    if (Model.Report.CostLimit != null)
-    {
-        if (Model.Report.CostLimitType == LimitType.Fixed)
-            highligtCostThreshold = (decimal)Model.Report.CostLimit;
-        else if (Model.Report.CostLimitType == LimitType.Percentile)
-        {
-            decimal lowestCost = Model.EntryGroups.Select(eg => eg.TotalCost).Min();
-            decimal highestCost = Model.EntryGroups.Select(eg => eg.TotalCost).Max();
-            decimal costSpan = highestCost - lowestCost;
-            highligtCostThreshold = lowestCost + costSpan * (decimal)Model.Report.CostLimit / 100;
-        }
-    }
+    var earliestTimestamp = Model.EntryGroups.GetEarliestTimestamp() ?? new DateTime();
+    var latestTimestamp = Model.EntryGroups.GetLatestTimestamp() ?? new DateTime();
+    var timePeriod = new TimePeriod(earliestTimestamp, latestTimestamp);
+    int entriesCount = Model.EntryGroups.GetEntriesCount();
+    var totalCost = Model.EntryGroups.GetTotalCost();
+    var highligtCostThreshold = (decimal)(ViewData["CostHighlightThreshold"] ?? decimal.MaxValue);
 }
 
 <h1>Reports</h1>
 <a asp-page="@Constants.RazorPages.ReportsSaved">Saved reports</a>
 
+<!-- Formulär -->
 <form method="post">
     <hr />
     <h2>Filter</h2>
@@ -50,7 +27,7 @@
     <h2>Report settings</h2>
     <div class="flexRow">
         <div>
-            <label asp-for="@Model.Report.CostLimit">Highlight cost above</label>
+            <label asp-for="@Model.Report.CostLimit">Highlight cost at or above</label>
             <input asp-for="@Model.Report.CostLimit" />
             <span asp-validation-for="@Model.Report.CostLimit" class="text-danger"></span>
         </div>
@@ -69,6 +46,7 @@
     <button type="submit">Generate report</button>
 </form>
 
+<!-- Visning -->
 @if (entriesCount > 0)
 {
     <hr />
@@ -76,9 +54,13 @@
     <p>
         Showing @Model.EntryGroups.Count articles from @entriesCount entries <br />
         from @earliestTimestamp until @latestTimestamp <br />
-        which is @days days, or @weeks weeks, or about @months months, or about @years years <br />
+        which is @timePeriod.Days days, or @timePeriod.Weeks weeks, or about @timePeriod.Months months, or about @timePeriod.Years years <br />
         with a total cost of @totalCost
     </p>
+    if (Model.Report.CostLimit != null)
+    {
+        <p>Highlighting articles with a total cost of @highligtCostThreshold or more.</p>
+    }
 
     <hr />
     <h2>Articles</h2>
