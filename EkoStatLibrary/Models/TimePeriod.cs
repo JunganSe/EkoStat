@@ -1,6 +1,6 @@
 ﻿using NodaTime;
 
-namespace EkoStatRp.Models;
+namespace EkoStatLibrary.Models;
 
 public class TimePeriod
 {
