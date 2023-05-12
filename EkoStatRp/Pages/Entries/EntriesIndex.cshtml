@@ -1,13 +1,12 @@
 ﻿@page "/Entries"
 @model EkoStatRp.Pages.Entries.EntriesIndex
+@using EkoStatLibrary.Extensions.DtoExtensions;
 @{
     ViewData["Title"] = "Entries";
     ViewData["ShowEditButtons"] = true;
-    int entriesCount = Model.EntryGroups.Sum(eg => eg.Entries.Count);
-    DateTime? earliestTimestamp = (entriesCount > 0)
-        ? Model.EntryGroups.Select(eg => eg.Timestamp).Min() : null;
-    DateTime? latestTimestamp = (entriesCount > 0)
-        ? Model.EntryGroups.Select(eg => eg.Timestamp).Max() : null;
+    int entriesCount = Model.EntryGroups.GetEntriesCount();
+    var earliestTimestamp = Model.EntryGroups.GetEarliestTimestamp();
+    var latestTimestamp = Model.EntryGroups.GetLatestTimestamp();
 }
 
 <h1>Entries</h1>
