@@ -11,12 +11,6 @@ public class DtoHelper
         return string.Join(", ", names);
     }
 
-    public List<int> ParseStringsToInts(List<string> strings)
-    {
-        // Kastar FormatException om en sträng inte kan parseas.
-        return strings.Select(int.Parse).ToList();
-    }
-
     public List<EntryGroupByTimestamp> GroupEntriesByTimestamp(List<EntryResponseDto> entries)
     {
         var distinctTimestamps = entries

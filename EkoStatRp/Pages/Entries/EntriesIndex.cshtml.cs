@@ -1,5 +1,6 @@
 using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
+using EkoStatLibrary.Extensions;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
@@ -54,10 +55,10 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
         try
         {
             var articleIds = Request.Form[Constants.Html.FilterFormArticleIds].ToList();
-            FilterViewModel.Filter.ArticleIds = _dtoHelper.ParseStringsToInts(articleIds);
+            FilterViewModel.Filter.ArticleIds = articleIds.ToInts();
 
             var tagIds = Request.Form[Constants.Html.FilterFormTagIds].ToList();
-            FilterViewModel.Filter.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
+            FilterViewModel.Filter.TagIds = tagIds.ToInts();
 
             var userId = GetUserId();
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);

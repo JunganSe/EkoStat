@@ -1,4 +1,5 @@
 using EkoStatLibrary.Dtos;
+using EkoStatLibrary.Extensions;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;
@@ -42,7 +43,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
         try
         {
             var tagIds = Request.Form["tagIds"].ToList();
-            NewArticle.TagIds = _dtoHelper.ParseStringsToInts(tagIds);
+            NewArticle.TagIds = tagIds.ToInts();
             NewArticle.UserId = GetUserId();
             var response = await _apiHandler.CreateArticleAsync(NewArticle);
             response.EnsureSuccessStatusCode();
