@@ -24,7 +24,6 @@ public class Program
         });
         builder.Services.AddHttpContextAccessor(); // För att kunna injecta IHttpContextAccessor, som används för att nå HttpContext.Session-metoder.
 
-        builder.Services.AddScoped<DtoHelper>();
         builder.Services.AddScoped<HttpHelper>();
         builder.Services.AddScoped<UserHelper>();
         string apiUrl = builder.Configuration.GetValue<string>(Constants.AppsettingsKeys.ApiUrl);

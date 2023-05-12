@@ -6,8 +6,8 @@ namespace EkoStatRp.Pages;
 
 public class Home : PageModelBase<Home>
 {
-    public Home(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<Home> logger)
-        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
+    public Home(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, ILogger<Home> logger)
+        : base(httpHelper, userHelper, apiHandler, logger)
     {
     }
 

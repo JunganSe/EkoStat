@@ -6,8 +6,8 @@ namespace EkoStatRp.Pages.Reports;
 
 public class ReportsSaved : PageModelBase<ReportsSaved>
 {
-    public ReportsSaved(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ReportsSaved> logger)
-        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
+    public ReportsSaved(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, ILogger<ReportsSaved> logger)
+        : base(httpHelper, userHelper, apiHandler, logger)
     {
     }
 

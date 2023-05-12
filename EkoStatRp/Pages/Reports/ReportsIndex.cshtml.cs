@@ -21,8 +21,8 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     public ReportSettingsViewModel Report { get; set; } = new();
     public List<EntryGroupByArticle> EntryGroups { get; set; } = new();
 
-    public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, DtoHelper dtoHelper, ILogger<ReportsIndex> logger)
-        : base(httpHelper, userHelper, apiHandler, dtoHelper, logger)
+    public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, ILogger<ReportsIndex> logger)
+        : base(httpHelper, userHelper, apiHandler, logger)
     {
         _articlesKey = "Articles";
         _tagsKey = "Tags";
