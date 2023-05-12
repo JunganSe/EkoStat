@@ -12,10 +12,9 @@ public class ReportSegment
     public ReportSegment(TimePeriod timePeriod, List<EntryResponseDto> entries)
     {
         TimePeriod = timePeriod;
-        var relevantEntries = entries
+        EntryGroupsByArticle = entries
             .Where(e => e.Timestamp >= TimePeriod.Start)
             .Where(e => e.Timestamp < TimePeriod.End)
-            .ToList();
-        EntryGroupsByArticle = relevantEntries.GroupByArticle();
+            .GroupByArticle();
     }
 }
