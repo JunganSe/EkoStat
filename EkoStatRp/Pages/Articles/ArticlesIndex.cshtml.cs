@@ -1,5 +1,5 @@
 using EkoStatLibrary.Dtos;
-using EkoStatLibrary.Extensions;
+using EkoStatLibrary.Extensions.Common;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
 using EkoStatRp.Helpers;

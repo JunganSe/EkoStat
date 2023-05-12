@@ -1,4 +1,4 @@
-﻿namespace EkoStatLibrary.Extensions;
+﻿namespace EkoStatLibrary.Extensions.Common;
 
 public static class CommonExtensions
 {

@@ -1,7 +1,7 @@
 using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
 using EkoStatLibrary.Enums;
-using EkoStatLibrary.Extensions;
+using EkoStatLibrary.Extensions.Common;
 using EkoStatLibrary.Extensions.DtoExtensions;
 using EkoStatLibrary.Helpers;
 using EkoStatRp.Common;
