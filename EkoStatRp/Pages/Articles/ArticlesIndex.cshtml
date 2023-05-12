@@ -1,6 +1,6 @@
 ﻿@page "/Articles"
 @model EkoStatRp.Pages.Articles.ArticlesIndex
-@inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
+@using EkoStatLibrary.Extensions.DtoExtensions;
 @{
     ViewData["Title"] = "Articles";
 }
@@ -38,7 +38,7 @@
     <tbody>
         @foreach (var article in Model.Articles)
         {
-            var tags = _dtoHelper.GetTagNamesAsString(article.Tags);
+            var tags = article.Tags.GetNamesAsString();
             <tr>
                 <td>@article.Name</td>
                 <td>@tags</td>

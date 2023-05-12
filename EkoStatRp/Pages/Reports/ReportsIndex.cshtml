@@ -3,7 +3,6 @@
 @using EkoStatLibrary.Enums;
 @using EkoStatLibrary.Extensions.DtoExtensions;
 @using EkoStatLibrary.Models;
-@inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
 @{
     ViewData["Title"] = "Reports";
     var earliestTimestamp = Model.EntryGroups.GetEarliestTimestamp() ?? new DateTime();
@@ -76,7 +75,7 @@
         <tbody>
             @foreach (var group in Model.EntryGroups)
             {
-                var tags = _dtoHelper.GetTagNamesAsString(group.Article.Tags);
+                var tags = group.Article.Tags.GetNamesAsString();
                 string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
                 <tr class="@highlight">
                     <td>@group.Article.Name</td>

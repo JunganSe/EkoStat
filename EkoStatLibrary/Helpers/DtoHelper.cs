@@ -5,12 +5,6 @@ namespace EkoStatLibrary.Helpers;
 
 public class DtoHelper
 {
-    public string GetTagNamesAsString(List<TagResponseDto> tags)
-    {
-        var names = tags.Select(t => t.Name);
-        return string.Join(", ", names);
-    }
-
     public List<EntryGroupByTimestamp> GroupEntriesByTimestamp(List<EntryResponseDto> entries)
     {
         var distinctTimestamps = entries

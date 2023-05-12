@@ -1,6 +1,6 @@
 ﻿@using EkoStatLibrary.DtoContainers;
+@using EkoStatLibrary.Extensions.DtoExtensions
 @model List<EntryGroupByTimestamp>
-@inject EkoStatLibrary.Helpers.DtoHelper _dtoHelper
 @{
     bool showEditButtons = (bool)(ViewData["ShowEditButtons"] ?? false);
 }
@@ -27,7 +27,7 @@
             <tr><th colspan="100">@group.Timestamp</th></tr>
             @foreach (var entry in group.Entries)
             {
-                var tags = _dtoHelper.GetTagNamesAsString(entry.Article.Tags);
+                var tags = entry.Article.Tags.GetNamesAsString();
                 <tr>
                     <td>@entry.Article.Name</td>
                     <td>@entry.Count</td>
