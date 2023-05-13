@@ -102,9 +102,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             // TODO: Dela på månad.
         }
         else if (Report.SegmentBy == SegmentSize.Year)
-        {
-            // TODO: Dela på år.
-        }
+            timePeriods = _timeHelper.GetTimePeriodsByYear(firstTimestamp, lastTimestamp);
 
         return timePeriods;
     }

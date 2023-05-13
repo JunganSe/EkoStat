@@ -33,4 +33,27 @@ public class TimeHelper
             return date;
         }
     }
+
+    public List<TimePeriod> GetTimePeriodsByYear(DateTime start, DateTime end)
+    {
+        var timePeriods = new List<TimePeriod>();
+        var startDate = DateOnly.FromDateTime(start);
+        var endDate = DateOnly.FromDateTime(end);
+
+        var yearStartDate = new DateOnly(startDate.Year + 1, 1, 1);
+
+        if (startDate < yearStartDate)
+            timePeriods.Add(new TimePeriod(startDate, yearStartDate));
+
+        while (yearStartDate.AddYears(1) <= endDate)
+        {
+            timePeriods.Add(new TimePeriod(yearStartDate, yearStartDate.AddYears(1)));
+            yearStartDate = yearStartDate.AddYears(1);
+        }
+
+        if (yearStartDate < endDate)
+            timePeriods.Add(new TimePeriod(yearStartDate, endDate));
+
+        return timePeriods;
+    }
 }

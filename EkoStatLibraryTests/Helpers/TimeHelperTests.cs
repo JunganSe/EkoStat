@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using EkoStatLibrary.Helpers;
+using EkoStatLibrary.Models;
+using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EkoStatLibrary.Helpers.Tests;
 
@@ -32,6 +35,24 @@ public class TimeHelperTests
         var startDate = DateTime.Parse(start);
         var endDate = DateTime.Parse(end);
         var timePeriods = timeHelper.GetTimePeriodsByWeek(startDate, endDate, firstDayOfWeek);
+        Assert.AreEqual(expectedPeriodsCount, timePeriods.Count);
+    }
+
+    [TestMethod()]
+    [DataRow("2020-01-01", "2020-05-07", 1)]
+    [DataRow("2020-01-01", "2021-01-01", 1)]
+    [DataRow("2020-01-01", "2021-01-02", 2)]
+    [DataRow("2020-01-01", "2021-12-31", 2)]
+    [DataRow("2020-01-01", "2022-01-01", 2)]
+    [DataRow("2020-01-01", "2022-01-02", 3)]
+    [DataRow("2019-12-31", "2022-01-01", 3)]
+    [DataRow("2019-12-31", "2022-01-02", 4)]
+    public void GetTimePeriodsByYearTest(string start, string end, int expectedPeriodsCount)
+    {
+        var timeHelper = new TimeHelper();
+        var startDate = DateTime.Parse(start);
+        var endDate = DateTime.Parse(end);
+        var timePeriods = timeHelper.GetTimePeriodsByYear(startDate, endDate);
         Assert.AreEqual(expectedPeriodsCount, timePeriods.Count);
     }
 }
