@@ -10,4 +10,7 @@ public class ReportSettingsViewModel
 
     [Display(Name = "Type")]
     public LimitType CostLimitType { get; set; }
+
+    [Display(Name = "Segment by")]
+    public SegmentSize SegmentBy { get; set; }
 }

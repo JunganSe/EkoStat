@@ -24,6 +24,8 @@
 
     <hr />
     <h2>Report settings</h2>
+
+    <!-- Markera rader med kostnad över gränsvärde -->
     <div class="flexRow">
         <div>
             <label asp-for="@Model.Report.CostLimit">Highlight cost at or above</label>
@@ -40,6 +42,18 @@
             </select>
             <span asp-validation-for="@Model.Report.CostLimitType" class="text-danger"></span>
         </div>
+    </div>
+
+    <!-- Segmentering -->
+    <div>
+        <label asp-for="@Model.Report.SegmentBy"></label>
+        <select asp-for="@Model.Report.SegmentBy">
+            @foreach (var segmentSize in Enum.GetValues(typeof(SegmentSize)))
+            {
+                <option value="@segmentSize">@segmentSize</option>
+            }
+        </select>
+        <span asp-validation-for="@Model.Report.SegmentBy" class="text-danger"></span>
     </div>
 
     <button type="submit">Generate report</button>
