@@ -23,4 +23,13 @@ public class TimePeriod
         _nodaPeriod = Period.Between(nodaStart, nodaEnd);
     }
 
+    public TimePeriod(DateOnly start, DateOnly end)
+    {
+        Start = new DateTime(start.Year, start.Month, start.Day);
+        End = new DateTime(end.Year, end.Month, end.Day);
+        var nodaStart = LocalDateTime.FromDateTime(Start);
+        var nodaEnd = LocalDateTime.FromDateTime(End);
+        _nodaPeriod = Period.Between(nodaStart, nodaEnd);
+    }
+
 }

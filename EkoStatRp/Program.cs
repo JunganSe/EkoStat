@@ -26,6 +26,7 @@ public class Program
 
         builder.Services.AddScoped<HttpHelper>();
         builder.Services.AddScoped<UserHelper>();
+        builder.Services.AddScoped<TimeHelper>();
         string apiUrl = builder.Configuration.GetValue<string>(Constants.AppsettingsKeys.ApiUrl);
         builder.Services.AddScoped(sp => new ApiHandler(apiUrl));
 
