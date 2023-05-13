@@ -18,8 +18,8 @@ public class TimePeriod
     {
         Start = start;
         End = end;
-        var nodaStart = new LocalDateTime(start.Year, start.Month, start.Day, start.Hour, start.Minute, start.Second);
-        var nodaEnd = new LocalDateTime(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second);
+        var nodaStart = LocalDateTime.FromDateTime(start);
+        var nodaEnd = LocalDateTime.FromDateTime(end);
         _nodaPeriod = Period.Between(nodaStart, nodaEnd);
     }
 
