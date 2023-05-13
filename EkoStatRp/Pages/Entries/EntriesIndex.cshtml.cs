@@ -55,11 +55,8 @@ public class EntriesIndex : PageModelBase<EntriesIndex>
     {
         try
         {
-            var articleIds = Request.Form[Constants.Html.FilterFormArticleIds].ToList();
-            FilterViewModel.Filter.ArticleIds = articleIds.ToInts();
-
-            var tagIds = Request.Form[Constants.Html.FilterFormTagIds].ToList();
-            FilterViewModel.Filter.TagIds = tagIds.ToInts();
+            FilterViewModel.Filter.ArticleIds = Request.Form[Constants.Html.FilterFormArticleIds].ToInts();
+            FilterViewModel.Filter.TagIds = Request.Form[Constants.Html.FilterFormTagIds].ToInts();
 
             var userId = GetUserId();
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);

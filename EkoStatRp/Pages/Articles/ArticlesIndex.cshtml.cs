@@ -42,8 +42,7 @@ public class ArticlesIndex : PageModelBase<ArticlesIndex>
     {
         try
         {
-            var tagIds = Request.Form["tagIds"].ToList();
-            NewArticle.TagIds = tagIds.ToInts();
+            NewArticle.TagIds = Request.Form["tagIds"].ToInts();
             NewArticle.UserId = GetUserId();
             var response = await _apiHandler.CreateArticleAsync(NewArticle);
             response.EnsureSuccessStatusCode();
