@@ -39,6 +39,29 @@ public class TimeHelperTests
     }
 
     [TestMethod()]
+    [DataRow("2020-01-01", "2020-01-07", 1)]
+    [DataRow("2020-01-01", "2020-01-31", 1)]
+    [DataRow("2020-01-01", "2020-02-01", 1)]
+    [DataRow("2020-01-01", "2020-02-02", 2)]
+    [DataRow("2020-01-01", "2020-02-29", 2)]
+    [DataRow("2020-01-01", "2020-03-01", 2)]
+    [DataRow("2020-01-01", "2020-03-02", 3)]
+    [DataRow("2020-01-22", "2020-02-01", 1)]
+    [DataRow("2020-01-22", "2020-02-05", 2)]
+    [DataRow("2020-01-22", "2020-03-01", 2)]
+    [DataRow("2020-01-22", "2020-03-31", 3)]
+    [DataRow("2020-01-22", "2020-04-01", 3)]
+    [DataRow("2020-01-22", "2020-04-02", 4)]
+    public void GetTimePeriodsByMonthTest(string start, string end, int expectedPeriodsCount)
+    {
+        var timeHelper = new TimeHelper();
+        var startDate = DateTime.Parse(start);
+        var endDate = DateTime.Parse(end);
+        var timePeriods = timeHelper.GetTimePeriodsByMonth(startDate, endDate);
+        Assert.AreEqual(expectedPeriodsCount, timePeriods.Count);
+    }
+
+    [TestMethod()]
     [DataRow("2020-01-01", "2020-05-07", 1)]
     [DataRow("2020-01-01", "2021-01-01", 1)]
     [DataRow("2020-01-01", "2021-01-02", 2)]

@@ -34,6 +34,36 @@ public class TimeHelper
         }
     }
 
+    public List<TimePeriod> GetTimePeriodsByMonth(DateTime start, DateTime end)
+    {
+        var timePeriods = new List<TimePeriod>();
+        var startDate = DateOnly.FromDateTime(start);
+        var endDate = DateOnly.FromDateTime(end);
+
+        var monthStartDate = GetMonthStartOnOrAfterDate(startDate);
+
+        if (startDate < monthStartDate)
+            timePeriods.Add(new TimePeriod(startDate, monthStartDate));
+
+        while (monthStartDate.AddMonths(1) <= endDate)
+        {
+            timePeriods.Add(new TimePeriod(monthStartDate, monthStartDate.AddMonths(1)));
+            monthStartDate = monthStartDate.AddMonths(1);
+        }
+
+        if (monthStartDate < endDate)
+            timePeriods.Add(new TimePeriod(monthStartDate, endDate));
+
+        return timePeriods;
+
+        DateOnly GetMonthStartOnOrAfterDate(DateOnly date)
+        {
+            if (date.Day > 1)
+                date = date.AddMonths(1);
+            return date.AddDays(1 - date.Day);
+        }
+    }
+
     public List<TimePeriod> GetTimePeriodsByYear(DateTime start, DateTime end)
     {
         var timePeriods = new List<TimePeriod>();

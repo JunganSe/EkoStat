@@ -98,9 +98,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
         else if (Report.SegmentBy == SegmentSize.Week)
             timePeriods = _timeHelper.GetTimePeriodsByWeek(firstTimestamp, lastTimestamp);
         else if (Report.SegmentBy == SegmentSize.Month)
-        {
-            // TODO: Dela på månad.
-        }
+            timePeriods = _timeHelper.GetTimePeriodsByMonth(firstTimestamp, lastTimestamp);
         else if (Report.SegmentBy == SegmentSize.Year)
             timePeriods = _timeHelper.GetTimePeriodsByYear(firstTimestamp, lastTimestamp);
 
