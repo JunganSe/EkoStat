@@ -5,20 +5,20 @@ namespace EkoStatLibrary.Extensions.DtoExtensions;
 
 public static class EntryGroupExtensions
 {
-    public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryGroupByTimestamp> entryGroups) 
+    public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryGroupByTimestamp> entryGroups)
         => (entryGroups.Any())
             ? entryGroups.Select(e => e.Timestamp).Min()
             : null;
-    public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryGroupByArticle> entryGroups) 
+    public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryGroupByArticle> entryGroups)
         => (entryGroups.Any())
             ? entryGroups.SelectMany(eg => eg.Entries).Select(e => e.Timestamp).Min()
             : null;
 
-    public static DateTime? GetLatestTimestamp(this IEnumerable<EntryGroupByTimestamp> entryGroups) 
+    public static DateTime? GetLatestTimestamp(this IEnumerable<EntryGroupByTimestamp> entryGroups)
         => (entryGroups.Any())
             ? entryGroups.Select(e => e.Timestamp).Max()
             : null;
-    public static DateTime? GetLatestTimestamp(this IEnumerable<EntryGroupByArticle> entryGroups) 
+    public static DateTime? GetLatestTimestamp(this IEnumerable<EntryGroupByArticle> entryGroups)
         => (entryGroups.Any())
             ? entryGroups.SelectMany(eg => eg.Entries).Select(e => e.Timestamp).Max()
             : null;
@@ -75,4 +75,14 @@ public static class EntryExtensions
 
         return groups.OrderBy(e => e.Article.Name).ToList();
     }
+
+    public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryResponseDto> entries)
+        => (entries.Any())
+            ? entries.Select(e => e.Timestamp).Min()
+            : null;
+
+    public static DateTime? GetLatestTimestamp(this IEnumerable<EntryResponseDto> entries)
+        => (entries.Any())
+            ? entries.Select(e => e.Timestamp).Max()
+            : null;
 }
