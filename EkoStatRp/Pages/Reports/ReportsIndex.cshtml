@@ -77,26 +77,30 @@
 
     <hr />
     <h2>Articles</h2>
-    <table class="table-bordered">
-        <thead>
-            <tr>
-                <th>Article</th>
-                <th>Count</th>
-                <th>Total cost</th>
-                <th>Tags</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var group in Model.EntryGroups)
-            {
-                string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
-                <tr class="@highlight">
-                    <td>@group.Article.Name</td>
-                    <td>@group.TotalCount</td>
-                    <td>@group.TotalCost</td>
-                    <td>@group.Article.Tags.GetNamesAsString()</td>
+    @foreach (var segment in Model.Segments)
+    {
+        <h3>@segment.TimePeriod.Start - @segment.TimePeriod.End (@segment.TimePeriod.TotalDays days)</h3>
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Count</th>
+                    <th>Total cost</th>
+                    <th>Tags</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var group in segment.EntryGroupsByArticle)
+                {
+                    string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
+                    <tr class="@highlight">
+                        <td>@group.Article.Name</td>
+                        <td>@group.TotalCount</td>
+                        <td>@group.TotalCost</td>
+                        <td>@group.Article.Tags.GetNamesAsString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
