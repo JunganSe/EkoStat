@@ -7,18 +7,14 @@ public class TimeHelper
 {
     public List<TimePeriod> GetChosenTimePeriods(DateTime start, DateTime end, SegmentSize segmentSize)
     {
-        var timePeriods = new List<TimePeriod>();
-
-        if (segmentSize == SegmentSize.None)
-            timePeriods.Add(new TimePeriod(start, end));
-        else if (segmentSize == SegmentSize.Week)
-            timePeriods = GetTimePeriodsByWeek(start, end);
-        else if (segmentSize == SegmentSize.Month)
-            timePeriods = GetTimePeriodsByMonth(start, end);
-        else if (segmentSize == SegmentSize.Year)
-            timePeriods = GetTimePeriodsByYear(start, end);
-
-        return timePeriods;
+        return segmentSize switch
+        {
+            SegmentSize.None => new List<TimePeriod> { new TimePeriod(start, end) },
+            SegmentSize.Week => GetTimePeriodsByWeek(start, end),
+            SegmentSize.Month => GetTimePeriodsByMonth(start, end),
+            SegmentSize.Year => GetTimePeriodsByYear(start, end),
+            _ => throw new ArgumentException("You're not supposed to be in here!")
+        };
     }
 
     public List<TimePeriod> GetTimePeriodsByWeek(DateTime start, DateTime end, DayOfWeek firstDayOfWeek = DayOfWeek.Monday)
