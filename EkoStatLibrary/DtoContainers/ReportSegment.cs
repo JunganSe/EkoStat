@@ -39,6 +39,9 @@ public class ReportSegment
 
         decimal GetArticleCostPercentileValue(decimal percentile)
         {
+            if (!EntryGroups.Any())
+                return decimal.MaxValue;
+
             decimal lowestCost = EntryGroups.Select(eg => eg.TotalCost).Min();
             decimal highestCost = EntryGroups.Select(eg => eg.TotalCost).Max();
             decimal costSpan = highestCost - lowestCost;
