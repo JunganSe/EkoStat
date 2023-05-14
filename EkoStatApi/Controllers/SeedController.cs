@@ -141,7 +141,7 @@ public class SeedController : ControllerBase
 
         List<DateTime> GenerateTimestamps()
         {
-            var min = new DateTime(2010, 01, 01, 00, 00, 00);
+            var min = new DateTime(2018, 01, 01, 00, 00, 00);
             var max = new DateTime(2022, 12, 31, 23, 59, 59);
             int loopCount = Math.Max(1, _seedEntriesCount / 5);
             var timestamps = new List<DateTime>();
