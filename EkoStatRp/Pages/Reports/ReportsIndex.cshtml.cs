@@ -68,7 +68,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
 
             var timeStamps = entries.Select(e => e.Timestamp).ToList();
             var timePeriods = GetTimePeriods(timeStamps);
-            Segments = CreateSegments(timePeriods, entries);
+            Segments = GetSegments(timePeriods, entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
             FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);
@@ -103,7 +103,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
         return timePeriods;
     }
 
-    private List<ReportSegment> CreateSegments(List<TimePeriod> timePeriods, List<EntryResponseDto> entries)
+    private List<ReportSegment> GetSegments(List<TimePeriod> timePeriods, List<EntryResponseDto> entries)
     {
         var segments = new List<ReportSegment>();
         foreach (var timePeriod in timePeriods)
