@@ -90,7 +90,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var group in segment.EntryGroupsByArticle)
+                @foreach (var group in segment.EntryGroups)
                 {
                     string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
                     <tr class="@highlight">
