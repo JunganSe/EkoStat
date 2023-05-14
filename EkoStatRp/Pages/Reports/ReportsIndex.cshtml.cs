@@ -66,8 +66,10 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
             EntryGroups = entries.GroupByArticle();
 
-            var timeStamps = entries.Select(e => e.Timestamp).ToList();
-            var timePeriods = GetTimePeriods(timeStamps);
+            var timestamps = entries.Select(e => e.Timestamp).ToList();
+            var from = FilterViewModel.Filter.TimestampFrom ?? timestamps.Min();
+            var until = FilterViewModel.Filter.TimestampUntil ?? timestamps.Max();
+            var timePeriods = GetTimePeriods(from, until);
             Segments = GetSegments(timePeriods, entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
@@ -82,23 +84,18 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
         }
     }
 
-    private List<TimePeriod> GetTimePeriods(List<DateTime> timeStamps)
+    private List<TimePeriod> GetTimePeriods(DateTime start, DateTime end)
     {
         var timePeriods = new List<TimePeriod>();
-        if (!timeStamps.Any())
-            return timePeriods;
-        
-        var firstTimestamp = timeStamps.Min();
-        var lastTimestamp = timeStamps.Max();
 
         if (Report.SegmentBy == SegmentSize.None)
-            timePeriods.Add(new TimePeriod(firstTimestamp, lastTimestamp));
+            timePeriods.Add(new TimePeriod(start, end));
         else if (Report.SegmentBy == SegmentSize.Week)
-            timePeriods = _timeHelper.GetTimePeriodsByWeek(firstTimestamp, lastTimestamp);
+            timePeriods = _timeHelper.GetTimePeriodsByWeek(start, end);
         else if (Report.SegmentBy == SegmentSize.Month)
-            timePeriods = _timeHelper.GetTimePeriodsByMonth(firstTimestamp, lastTimestamp);
+            timePeriods = _timeHelper.GetTimePeriodsByMonth(start, end);
         else if (Report.SegmentBy == SegmentSize.Year)
-            timePeriods = _timeHelper.GetTimePeriodsByYear(firstTimestamp, lastTimestamp);
+            timePeriods = _timeHelper.GetTimePeriodsByYear(start, end);
 
         return timePeriods;
     }

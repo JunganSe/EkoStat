@@ -71,7 +71,7 @@
     <h2>Summary</h2>
     <p>
         Showing @Model.EntryGroups.Count articles from @entriesCount entries <br />
-        from @earliestTimestamp until @latestTimestamp <br />
+        from @timePeriod.Start.ToShortDateString() until @timePeriod.End.ToShortDateString() <br />
         which is @timePeriod.Years years, @timePeriod.Months months, and @timePeriod.Days days<br />
         with a total cost of @totalCost
     </p>
@@ -85,7 +85,7 @@
     @foreach (var segment in Model.Segments)
     {
         string startDate = segment.TimePeriod.Start.ToShortDateString();
-        string endDate = segment.TimePeriod.End.ToShortDateString();
+        string endDate = segment.TimePeriod.End.AddMilliseconds(-1).ToShortDateString();
         int daysCount = segment.TimePeriod.TotalDays;
         <h3>@startDate to @endDate (@daysCount days)</h3>
         <table class="table-bordered">
