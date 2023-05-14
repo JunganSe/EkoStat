@@ -3,6 +3,35 @@ using EkoStatLibrary.Dtos;
 
 namespace EkoStatLibrary.Extensions.DtoExtensions;
 
+public static class ReportSegmentExtensions
+{
+    public static int GetArticlesCount(this IEnumerable<ReportSegment> segments)
+        => segments
+            .SelectMany(s => s.EntryGroups)
+            .Select(eg => eg.Article)
+            .GroupBy(a => a.Id)
+            .Select(group => group.First())
+            .Count();
+    
+    public static int GetEntriesCount(this IEnumerable<ReportSegment> segments)
+        => segments
+            .SelectMany(s => s.EntryGroups)
+            .Sum(eg => eg.Entries.Count);
+
+    public static decimal GetTotalCost(this IEnumerable<ReportSegment> segments)
+        => segments.SelectMany(s => s.EntryGroups).Sum(eg => eg.TotalCost);
+
+    public static DateTime? GetEarliestStart(this IEnumerable<ReportSegment> segments)
+        => (segments.Any())
+            ? segments.Min(s => s.TimePeriod.Start)
+            : null;
+
+    public static DateTime? GetLatestEnd(this IEnumerable<ReportSegment> segments)
+        => (segments.Any())
+            ? segments.Max(s => s.TimePeriod.End)
+            : null;
+}
+
 public static class EntryGroupExtensions
 {
     public static DateTime? GetEarliestTimestamp(this IEnumerable<EntryGroupByTimestamp> entryGroups)

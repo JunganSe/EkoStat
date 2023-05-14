@@ -8,6 +8,8 @@ public class ReportSegment
     public TimePeriod TimePeriod { get; init; }
     public List<EntryGroupByArticle> EntryGroups { get; init; }
     public decimal? CostThreshold { get; private set; }
+    public int ArticlesCount => EntryGroups.Count;
+    public decimal TotalCost => EntryGroups.Sum(eg => eg.TotalCost);
 
     public ReportSegment(TimePeriod timePeriod, List<EntryGroupByArticle> entryGroups)
     {
