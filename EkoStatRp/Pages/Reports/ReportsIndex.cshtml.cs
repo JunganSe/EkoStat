@@ -70,8 +70,6 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             var timePeriods = GetTimePeriods(timeStamps);
             Segments = CreateSegments(timePeriods, entries);
 
-            ViewData["CostHighlightThreshold"] = GetCostHighlightThreshold();
-
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
             FilterViewModel.Tags = GetTempData<List<TagResponseDto>>(_tagsKey);
             return Page();
@@ -109,25 +107,11 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     {
         var segments = new List<ReportSegment>();
         foreach (var timePeriod in timePeriods)
-            segments.Add(new ReportSegment(timePeriod, entries));
-        return segments;
-    }
-
-    private decimal GetCostHighlightThreshold()
-    {
-        if (Report.CostLimit == null)
-            return decimal.MaxValue;
-
-        if (Report.CostLimitType == LimitType.Fixed)
-            return (decimal)Report.CostLimit;
-        else if (Report.CostLimitType == LimitType.Percentile)
         {
-            decimal lowestCost = EntryGroups.Select(eg => eg.TotalCost).Min();
-            decimal highestCost = EntryGroups.Select(eg => eg.TotalCost).Max();
-            decimal costSpan = highestCost - lowestCost;
-            return lowestCost + costSpan * (decimal)Report.CostLimit / 100;
+            var newSegment = new ReportSegment(timePeriod, entries);
+            newSegment.SetCostThreshold(Report.CostLimit, Report.CostLimitType);
+            segments.Add(newSegment);
         }
-
-        return decimal.MaxValue;
+        return segments;
     }
 }

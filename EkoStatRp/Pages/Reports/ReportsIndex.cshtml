@@ -10,7 +10,12 @@
     var timePeriod = new TimePeriod(earliestTimestamp, latestTimestamp);
     int entriesCount = Model.EntryGroups.GetEntriesCount();
     var totalCost = Model.EntryGroups.GetTotalCost();
-    var highligtCostThreshold = (decimal)(ViewData["CostHighlightThreshold"] ?? decimal.MaxValue);
+    string highlightMessage = Model.Report.CostLimitType switch
+    {
+        LimitType.Fixed => $"Highlighting articles with a total cost of {Model.Report.CostLimit} or more.",
+        LimitType.Percentile => $"Highlighting articles with a total cost at or above the {Model.Report.CostLimit}th percentile for that period.",
+        _ => ""
+    };
 }
 
 <h1>Reports</h1>
@@ -72,14 +77,17 @@
     </p>
     if (Model.Report.CostLimit != null)
     {
-        <p>Highlighting articles with a total cost of @highligtCostThreshold or more.</p>
+        <p>@highlightMessage</p>
     }
 
     <hr />
     <h2>Articles</h2>
     @foreach (var segment in Model.Segments)
     {
-        <h3>@segment.TimePeriod.Start - @segment.TimePeriod.End (@segment.TimePeriod.TotalDays days)</h3>
+        string startDate = segment.TimePeriod.Start.ToShortDateString();
+        string endDate = segment.TimePeriod.End.ToShortDateString();
+        int daysCount = segment.TimePeriod.TotalDays;
+        <h3>@startDate to @endDate (@daysCount days)</h3>
         <table class="table-bordered">
             <thead>
                 <tr>
@@ -92,7 +100,7 @@
             <tbody>
                 @foreach (var group in segment.EntryGroups)
                 {
-                    string highlight = (group.TotalCost >= highligtCostThreshold) ? "highlightRow" : "";
+                    string highlight = (group.TotalCost >= segment.CostThreshold) ? "highlightRow" : "";
                     <tr class="@highlight">
                         <td>@group.Article.Name</td>
                         <td>@group.TotalCount</td>
