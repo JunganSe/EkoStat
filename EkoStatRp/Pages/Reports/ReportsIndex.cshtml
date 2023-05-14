@@ -5,11 +5,12 @@
 @using EkoStatLibrary.Models
 @{
     ViewData["Title"] = "Reports";
-    var earliestTimestamp = Model.EntryGroups.GetEarliestTimestamp() ?? new DateTime();
-    var latestTimestamp = Model.EntryGroups.GetLatestTimestamp() ?? new DateTime();
-    var timePeriod = new TimePeriod(earliestTimestamp, latestTimestamp);
-    int entriesCount = Model.EntryGroups.GetEntriesCount();
-    var totalCost = Model.EntryGroups.GetTotalCost();
+    var start = Model.Segments.GetEarliestStart() ?? new DateTime();
+    var end = Model.Segments.GetLatestEnd() ?? new DateTime();
+    var timePeriod = new TimePeriod(start, end);
+    int articlesCount = Model.Segments.GetArticlesCount();
+    int entriesCount = Model.Segments.GetEntriesCount();
+    var totalCost = Model.Segments.GetTotalCost();
     string highlightMessage = Model.Report.CostLimitType switch
     {
         LimitType.Fixed => $"Highlighting articles with a total cost of {Model.Report.CostLimit} or more.",
@@ -70,7 +71,7 @@
     <hr />
     <h2>Summary</h2>
     <p>
-        Showing @Model.EntryGroups.Count articles from @entriesCount entries <br />
+        Showing @articlesCount articles from @entriesCount entries <br />
         from @timePeriod.Start.ToShortDateString() until @timePeriod.End.ToShortDateString() <br />
         which is @timePeriod.Years years, @timePeriod.Months months, and @timePeriod.Days days<br />
         with a total cost of @totalCost
@@ -91,6 +92,8 @@
         string endDate = segment.TimePeriod.End.AddMilliseconds(-1).ToShortDateString();
         int daysCount = segment.TimePeriod.TotalDays;
         <h3>@startDate to @endDate (@daysCount days)</h3>
+        <div>@segment.ArticlesCount articles, Total cost: @segment.TotalCost</div>
+
         <table class="table-bordered">
             <thead>
                 <tr>

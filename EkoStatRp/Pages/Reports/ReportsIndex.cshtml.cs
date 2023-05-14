@@ -1,6 +1,5 @@
 using EkoStatLibrary.DtoContainers;
 using EkoStatLibrary.Dtos;
-using EkoStatLibrary.Enums;
 using EkoStatLibrary.Extensions.Common;
 using EkoStatLibrary.Extensions.DtoExtensions;
 using EkoStatLibrary.Helpers;
@@ -21,7 +20,6 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
 
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
     public ReportSettingsViewModel Report { get; set; } = new();
-    public List<EntryGroupByArticle> EntryGroups { get; set; } = new();
     public List<ReportSegment> Segments { get; set; } = new();
 
     public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, TimeHelper timeHelper, ILogger<ReportsIndex> logger)
@@ -64,7 +62,6 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
 
             var userId = GetUserId();
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
-            EntryGroups = entries.GroupByArticle();
 
             var timestamps = entries.Select(e => e.Timestamp).ToList();
             var from = FilterViewModel.Filter.TimestampFrom ?? timestamps.Min();
