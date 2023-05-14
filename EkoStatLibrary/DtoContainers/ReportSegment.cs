@@ -1,6 +1,4 @@
-﻿using EkoStatLibrary.Dtos;
-using EkoStatLibrary.Enums;
-using EkoStatLibrary.Extensions.DtoExtensions;
+﻿using EkoStatLibrary.Enums;
 using EkoStatLibrary.Models;
 
 namespace EkoStatLibrary.DtoContainers;
@@ -26,7 +24,7 @@ public class ReportSegment
                 e.Timestamp >= timePeriod.Start
                 && e.Timestamp < timePeriod.End);
         if (!ok)
-            throw new ArgumentException("Not all entries are withing the time period.");
+            throw new ArgumentException("Not all entries are within the time period.");
     }
 
     public void SetCostThreshold(decimal? limit, LimitType limitType)
