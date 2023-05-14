@@ -5,7 +5,8 @@ namespace EkoStatRp.Models;
 
 public class ReportSettingsViewModel
 {
-    [Display(Name = "Cost limit")]
+    [Display(Name = "Highlight cost at or above")]
+    [Range(0, 100, ErrorMessage = "Must be {1} to {2}.")]
     public decimal? CostLimit { get; set; }
 
     [Display(Name = "Type")]
