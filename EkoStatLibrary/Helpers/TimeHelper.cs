@@ -1,9 +1,26 @@
-﻿using EkoStatLibrary.Models;
+﻿using EkoStatLibrary.Enums;
+using EkoStatLibrary.Models;
 
 namespace EkoStatLibrary.Helpers;
 
 public class TimeHelper
 {
+    public List<TimePeriod> GetChosenTimePeriods(DateTime start, DateTime end, SegmentSize segmentSize)
+    {
+        var timePeriods = new List<TimePeriod>();
+
+        if (segmentSize == SegmentSize.None)
+            timePeriods.Add(new TimePeriod(start, end));
+        else if (segmentSize == SegmentSize.Week)
+            timePeriods = GetTimePeriodsByWeek(start, end);
+        else if (segmentSize == SegmentSize.Month)
+            timePeriods = GetTimePeriodsByMonth(start, end);
+        else if (segmentSize == SegmentSize.Year)
+            timePeriods = GetTimePeriodsByYear(start, end);
+
+        return timePeriods;
+    }
+
     public List<TimePeriod> GetTimePeriodsByWeek(DateTime start, DateTime end, DayOfWeek firstDayOfWeek = DayOfWeek.Monday)
     {
         var timePeriods = new List<TimePeriod>();
