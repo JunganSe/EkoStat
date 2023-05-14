@@ -84,6 +84,9 @@
     <h2>Articles</h2>
     @foreach (var segment in Model.Segments)
     {
+        if (!segment.EntryGroups.Any())
+            continue;
+
         string startDate = segment.TimePeriod.Start.ToShortDateString();
         string endDate = segment.TimePeriod.End.AddMilliseconds(-1).ToShortDateString();
         int daysCount = segment.TimePeriod.TotalDays;
