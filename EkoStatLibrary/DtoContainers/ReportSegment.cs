@@ -11,13 +11,22 @@ public class ReportSegment
     public List<EntryGroupByArticle> EntryGroups { get; init; }
     public decimal? CostThreshold { get; private set; }
 
-    public ReportSegment(TimePeriod timePeriod, List<EntryResponseDto> entries)
+    public ReportSegment(TimePeriod timePeriod, List<EntryGroupByArticle> entryGroups)
     {
+        EnsureEntriesAreWithinTimePeriod(timePeriod, entryGroups);
         TimePeriod = timePeriod;
-        EntryGroups = entries
-            .Where(e => e.Timestamp >= TimePeriod.Start)
-            .Where(e => e.Timestamp < TimePeriod.End)
-            .GroupByArticle();
+        EntryGroups = entryGroups;
+    }
+
+    private void EnsureEntriesAreWithinTimePeriod(TimePeriod timePeriod, List<EntryGroupByArticle> entryGroups)
+    {
+        bool ok = entryGroups
+            .SelectMany(eg => eg.Entries)
+            .All(e =>
+                e.Timestamp >= timePeriod.Start
+                && e.Timestamp < timePeriod.End);
+        if (!ok)
+            throw new ArgumentException("Not all entries are withing the time period.");
     }
 
     public void SetCostThreshold(decimal? limit, LimitType limitType)

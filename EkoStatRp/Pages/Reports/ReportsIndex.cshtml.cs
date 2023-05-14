@@ -105,7 +105,11 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
         var segments = new List<ReportSegment>();
         foreach (var timePeriod in timePeriods)
         {
-            var newSegment = new ReportSegment(timePeriod, entries);
+            var entryGroups = entries
+                .Where(e => e.Timestamp >= timePeriod.Start)
+                .Where(e => e.Timestamp < timePeriod.End)
+                .GroupByArticle();
+            var newSegment = new ReportSegment(timePeriod, entryGroups);
             newSegment.SetCostThreshold(Report.CostLimit, Report.CostLimitType);
             segments.Add(newSegment);
         }
