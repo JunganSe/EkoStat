@@ -19,7 +19,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
     private readonly TimeHelper _timeHelper;
 
     public EntriesFilterViewModel FilterViewModel { get; set; } = new();
-    public ReportSettingsViewModel Report { get; set; } = new();
+    public ReportSettingsViewModel ReportForm { get; set; } = new();
     public List<ReportSegment> Segments { get; set; } = new();
 
     public ReportsIndex(HttpHelper httpHelper, UserHelper userHelper, ApiHandler apiHandler, TimeHelper timeHelper, ILogger<ReportsIndex> logger)
@@ -64,9 +64,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
             var entries = await _apiHandler.GetEntriesFilteredAsync(userId, FilterViewModel.Filter);
 
             var timestamps = entries.Select(e => e.Timestamp).ToList();
-            var from = FilterViewModel.Filter.TimestampFrom ?? timestamps.Min();
-            var until = FilterViewModel.Filter.TimestampUntil ?? timestamps.Max();
-            var timePeriods = _timeHelper.GetChosenTimePeriods(from, until, Report.SegmentBy);
+            var timePeriods = GetTimePeriods(timestamps);
             Segments = GetSegments(timePeriods, entries);
 
             FilterViewModel.Articles = GetTempData<List<ArticleResponseDto>>(_articlesKey);
@@ -81,6 +79,13 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
         }
     }
 
+    private List<TimePeriod> GetTimePeriods(List<DateTime> timestamps)
+    {
+        var from = FilterViewModel.Filter.TimestampFrom ?? timestamps.Min();
+        var until = FilterViewModel.Filter.TimestampUntil ?? timestamps.Max();
+        return _timeHelper.GetChosenTimePeriods(from, until, ReportForm.SegmentBy);
+    }
+
     private List<ReportSegment> GetSegments(List<TimePeriod> timePeriods, List<EntryResponseDto> entries)
     {
         var segments = new List<ReportSegment>();
@@ -91,7 +96,7 @@ public class ReportsIndex : PageModelBase<ReportsIndex>
                 .Where(e => e.Timestamp < timePeriod.End)
                 .GroupByArticle();
             var newSegment = new ReportSegment(timePeriod, entryGroups);
-            newSegment.SetCostThreshold(Report.CostLimit, Report.CostLimitType);
+            newSegment.SetCostThreshold(ReportForm.CostLimit, ReportForm.CostLimitType);
             segments.Add(newSegment);
         }
         return segments;

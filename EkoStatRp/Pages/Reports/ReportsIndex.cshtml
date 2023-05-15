@@ -12,10 +12,10 @@
     int entriesCount = Model.Segments.GetEntriesCount();
     var totalCost = Model.Segments.GetTotalCost();
     int skippedSegmentsCount = 0;
-    string highlightMessage = Model.Report.CostLimitType switch
+    string highlightMessage = Model.ReportForm.CostLimitType switch
     {
-        LimitType.Fixed => $"Highlighting articles with a total cost of {Model.Report.CostLimit} or more.",
-        LimitType.Percentile => $"Highlighting articles with a total cost at or above the {Model.Report.CostLimit}th percentile for that period.",
+        LimitType.Fixed => $"Highlighting articles with a total cost of {Model.ReportForm.CostLimit} or more.",
+        LimitType.Percentile => $"Highlighting articles with a total cost at or above the {Model.ReportForm.CostLimit}th percentile for that period.",
         _ => ""
     };
 }
@@ -36,32 +36,32 @@
     <!-- Markera rader med kostnad över gränsvärde -->
     <div class="flexRow">
         <div>
-            <label asp-for="@Model.Report.CostLimit"></label>
-            <input asp-for="@Model.Report.CostLimit" />
-            <span asp-validation-for="@Model.Report.CostLimit" class="text-danger"></span>
+            <label asp-for="@Model.ReportForm.CostLimit"></label>
+            <input asp-for="@Model.ReportForm.CostLimit" />
+            <span asp-validation-for="@Model.ReportForm.CostLimit" class="text-danger"></span>
         </div>
         <div>
-            <label asp-for="@Model.Report.CostLimitType"></label>
-            <select asp-for="@Model.Report.CostLimitType">
+            <label asp-for="@Model.ReportForm.CostLimitType"></label>
+            <select asp-for="@Model.ReportForm.CostLimitType">
                 @foreach (var costLimitType in Enum.GetValues(typeof(LimitType)))
                 {
                     <option value="@costLimitType">@costLimitType</option>
                 }
             </select>
-            <span asp-validation-for="@Model.Report.CostLimitType" class="text-danger"></span>
+            <span asp-validation-for="@Model.ReportForm.CostLimitType" class="text-danger"></span>
         </div>
     </div>
 
     <!-- Segmentering -->
     <div>
-        <label asp-for="@Model.Report.SegmentBy"></label>
-        <select asp-for="@Model.Report.SegmentBy">
+        <label asp-for="@Model.ReportForm.SegmentBy"></label>
+        <select asp-for="@Model.ReportForm.SegmentBy">
             @foreach (var segmentSize in Enum.GetValues(typeof(SegmentSize)))
             {
                 <option value="@segmentSize">@segmentSize</option>
             }
         </select>
-        <span asp-validation-for="@Model.Report.SegmentBy" class="text-danger"></span>
+        <span asp-validation-for="@Model.ReportForm.SegmentBy" class="text-danger"></span>
     </div>
 
     <button type="submit">Generate report</button>
@@ -78,7 +78,7 @@
         which is @timePeriod.Years years, @timePeriod.Months months, and @timePeriod.Days days<br />
         with a total cost of @totalCost
     </p>
-    if (Model.Report.CostLimit != null)
+    if (Model.ReportForm.CostLimit != null)
     {
         <p>@highlightMessage</p>
     }
