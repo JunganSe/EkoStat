@@ -11,6 +11,7 @@
     int articlesCount = Model.Segments.GetArticlesCount();
     int entriesCount = Model.Segments.GetEntriesCount();
     var totalCost = Model.Segments.GetTotalCost();
+    int skippedSegmentsCount = 0;
     string highlightMessage = Model.Report.CostLimitType switch
     {
         LimitType.Fixed => $"Highlighting articles with a total cost of {Model.Report.CostLimit} or more.",
@@ -24,6 +25,7 @@
 
 <!-- Formulär -->
 <form method="post">
+    <!-- Filtrering -->
     <hr />
     <h2>Filter</h2>
     <partial name="@Constants.PartialViews.FilterEntries" model="@Model.FilterViewModel" />
@@ -86,7 +88,17 @@
     @foreach (var segment in Model.Segments)
     {
         if (!segment.EntryGroups.Any())
+        {
+            skippedSegmentsCount++;
             continue;
+        }
+
+        @if (skippedSegmentsCount > 0)
+        {
+            string segmentWording = (skippedSegmentsCount > 1) ? "periods" : "period";
+            <p><br/>(Skipped @skippedSegmentsCount empty @segmentWording)</p>
+            skippedSegmentsCount = 0;
+        }
 
         string startDate = segment.TimePeriod.Start.ToShortDateString();
         string endDate = segment.TimePeriod.End.AddMilliseconds(-1).ToShortDateString();
