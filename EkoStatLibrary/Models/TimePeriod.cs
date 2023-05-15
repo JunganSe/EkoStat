@@ -19,13 +19,6 @@ public class TimePeriod
         SetProperties();
     }
 
-    public TimePeriod(DateOnly start, DateOnly end)
-    {
-        Start = new DateTime(start.Year, start.Month, start.Day);
-        End = new DateTime(end.Year, end.Month, end.Day);
-        SetProperties();
-    }
-
     private void SetProperties()
     {
         var start = LocalDateTime.FromDateTime(Start);
