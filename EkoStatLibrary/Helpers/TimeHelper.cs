@@ -9,7 +9,7 @@ public class TimeHelper
     {
         return segmentSize switch
         {
-            SegmentSize.None => new List<TimePeriod> { new TimePeriod(start, end) },
+            SegmentSize.None => new List<TimePeriod> { new TimePeriod(start, end.Date.AddDays(1)) },
             SegmentSize.Week => GetTimePeriodsByWeek(start, end),
             SegmentSize.Month => GetTimePeriodsByMonth(start, end),
             SegmentSize.Year => GetTimePeriodsByYear(start, end),
@@ -20,9 +20,8 @@ public class TimeHelper
     public List<TimePeriod> GetTimePeriodsByWeek(DateTime start, DateTime end, DayOfWeek firstDayOfWeek = DayOfWeek.Monday)
     {
         var timePeriods = new List<TimePeriod>();
-        var startDate = DateOnly.FromDateTime(start);
-        var endDate = DateOnly.FromDateTime(end);
-
+        var startDate = start.Date;
+        var endDate = end.Date.AddDays(1);
         var weekStartDate = GetFirstDayOfWeekOnOrAfterDate(startDate, firstDayOfWeek);
 
         if (startDate < weekStartDate)
@@ -39,7 +38,7 @@ public class TimeHelper
 
         return timePeriods;
 
-        DateOnly GetFirstDayOfWeekOnOrAfterDate(DateOnly date, DayOfWeek firstDayOfWeek)
+        DateTime GetFirstDayOfWeekOnOrAfterDate(DateTime date, DayOfWeek firstDayOfWeek)
         {
             while (date.DayOfWeek != firstDayOfWeek)
                 date = date.AddDays(1);
@@ -50,9 +49,8 @@ public class TimeHelper
     public List<TimePeriod> GetTimePeriodsByMonth(DateTime start, DateTime end)
     {
         var timePeriods = new List<TimePeriod>();
-        var startDate = DateOnly.FromDateTime(start);
-        var endDate = DateOnly.FromDateTime(end);
-
+        var startDate = start.Date;
+        var endDate = end.Date.AddDays(1);
         var monthStartDate = GetMonthStartOnOrAfterDate(startDate);
 
         if (startDate < monthStartDate)
@@ -69,7 +67,7 @@ public class TimeHelper
 
         return timePeriods;
 
-        DateOnly GetMonthStartOnOrAfterDate(DateOnly date)
+        DateTime GetMonthStartOnOrAfterDate(DateTime date)
         {
             if (date.Day > 1)
                 date = date.AddMonths(1);
@@ -80,10 +78,9 @@ public class TimeHelper
     public List<TimePeriod> GetTimePeriodsByYear(DateTime start, DateTime end)
     {
         var timePeriods = new List<TimePeriod>();
-        var startDate = DateOnly.FromDateTime(start);
-        var endDate = DateOnly.FromDateTime(end);
-
-        var yearStartDate = new DateOnly(startDate.Year + 1, 1, 1);
+        var startDate = start.Date;
+        var endDate = end.Date.AddDays(1);
+        var yearStartDate = new DateTime(startDate.Year + 1, 1, 1);
 
         if (startDate < yearStartDate)
             timePeriods.Add(new TimePeriod(startDate, yearStartDate));
